@@ -768,12 +768,60 @@ public class GamePlayerVsPCController implements Initializable {
     @FXML
     private void saveGame(MouseEvent event) {
         
+        // should create an alert here.
+
+        Stage stage = new Stage();
+        FileChooser fc = new FileChooser();
+
+        File file = fc.showSaveDialog(stage);
+        FileOutputStream fos;
+        try {
+            if (file != null) {
+                fos = new FileOutputStream(file);
+                b = bString.getBytes();
+                fos.write(b);
+                // 0X-1O-3X
+                fos.close();
+            }
+        } catch (FileNotFoundException ex) {
+
+        } catch (IOException ex) {
+        }
 
     }
 
     @FXML
     private void loadGame(MouseEvent event) {
-       
+        Stage stage = new Stage();
+        FileChooser fc = new FileChooser();
+        File file = fc.showOpenDialog(stage);
+        FileInputStream fis;
+
+        try {
+            if (file != null) {
+                fis = new FileInputStream(file);
+                while (fis.read() != -1) {
+                    int size = fis.available();
+                    b = new byte[size];
+                    fis.read(b);
+                    bString = new String(b);
+                    String[] arrString = bString.split("-");
+
+                    for (int i = 0; i < arrString.length; i++) {
+                        if ("X".equals(Character.toString(arrString[i].charAt(1))) | "O".equals(Character.toString(arrString[i].charAt(1)))) {
+                            btnsArr[(Integer.parseInt(Character.toString(arrString[i].charAt(0))) - 1)].setText(Character.toString(arrString[i].charAt(1)));
+                            btnsArr[(Integer.parseInt(Character.toString(arrString[i].charAt(0))) - 1)].setDisable(true);
+                        }
+
+
+                    }
+
+                    fis.close();
+                }
+            }
+        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
+        }
     }
     
 }
