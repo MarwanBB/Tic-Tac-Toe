@@ -11,32 +11,34 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 /**
- * FXML Controller class
  *
  * @author Copy Center
  */
-public class PlayerVsPCNameController implements Initializable {
-
+public class GameOnlineController implements Initializable {
+    
+    
+    
     @FXML
-    private TextField PlayerOTxt;
+    private Label label;
+    
     @FXML
-    private Button nextBtn;
-    @FXML
-    private ImageView backImg;
-
-    /**
-     * Initializes the controller class.
-     */
+    private void handleButtonAction(ActionEvent event) {
+        System.out.println("You clicked me!");
+        label.setText("Hello World!");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
+    }   
+    
+    
+    
+    
+    
     
 }
