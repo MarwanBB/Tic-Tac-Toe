@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import models.SceneNavigator;
 
+
 /**
  *
  * @author Copy Center
@@ -27,11 +29,13 @@ public class MenuController implements Initializable {
     
     private Label label;
     
-    
+    private void handleButtonAction(ActionEvent event) {
+        System.out.println("You clicked me!");
+        label.setText("Hello World!");
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
 
     @FXML

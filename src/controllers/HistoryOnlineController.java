@@ -47,7 +47,10 @@ public class HistoryOnlineController implements Initializable {
     @FXML
     private TableColumn<?, ?> winner;
     
-    
+    private void handleButtonAction(ActionEvent event) {
+        System.out.println("You clicked me!");
+        label.setText("Hello World!");
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

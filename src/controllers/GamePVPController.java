@@ -1,14 +1,12 @@
 package controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import database.LocalDataBase;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,13 +16,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import models.GameDataPVP;
+import models.SceneNavigator;
+import java.util.Calendar;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import models.SceneNavigator;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class GamePVPController implements Initializable {
 
@@ -54,6 +56,7 @@ public class GamePVPController implements Initializable {
     private Label TieScore;
     @FXML
     private Button playAgainButton;
+
     private int playerTurn = 0;
     private int p1score = 0;
     private int p2score = 0;
@@ -64,13 +67,17 @@ public class GamePVPController implements Initializable {
     private ArrayList<Button> buttons;
     private byte[] b;
     private String bString = "-";   //added this at first cause printing reading the file didnt show first letter..
-
     @FXML
     private ImageView backImg;
     @FXML
     private ImageView saveImg;
     @FXML
     private ImageView loadImg;
+    @FXML
+    private Label Player1Name;
+    @FXML
+    private Label Player2Name;
+    LocalDataBase ldb;
 
     /**
      * Initializes the controller class.
@@ -78,9 +85,10 @@ public class GamePVPController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
+
         buttons.forEach(button -> {
             setupButton(button);
-
+            button.setFocusTraversable(false);
         });
     }
 
@@ -103,25 +111,27 @@ public class GamePVPController implements Initializable {
         button.setOnMouseClicked(mouseEvent -> {
             setPlayerSymbol(button);
             button.setDisable(true);
-            checkIfGameIsOver();
+            try {
+                checkIfGameIsOver();
+            } catch (IOException ex) {
+                Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
 
     public void setPlayerSymbol(Button button) {
-        if (playerTurn == 0) {    // i changed this ----------------
+        if (playerTurn % 2 == 0) {
             button.setText("X");
-            //add element 
             playerTurn = 1;
         } else {
             button.setText("O");
             playerTurn = 0;
         }
-
+        
         bString += button.getId() + button.getText() + "-";
-
     }
 
-    public void checkIfGameIsOver() {
+    public void checkIfGameIsOver() throws IOException {
 
         squareCount++;
 
@@ -141,21 +151,27 @@ public class GamePVPController implements Initializable {
         winLoseChecker(line);
         line = button3.getText() + button6.getText() + button9.getText();
         winLoseChecker(line);
-
         if (squareCount == 9 && flagWin == 0) {
+            getData("Tied");
             tiescore++;
             TieScore.setText(Integer.toString(tiescore));
         }
 
     }
 
-    boolean winLoseChecker(String line) {
+    boolean winLoseChecker(String line) throws IOException {
         switch (line) {
             case "XXX":
                 flagWin = 1;
                 p1score++;
                 Player1Score.setText(Integer.toString(p1score));
-
+                 {
+                    try {
+                        getData(Player1Name.getText());
+                    } catch (IOException ex) {
+                        Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 buttons.forEach(button -> {
                     button.setDisable(true);
                 });
@@ -164,12 +180,13 @@ public class GamePVPController implements Initializable {
                 flagWin = 1;
                 p2score++;
                 Player2Score.setText(Integer.toString(p2score));
-
+                getData(Player2Name.getText());
                 buttons.forEach(button -> {
                     button.setDisable(true);
                 });
                 return true;
             default:
+
                 return false;
         }
     }
@@ -188,7 +205,24 @@ public class GamePVPController implements Initializable {
 
     }
 
-    @FXML
+    
+
+    public void DisplayNames(String p1Name, String p2Name) {
+        Player1Name.setText(p1Name);
+        Player2Name.setText(p2Name);
+    }
+
+    public void getData(String winner) throws IOException {
+        String date = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss").format(Calendar.getInstance().getTime());
+        ldb = new LocalDataBase();
+
+        GameDataPVP gm = new GameDataPVP(
+                date, Player1Name.getText(), Player1Score.getText(),
+                 Player2Name.getText(), Player2Score.getText(), winner);
+        ldb.writeData(gm);
+    }
+	
+	@FXML
     private void saveGame(MouseEvent event) {
         
         // should create an alert here.
@@ -251,5 +285,5 @@ public class GamePVPController implements Initializable {
         } catch (IOException ex) {
         }
     }
-
+	
 }
