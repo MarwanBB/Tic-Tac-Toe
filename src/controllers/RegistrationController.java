@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import models.SceneNavigator;
 
 /**
  * FXML Controller class
@@ -42,6 +43,18 @@ public class RegistrationController implements Initializable {
         // TODO
     }    
     
+    @FXML
+    private void goToOnlineGame(ActionEvent event) throws IOException {
+        
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateBtn(event, "/views/GameOnline.fxml");
+            
+    }
     
+    @FXML
+    private void goBackToSignIn(MouseEvent event) throws IOException {
+    SceneNavigator sceneNavigator = new SceneNavigator();
+    sceneNavigator.navigateImg(event, "/views/SignIn.fxml");
+    }
     
 }

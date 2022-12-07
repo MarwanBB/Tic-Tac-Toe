@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import models.SceneNavigator;
 
 /**
  * FXML Controller class
@@ -28,6 +29,26 @@ public class SignInController implements Initializable {
         // TODO
     }    
     
+    @FXML
+    private void goToRegistration(ActionEvent event) throws IOException {
+        
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateBtn(event, "/views/Registration.fxml");
+            
+    }
     
+    @FXML
+    private void goToOnlineGame(ActionEvent event) throws IOException {
+        
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateBtn(event, "/views/GameOnline.fxml");
+            
+    }
+    
+    @FXML
+    private void goBackToMenu(MouseEvent event) throws IOException {
+    SceneNavigator sceneNavigator = new SceneNavigator();
+    sceneNavigator.navigateImg(event, "/views/Menu.fxml");
+    }
     
 }

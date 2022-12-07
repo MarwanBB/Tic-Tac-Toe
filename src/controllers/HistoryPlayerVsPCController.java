@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import models.SceneNavigator;
 
 /**
  *
@@ -51,6 +52,10 @@ public class HistoryPlayerVsPCController implements Initializable {
         // TODO
     }    
 
-    
+    @FXML
+    private void goBackToGamePlayerVsPc(MouseEvent event) throws IOException {
+    SceneNavigator sceneNavigator = new SceneNavigator();
+    sceneNavigator.navigateImg(event, "/views/GamePlayerVsPC.fxml");
+    }
     
 }

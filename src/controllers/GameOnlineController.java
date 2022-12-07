@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import models.SceneNavigator;
 
 /**
  *
@@ -22,21 +23,26 @@ public class GameOnlineController implements Initializable {
     
     
     
-    @FXML
-    private Label label;
     
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }   
     
+    @FXML
+    private void goBack(MouseEvent event) throws IOException {
+    SceneNavigator sceneNavigator = new SceneNavigator();
+    sceneNavigator.navigateImg(event, "/views/SignIn.fxml");
+    }
     
+    @FXML
+    private void goToHistoryOnline(ActionEvent event) throws IOException {
+        
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateBtn(event, "/views/HistoryOnline.fxml");
+            
+    }
     
     
     

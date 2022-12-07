@@ -23,6 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.SceneNavigator;
 
 /**
  * FXML Controller class
@@ -739,7 +740,19 @@ public class GamePlayerVsPCController implements Initializable {
         return -1;
     }
     
-    
+    @FXML
+    private void goToHistoryPlayerVsPc(ActionEvent event) throws IOException {
+        
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateBtn(event, "/views/HistoryPlayerVsPC.fxml");
+            
+    }
+
+     @FXML
+    private void goBack(MouseEvent event) throws IOException {
+    SceneNavigator sceneNavigator = new SceneNavigator();
+    sceneNavigator.navigateImg(event, "/views/PlayerVsPCName.fxml");
+    }
 
 
     @FXML

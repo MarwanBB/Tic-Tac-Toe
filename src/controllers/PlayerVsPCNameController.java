@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import models.SceneNavigator;
 
 /**
  * FXML Controller class
@@ -38,5 +39,16 @@ public class PlayerVsPCNameController implements Initializable {
         // TODO
     }    
 
+    @FXML
+    private void goBackToMenu(MouseEvent event) throws IOException {
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateImg(event, "/views/Menu.fxml");
+    }
+
+    @FXML
+    private void goToGameSinglePlayer(ActionEvent event) throws IOException {
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateBtn(event, "/views/GamePlayerVsPC.fxml");
+    }
     
 }

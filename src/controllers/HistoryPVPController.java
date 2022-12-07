@@ -26,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import models.SceneNavigator;
 
 /**
  *
@@ -43,12 +44,17 @@ public class HistoryPVPController implements Initializable {
     
     
     
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
 
     }    
 
-
+    @FXML
+    private void goBackToGamePVP(MouseEvent event) throws IOException {
+    SceneNavigator sceneNavigator = new SceneNavigator();
+    sceneNavigator.navigateImg(event, "/views/GamePVP.fxml");
+    }
     
 }

@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import models.SceneNavigator;
 
 /**
  *
@@ -46,16 +47,17 @@ public class HistoryOnlineController implements Initializable {
     @FXML
     private TableColumn<?, ?> winner;
     
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
 
-
+    @FXML
+    private void goBackToGameOnline(MouseEvent event) throws IOException {
+    SceneNavigator sceneNavigator = new SceneNavigator();
+    sceneNavigator.navigateImg(event, "/views/GameOnline.fxml");
+    }
     
 }

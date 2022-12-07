@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import models.SceneNavigator;
 
 /**
  *
@@ -26,13 +27,33 @@ public class MenuController implements Initializable {
     
     private Label label;
     
-
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
 
-   
+    @FXML
+    private void goToGameSinglePlayer(ActionEvent event) throws IOException {
+        
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateBtn(event, "/views/PlayerVsPCName.fxml");
+
+    }
+
+    @FXML
+    private void goToGamePVP(ActionEvent event) throws IOException {
+        
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateBtn(event, "/views/PVPNames.fxml");
+            
+    }
+
+    @FXML
+    private void goToGameOnline(ActionEvent event) throws IOException {
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateBtn(event, "/views/SignIn.fxml");
+    }
     
 }
