@@ -1,18 +1,24 @@
 
 package controllers;
 
+import database.LocalDataBase;
+import database.SingleDataBase;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +29,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.GameDataPVP;
+import models.GameDataPlayerVsPC;
 import models.SceneNavigator;
 
 /**
@@ -93,7 +101,12 @@ public class GamePlayerVsPCController implements Initializable {
     private ImageView loadImg;
     @FXML
     private ImageView saveImg;
+    @FXML
+    private Label PlayerName;
+    @FXML
+    private Label Player2Name;
     
+    SingleDataBase singleDB;
     /**
      * Initializes the controller class.
      */
@@ -112,7 +125,7 @@ public class GamePlayerVsPCController implements Initializable {
     }    
 
     @FXML
-    private void btn1Clicked(ActionEvent event) {
+    private void btn1Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
                 printXOForEasy(0);
             } else if (mode.equalsIgnoreCase("medium")) {
@@ -137,7 +150,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     @FXML
-    private void btn2Clicked(ActionEvent event) {
+    private void btn2Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
                 printXOForEasy(1);
             } else if (mode.equalsIgnoreCase("medium")) {
@@ -163,7 +176,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     @FXML
-    private void btn3Clicked(ActionEvent event) {
+    private void btn3Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
                 printXOForEasy(2);
             } else if (mode.equalsIgnoreCase("medium")) {
@@ -189,7 +202,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     @FXML
-    private void btn4Clicked(ActionEvent event) {
+    private void btn4Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
                 printXOForEasy(3);
             } else if (mode.equalsIgnoreCase("medium")) {
@@ -214,7 +227,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     @FXML
-    private void btn5Clicked(ActionEvent event) {
+    private void btn5Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
                 printXOForEasy(4);
             } else if (mode.equalsIgnoreCase("medium")) {
@@ -240,7 +253,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     @FXML
-    private void btn6Clicked(ActionEvent event) {
+    private void btn6Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
                 printXOForEasy(5);
             } else if (mode.equalsIgnoreCase("medium")) {
@@ -266,7 +279,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     @FXML
-    private void btn7Clicked(ActionEvent event) {
+    private void btn7Clicked(ActionEvent event) throws IOException {
          if (mode.equalsIgnoreCase("easy")) {
                 printXOForEasy(6);
             } else if (mode.equalsIgnoreCase("medium")) {
@@ -292,7 +305,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     @FXML
-    private void btn8Clicked(ActionEvent event) {
+    private void btn8Clicked(ActionEvent event) throws IOException {
          if (mode.equalsIgnoreCase("easy")) {
                 printXOForEasy(7);
             } else if (mode.equalsIgnoreCase("medium")) {
@@ -318,7 +331,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     @FXML
-    private void btn9Clicked(ActionEvent event) {
+    private void btn9Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
                 printXOForEasy(8);
             } else if (mode.equalsIgnoreCase("medium")) {
@@ -437,38 +450,46 @@ public class GamePlayerVsPCController implements Initializable {
         }
     }
 
-    public void SetResultForMedium(int Num) {
-        switch (Num) {
-            case 1:
-                xScore++;
-                xResult++;
-                break;
-            case 2:
-                oScore++;
-                oResult++;
-                break;
-            case 0:
-                draws++;
-                break;
-        }
-        disableAllXOButton();
-        PlayerScore.setText("" + xScore);
-        PCScore.setText("" + oScore);
-        TiedScore.setText("" + draws);
-        if (xResult > oResult) {
-
-            xResult = 0;
-            oResult = 0;
-
-        } else if (xResult < oResult) {
-            xResult = 0;
-            oResult = 0;
-
-        } else {
-
-            xResult = 0;
-            oResult = 0;
-
+    public void SetResultForMedium(int Num){
+        try {
+            switch (Num) {
+                case 1:
+                    xScore++;
+                    xResult++;
+                   
+                    break;
+                case 2:
+                    oScore++;
+                    oResult++;
+                    
+                    break;
+                case 0:
+                    draws++;
+                    
+                    break;
+            }
+            disableAllXOButton();
+            PlayerScore.setText("" + xScore);
+            PCScore.setText("" + oScore);
+            TiedScore.setText("" + draws);
+            if (xResult > oResult) {
+                getData(Player2Name.getText());
+                xResult = 0;
+                oResult = 0;
+                
+            } else if (xResult < oResult) { 
+                getData("PC");
+                xResult = 0;
+                oResult = 0;
+                
+            } else {
+                getData("Tied");
+                xResult = 0;
+                oResult = 0;
+                
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GamePlayerVsPCController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -580,17 +601,19 @@ public class GamePlayerVsPCController implements Initializable {
 
     }
 
-    public void SetResulForHard(int Num) {
+    public void SetResulForHard(int Num) throws IOException {
         switch (Num) {
             case 1:
                 xScore++;
                 xResult++;
+                
             case -1:
                 oScore++;
                 oResult++;
                 break;
             case 2:
                 draws++;
+                
                 TiedScore.setText("" + draws);
                 System.out.println("" + draws);
 
@@ -606,16 +629,17 @@ public class GamePlayerVsPCController implements Initializable {
         PlayerScore.setText("" + xScore);
         PCScore.setText("" + oScore);
         if (xResult > oResult) {
-
+            getData(PlayerName.getText());
             xResult = 0;
             oResult = 0;
 
         } else if (xResult < oResult) {
-
+            getData("PC");
             xResult = 0;
             oResult = 0;
 
         } else {
+            getData("Tied");
             xResult = 0;
             oResult = 0;
         }
@@ -705,7 +729,7 @@ public class GamePlayerVsPCController implements Initializable {
 
     }
 
-    public int getResult(ArrayList<Integer> playerXSteps, ArrayList<Integer> playerOSteps) {
+    public int getResult(ArrayList<Integer> playerXSteps, ArrayList<Integer> playerOSteps){
         List<List> winningLists = new ArrayList<>();
         List topRow = Arrays.asList(1, 2, 3);
         List midRow = Arrays.asList(4, 5, 6);
@@ -727,13 +751,14 @@ public class GamePlayerVsPCController implements Initializable {
 
             for (List l : winningLists) {
                 if (playerXSteps.containsAll(l)) {
-                    return 1;
+                        return 1;
                 } else if (playerOSteps.containsAll(l)) {
-                    return 2;
+                        return 2;
                 }
             }
             if (playerXSteps.size() + playerOSteps.size() == 9) {
-                return 0;
+
+                    return 0;
             }
         }
 
@@ -822,6 +847,19 @@ public class GamePlayerVsPCController implements Initializable {
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         }
+    }
+    public void DisplayNames(String p1Name) {
+        PlayerName.setText(p1Name);
+    }
+    
+    public void getData(String winner) throws IOException {
+        String date = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss").format(Calendar.getInstance().getTime());
+        singleDB = new SingleDataBase();
+
+        GameDataPlayerVsPC gm = new GameDataPlayerVsPC(
+                date, PlayerName.getText(), PlayerScore.getText(),
+                 Player2Name.getText(), PCScore.getText(), winner);
+        singleDB.writeData(gm);
     }
     
 }
