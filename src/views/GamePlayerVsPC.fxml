@@ -12,47 +12,47 @@
    <children>
       <FlowPane hgap="10.0" layoutX="24.0" layoutY="84.0" prefHeight="300.0" prefWidth="331.0" vgap="10.0">
          <children>
-            <Button id="1" fx:id="Btn11" mnemonicParsing="false" onAction="#btn1Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25;">
+            <Button id="1" fx:id="Btn11" mnemonicParsing="false" onAction="#btn1Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-size: 30; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: white;">
                <FlowPane.margin>
                   <Insets top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button id="2" fx:id="btn12" mnemonicParsing="false" onAction="#btn2Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25;">
+            <Button id="2" fx:id="btn12" mnemonicParsing="false" onAction="#btn2Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-size: 30; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: white;">
                <FlowPane.margin>
                   <Insets top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button id="3" fx:id="btn13" mnemonicParsing="false" onAction="#btn3Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25;">
+            <Button id="3" fx:id="btn13" mnemonicParsing="false" onAction="#btn3Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-size: 30; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: white;">
                <FlowPane.margin>
                   <Insets top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button id="4" fx:id="Btn21" mnemonicParsing="false" onAction="#btn4Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25;">
+            <Button id="4" fx:id="Btn21" mnemonicParsing="false" onAction="#btn4Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-size: 30; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: white;">
                <FlowPane.margin>
                   <Insets top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button id="5" fx:id="Btn22" mnemonicParsing="false" onAction="#btn5Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25;">
+            <Button id="5" fx:id="Btn22" mnemonicParsing="false" onAction="#btn5Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-size: 30; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: white;">
                <FlowPane.margin>
                   <Insets top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button id="6" fx:id="Btn23" mnemonicParsing="false" onAction="#btn6Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25;">
+            <Button id="6" fx:id="Btn23" mnemonicParsing="false" onAction="#btn6Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 30; -fx-font-style: italic;">
                <FlowPane.margin>
                   <Insets top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button id="7" fx:id="Btn31" mnemonicParsing="false" onAction="#btn7Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25;">
+            <Button id="7" fx:id="Btn31" mnemonicParsing="false" onAction="#btn7Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-size: 30; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: white;">
                <FlowPane.margin>
                   <Insets />
                </FlowPane.margin>
             </Button>
-            <Button id="8" fx:id="Btn32" mnemonicParsing="false" onAction="#btn8Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-family: Concert One; -fx-font-weight: bold; -fx-font-size: 50; -fx-font-style: italic;" textAlignment="CENTER">
+            <Button id="8" fx:id="Btn32" mnemonicParsing="false" onAction="#btn8Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 30; -fx-font-style: italic; -fx-text-fill: white;" textAlignment="CENTER">
                <FlowPane.margin>
                   <Insets bottom="10.0" top="10.0" />
                </FlowPane.margin>
             </Button>
-            <Button id="9" fx:id="Btn33" mnemonicParsing="false" onAction="#btn9Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25;">
+            <Button id="9" fx:id="Btn33" mnemonicParsing="false" onAction="#btn9Clicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-size: 30; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: white;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -67,16 +67,16 @@
             <Image url="@../Images/Record.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="372.0" layoutY="130.0" minHeight="40.0" prefHeight="60.0" prefWidth="342.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 40; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="Select Difficulty" textAlignment="CENTER" />
-      <Button fx:id="EasyBtn" layoutX="489.0" layoutY="213.0" mnemonicParsing="false" onAction="#onEasyClicked" prefHeight="50.0" prefWidth="216.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="Easy" />
-      <Button fx:id="MediumBtn" layoutX="489.0" layoutY="278.0" mnemonicParsing="false" onAction="#onMediumClicked" prefHeight="50.0" prefWidth="216.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="Medium" />
-      <Button fx:id="HardBtn" layoutX="489.0" layoutY="341.0" mnemonicParsing="false" onAction="#onHardClicked" prefHeight="50.0" prefWidth="216.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="Hard" />
-      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="475.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="372.0" layoutY="54.0" minHeight="40.0" prefHeight="60.0" prefWidth="342.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 40; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="Select Difficulty" textAlignment="CENTER" />
+      <Button fx:id="EasyBtn" layoutX="486.0" layoutY="114.0" mnemonicParsing="false" onAction="#onEasyClicked" prefHeight="50.0" prefWidth="216.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="Easy" />
+      <Button fx:id="MediumBtn" layoutX="486.0" layoutY="179.0" mnemonicParsing="false" onAction="#onMediumClicked" prefHeight="50.0" prefWidth="216.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="Medium" />
+      <Button fx:id="HardBtn" layoutX="486.0" layoutY="242.0" mnemonicParsing="false" onAction="#onHardClicked" prefHeight="50.0" prefWidth="216.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="Hard" />
+      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="472.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Robot2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="475.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="472.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Robot3.png" />
          </image>
@@ -86,26 +86,26 @@
             <Image url="@../Images/tic-tac.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="32.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="443.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/Player1.png" />
+            <Image url="@../Images/user-icon-png-pnglogocom-133466.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="234.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="645.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/Player2.png" />
+            <Image url="@../Images/Untitled-1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="88.0" layoutX="133.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="60.0" fitWidth="88.0" layoutX="544.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Tied.png" />
          </image>
       </ImageView>
-      <Label fx:id="PlayerScore" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="542.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 40; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="0" textAlignment="CENTER" />
-      <Label fx:id="PCScore" alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="542.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 40; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="0" textAlignment="CENTER" />
-      <Label fx:id="TiedScore" alignment="CENTER" contentDisplay="CENTER" layoutX="121.0" layoutY="542.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 40; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="0" textAlignment="CENTER" />
-      <Button layoutX="665.0" layoutY="515.0" mnemonicParsing="false" onAction="#goToHistoryPlayerVsPc" prefHeight="50.0" prefWidth="216.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="History" />
-      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="643.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="PlayerScore" alignment="CENTER" contentDisplay="CENTER" layoutX="445.0" layoutY="461.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 40; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="0" textAlignment="CENTER" />
+      <Label fx:id="PCScore" alignment="CENTER" contentDisplay="CENTER" layoutX="632.0" layoutY="461.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 40; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="0" textAlignment="CENTER" />
+      <Label fx:id="TiedScore" alignment="CENTER" contentDisplay="CENTER" layoutX="538.0" layoutY="460.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 40; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="0" textAlignment="CENTER" />
+      <Button layoutX="222.0" layoutY="498.0" mnemonicParsing="false" onAction="#goToHistoryPlayerVsPc" prefHeight="50.0" prefWidth="216.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="History" />
+      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="200.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Results.png" />
          </image>
@@ -115,12 +115,12 @@
             <Image url="@../Images/Back.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="475.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="472.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Robot1.png" />
          </image>
       </ImageView>
-      <Button fx:id="playAgainButton" layoutX="372.0" layoutY="465.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: white;" text="Play Again">
+      <Button fx:id="playAgainButton" layoutX="45.0" layoutY="499.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: white;" text="Play Again">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -130,5 +130,7 @@
             <Image url="@../Images/Robot2.png" />
          </image>
       </ImageView>
+      <Label fx:id="PlayerName" alignment="CENTER" contentDisplay="CENTER" layoutX="445.0" layoutY="406.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 20; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" textAlignment="CENTER" />
+      <Label fx:id="Player2Name" alignment="CENTER" contentDisplay="CENTER" layoutX="644.0" layoutY="406.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 20; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="PC" textAlignment="CENTER" />
    </children>
 </AnchorPane>

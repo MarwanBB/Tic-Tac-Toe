@@ -72,10 +72,6 @@ public class PVPNamesController implements Initializable {
            stage.show();
            
         }  
-           
-           
-        // SceneNavigator sceneNavigator = new SceneNavigator();
-        //    sceneNavigator.navigateBtn(event, "/views/GamePVP.fxml");
     }
     
 }

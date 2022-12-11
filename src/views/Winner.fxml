@@ -26,9 +26,9 @@
       <Text layoutX="612.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="I" />
       <Text layoutX="717.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="S" />
       <Button fx:id="backBtn" layoutX="27.0" layoutY="38.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="55.0" style="-fx-background-color: #90e0ef;" text="Button" />
-      <ImageView fx:id="imageBack" fitHeight="40.0" fitWidth="40.0" layoutX="35.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageBack" fitHeight="40.0" fitWidth="40.0" layoutX="35.0" layoutY="40.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/Back.png" />
+            <Image url="@../Images/Back.png" />
          </image>
       </ImageView>
    </children>

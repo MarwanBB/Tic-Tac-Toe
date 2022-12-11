@@ -83,7 +83,7 @@
                               <Image url="@../Images/Player1.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="PlayerOTxt" prefHeight="40.0" prefWidth="250.0" promptText="Player Name">
+                        <TextField fx:id="PlayerTxt" prefHeight="40.0" prefWidth="250.0" promptText="Player Name">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>

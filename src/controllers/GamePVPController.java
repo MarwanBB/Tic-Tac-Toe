@@ -27,6 +27,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 public class GamePVPController implements Initializable {
 
@@ -79,6 +83,10 @@ public class GamePVPController implements Initializable {
     private Label Player2Name;
     LocalDataBase ldb;
 
+    private Parent root;
+    private Scene scene;
+    private Stage stage;
+
     /**
      * Initializes the controller class.
      */
@@ -109,10 +117,20 @@ public class GamePVPController implements Initializable {
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
-            setPlayerSymbol(button);
-            button.setDisable(true);
             try {
-                checkIfGameIsOver();
+                setPlayerSymbol(button);
+                button.setDisable(true);
+                String check = checkIfGameIsOver();
+                if (winLoseChecker(check)==true) {
+                    try {
+                        
+                        SceneNavigator sceneNavigator = new SceneNavigator();
+                        sceneNavigator.navigateImg(mouseEvent, "/views/Winner.fxml");
+                        
+                    } catch (IOException ex) {
+                        Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             } catch (IOException ex) {
                 Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -127,14 +145,14 @@ public class GamePVPController implements Initializable {
             button.setText("O");
             playerTurn = 0;
         }
-        
+
         bString += button.getId() + button.getText() + "-";
     }
 
-    public void checkIfGameIsOver() throws IOException {
+    public String checkIfGameIsOver() throws IOException {
 
         squareCount++;
-
+        String d = "";
         line = button1.getText() + button2.getText() + button3.getText();
         winLoseChecker(line);
         line = button4.getText() + button5.getText() + button6.getText();
@@ -156,7 +174,8 @@ public class GamePVPController implements Initializable {
             tiescore++;
             TieScore.setText(Integer.toString(tiescore));
         }
-
+        d=line;
+        return d;
     }
 
     boolean winLoseChecker(String line) throws IOException {
@@ -194,18 +213,15 @@ public class GamePVPController implements Initializable {
     @FXML
     private void goBack(MouseEvent event) throws IOException {
         SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateImg(event, "/views/PVPNames.fxml");
+        sceneNavigator.navigateImg(event, "/views/Menu.fxml");
     }
 
     @FXML
     private void goToHistoryPVP(ActionEvent event) throws IOException {
-
         SceneNavigator sceneNavigator = new SceneNavigator();
         sceneNavigator.navigateBtn(event, "/views/HistoryPVP.fxml");
 
     }
-
-    
 
     public void DisplayNames(String p1Name, String p2Name) {
         Player1Name.setText(p1Name);
@@ -218,15 +234,14 @@ public class GamePVPController implements Initializable {
 
         GameDataPVP gm = new GameDataPVP(
                 date, Player1Name.getText(), Player1Score.getText(),
-                 Player2Name.getText(), Player2Score.getText(), winner);
+                Player2Name.getText(), Player2Score.getText(), winner);
         ldb.writeData(gm);
     }
-	
-	@FXML
-    private void saveGame(MouseEvent event) {
-        
-        // should create an alert here.
 
+    @FXML
+    private void saveGame(MouseEvent event) {
+
+        // should create an alert here.
         Stage stage = new Stage();
         FileChooser fc = new FileChooser();
 
@@ -285,5 +300,13 @@ public class GamePVPController implements Initializable {
         } catch (IOException ex) {
         }
     }
-	
+
+    public void Data(String p1Name, String p2Name, int p1Score, int p2Score, int tScore) {
+        Player1Name.setText(p1Name);
+        Player2Name.setText(p2Name);
+        Player1Score.setText(Integer.toString(p1Score));
+        Player2Score.setText(Integer.toString(p2Score));
+        TieScore.setText(Integer.toString(tScore));
+    }
+
 }

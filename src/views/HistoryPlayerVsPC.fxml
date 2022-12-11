@@ -11,18 +11,18 @@
    <children>
       <ImageView fx:id="imageStar" fitHeight="211.0" fitWidth="247.0" layoutX="5.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/Winner.png" />
+            <Image url="@../Images/Winner.png" />
          </image>
       </ImageView>
       <StackPane fx:id="stackpane" layoutX="273.0" layoutY="28.0" prefHeight="487.0" prefWidth="608.0">
          <children>
-            <TableView fx:id="table" prefHeight="471.0" prefWidth="578.0" style="-fx-text-fill: #BB5B69; -fx-background-color: #FFFFFF; -fx-border-weight: 3px; -fx-border-color: #74ADE0; -fx-padding: 0 0 5px 0;">
+            <TableView fx:id="table" prefHeight="471.0" prefWidth="578.0" style="-fx-border-weight: 3px; -fx-padding: 0 0 5px 0;">
                <columns>
-                  <TableColumn fx:id="gameDate" prefWidth="148.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive'; -fx-background-color: #0077b6;" text="Game Date" />
-                  <TableColumn fx:id="player" prefWidth="130.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive'; -fx-background-color: #0077b6;" text="Player" />
-                  <TableColumn fx:id="score" prefWidth="93.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive'; -fx-background-color: #0077b6;" text="Score" />
-                  <TableColumn fx:id="pcScore" prefWidth="99.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive'; -fx-background-color: #0077b6;" text="Pc Score" />
-                  <TableColumn fx:id="winner" prefWidth="137.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive'; -fx-background-color: #0077b6;" text="Winner" />
+                  <TableColumn fx:id="gameDate" prefWidth="148.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Game Date" />
+                  <TableColumn fx:id="player" prefWidth="130.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Player" />
+                  <TableColumn fx:id="score" prefWidth="93.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Score" />
+                  <TableColumn fx:id="pcScore" prefWidth="99.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Pc Score" />
+                  <TableColumn fx:id="winner" prefWidth="137.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Winner" />
                </columns>
             </TableView>
          </children>
