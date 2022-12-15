@@ -52,5 +52,32 @@ public class DatabaseAccessLayer {
         } 
         return null;
     }
+    
+    public static int SignUp(String username, String password) {
+        int result = 0;
+        
+        if (!query(username)){
+            try {
+            con = startConnection();
+            PreparedStatement stmt = con.prepareStatement("insert into USERS (username,password) values(?,?)");
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            result = stmt.executeUpdate();
+                System.out.println(result);
+            stmt.close();
+            con.close();
+            // do we need to commit?
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        }
+        
+        
+        
+        
+        return result;
+    }
 
 }
