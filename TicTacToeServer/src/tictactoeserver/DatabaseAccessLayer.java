@@ -79,5 +79,36 @@ public class DatabaseAccessLayer {
         
         return result;
     }
+    
+    public static boolean Signin(String username, String password) {
+        
+        
+        
+            try {
+                con = startConnection();
+                PreparedStatement stmt = con.prepareStatement("Select * FROM USERS WHERE username=? and password=?");
+                stmt.setString(1, username);
+                stmt.setString(2, password);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    stmt.close();
+                    con.close();
+                    return true;
+
+                } else {
+
+                    stmt.close();
+                    con.close();
+                    return false;
+                }
+                // do we need to commit?
+            } catch (SQLException ex) {
+                Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        
+
+        return false;
+    }
 
 }
