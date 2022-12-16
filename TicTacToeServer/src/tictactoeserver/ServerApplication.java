@@ -12,7 +12,7 @@ public class ServerApplication extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("tictactoeserver.Server.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Server.fxml"));
         
         Scene scene = new Scene(root);
         

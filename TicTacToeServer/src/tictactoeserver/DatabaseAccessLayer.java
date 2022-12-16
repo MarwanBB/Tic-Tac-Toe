@@ -19,6 +19,8 @@ public class DatabaseAccessLayer {
     
     
     private static Connection startConnection() {
+        //driver
+        //connect DB
         try {
             DriverManager.registerDriver(new ClientDriver());
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/RegisteredUsers", "root", "root");
@@ -31,28 +33,8 @@ public class DatabaseAccessLayer {
         return con;
     }
     
-    public static Boolean query(String username){
-        try {
-            con = startConnection();
-            PreparedStatement stmt = con.prepareStatement("Select * FROM USERS WHERE username=?");
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                System.out.println("found the user");
-               return true;
-            }
-            else{
-                System.out.println("Didnt find the user");
-                return false;
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        return null;
-    }
     
+
     public static int SignUp(String username, String password) {
         int result = 0;
         
@@ -79,7 +61,7 @@ public class DatabaseAccessLayer {
         
         return result;
     }
-    
+
     public static boolean Signin(String username, String password) {
         
         
@@ -109,6 +91,42 @@ public class DatabaseAccessLayer {
         
 
         return false;
+    }
+    
+    public static Boolean query(String username){
+        try {
+            con = startConnection();
+            PreparedStatement stmt = con.prepareStatement("Select * FROM USERS WHERE username=?");
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                System.out.println("found the user");
+               return true;
+            }
+            else{
+                System.out.println("Didnt find the user");
+                return false;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return null;
+    }
+
+    public ResultSet getOnlinePlayers() {
+        ResultSet rs = null;
+        try {
+
+            PreparedStatement stmt = con.prepareStatement("Select name,Score FROM USERS where isOnline = true ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return rs;
+
     }
 
 }

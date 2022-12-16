@@ -10,9 +10,9 @@ public class Server {
     Socket socket;
 
     public Server() {
-        System.out.println("Server turned on");
+        System.out.println("Server inside constructor outside try");
         try {
-            
+            System.out.println("Server inside constructor inside try");
             serverSocket = new ServerSocket(5005);
                 new Thread(new Runnable(){
                 
@@ -30,6 +30,7 @@ public class Server {
                 
             }).start();
         } catch (IOException ex) {
+            System.out.println("server at catch");
             ex.printStackTrace();
         }   
         

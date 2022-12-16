@@ -45,6 +45,8 @@ public class RegistrationController implements Initializable {
 
     @FXML
     private void signUpClicked(ActionEvent event) {
+        //        SceneNavigator sceneNavigator = new SceneNavigator();
+        //        sceneNavigator.navigateBtn(event, "/views/GameOnline.fxml");
 
         User user = new User(userTxt.getText(), passwordTxt.getText());
         
@@ -52,6 +54,9 @@ public class RegistrationController implements Initializable {
         
         client.sendMessage(user);
         
+        
+        
+        //DataBaseAccessLayer.SignUp();
         
     }
     

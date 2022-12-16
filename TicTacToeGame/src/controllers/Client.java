@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.stage.Stage;
 import models.User;
 
 
@@ -22,6 +23,13 @@ public class Client {
             public Client(){
             try {
             mySocket = new Socket("127.0.0.1" , 5005);
+                // Didnt need those below here, placed them elsewhere, implemented the inputting in the thread itself,
+                //and the outputing as a result of the button action bellow.
+            //dis = new DataInputStream(mySocket.getInputStream());
+            //ps = new PrintStream(mySocket.getOutputStream());
+            ///ps.println("From Client: Client sending to Server");
+            //String reply = dis.readLine();
+            //System.out.println(reply);
             
         } catch (IOException ex) {
             ex.printStackTrace();
