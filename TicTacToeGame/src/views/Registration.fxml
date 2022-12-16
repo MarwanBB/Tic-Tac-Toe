@@ -96,31 +96,6 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="139.0" text="Email" textAlignment="CENTER" textFill="#239bd7">
-                     <font>
-                        <Font name="Tahoma" size="26.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/email-13765.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <TextField fx:id="userTxt1" prefHeight="40.0" prefWidth="250.0" promptText="Email">
-                     <font>
-                        <Font name="Tahoma" size="20.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
                   <Label prefHeight="50.0" prefWidth="141.0" text="Password" textAlignment="CENTER" textFill="#239bd7">
                      <font>
                         <Font name="Tahoma" size="24.0" />
@@ -146,7 +121,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="signInBtn" mnemonicParsing="false" onAction="#goToOnlineGame" prefHeight="46.0" prefWidth="161.0" style="-fx-background-color: #239bd7; -fx-background-radius: 25;" text="Sign Up" textFill="WHITE">
+                  <Button fx:id="signupBtn" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="46.0" prefWidth="161.0" style="-fx-background-color: #239bd7; -fx-background-radius: 25;" text="Sign Up" textFill="WHITE">
                      <font>
                         <Font name="Tahoma Bold" size="24.0" />
                      </font>

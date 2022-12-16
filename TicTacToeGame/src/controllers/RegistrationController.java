@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
 import java.io.IOException;
@@ -14,47 +10,49 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import models.SceneNavigator;
+import models.User;
 
-/**
- * FXML Controller class
- *
- * @author Copy Center
- */
+
+
 public class RegistrationController implements Initializable {
 
     @FXML
-    private Button backBtn;
-    @FXML
     private TextField userTxt;
-    @FXML
-    private TextField userTxt1;
     @FXML
     private PasswordField passwordTxt;
     @FXML
-    private Button signInBtn;
+    private ImageView backImg;
+    @FXML
+    private Button signupBtn;
+    
+    Client client;
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        client = new Client();
     }    
-    
-    @FXML
-    private void goToOnlineGame(ActionEvent event) throws IOException {
-        
-        SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateBtn(event, "/views/GameOnline.fxml");
-            
-    }
     
     @FXML
     private void goBackToSignIn(MouseEvent event) throws IOException {
     SceneNavigator sceneNavigator = new SceneNavigator();
     sceneNavigator.navigateImg(event, "/views/SignIn.fxml");
+    }
+
+    @FXML
+    private void signUpClicked(ActionEvent event) {
+
+        User user = new User(userTxt.getText(), passwordTxt.getText());
+        
+        System.out.println("username and password are going to be sent to the client");
+        
+        client.sendMessage(user);
+        
+        
     }
     
 }
