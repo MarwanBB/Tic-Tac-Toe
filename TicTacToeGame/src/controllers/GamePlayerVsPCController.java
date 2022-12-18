@@ -1,4 +1,3 @@
-
 package controllers;
 
 import database.LocalDataBase;
@@ -19,9 +18,13 @@ import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -29,8 +32,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import main.MenuScreen;
 import models.GameDataPVP;
 import models.GameDataPlayerVsPC;
+import models.PVEDetails;
 import models.SceneNavigator;
 
 /**
@@ -78,9 +83,9 @@ public class GamePlayerVsPCController implements Initializable {
     private boolean printO = true;
     private byte[] b;
     private String bString = "-";   //added this at first cause printing reading the file didnt show first letter..
-    
+
     Stage stage;
-     private int xScore = 0;
+    private int xScore = 0;
     private int oScore = 0;
     private int draws = 0;
     private int xResult = 0;
@@ -89,7 +94,7 @@ public class GamePlayerVsPCController implements Initializable {
     ArrayList<Integer> playerOMoves;
     ArrayList<Integer> moves;
     AIMediumLevel AML;
-   
+
     String movesAsAString;
     String getSubStringForNames = "";
     String nameOfPlayerOneRecorder = "";
@@ -105,14 +110,27 @@ public class GamePlayerVsPCController implements Initializable {
     private Label PlayerName;
     @FXML
     private Label Player2Name;
-    
+
     SingleDataBase singleDB;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        if (PVEDetails.getPcScore() != null && PVEDetails.getpScore() != null && PVEDetails.getpName() != null && PVEDetails.getTie() != null) {
+
+            PlayerName.setText(PVEDetails.getpName());
+            PlayerScore.setText(PVEDetails.getpScore());
+            PCScore.setText(PVEDetails.getPcScore());
+            TiedScore.setText(PVEDetails.getTie());
+
+            xScore = Integer.parseInt(PlayerScore.getText());
+            oScore = Integer.parseInt(PCScore.getText());
+            draws = Integer.parseInt(TiedScore.getText());
+
+        }
         AHL = new AiHardLevel();
         AHL.NewGame();
         playerXMoves = new ArrayList<Integer>();
@@ -122,245 +140,245 @@ public class GamePlayerVsPCController implements Initializable {
         btnsArr = new Button[9];
         addButtonsToArray();
 
-    }    
+    }
 
     @FXML
     private void btn1Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
-                printXOForEasy(0);
-            } else if (mode.equalsIgnoreCase("medium")) {
-                printXOForMedium(0);
-            } else if (mode.equalsIgnoreCase("hard")) {
-                int GO = AHL.isGameOver();
-                if (AHL.Move(1, 1) && GO == 0) {
-                    System.out.println("YES");
-                    Btn11.setDisable(true);
-                    Btn11.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
-                    Btn11.setText("X");
-                    
-                    bString += Btn11.getId() + Btn11.getText() + "-";
-                    
-                    ComputerMove(-1, 0);
-                    if ((GO = AHL.isGameOver()) != 0) {
-                        SetResulForHard(GO);
-                    }
-                }
+            printXOForEasy(0);
+        } else if (mode.equalsIgnoreCase("medium")) {
+            printXOForMedium(0);
+        } else if (mode.equalsIgnoreCase("hard")) {
+            int GO = AHL.isGameOver();
+            if (AHL.Move(1, 1) && GO == 0) {
+                System.out.println("YES");
+                Btn11.setDisable(true);
+                Btn11.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                Btn11.setText("X");
 
+                bString += Btn11.getId() + Btn11.getText() + "-";
+
+                ComputerMove(-1, 0);
+                if ((GO = AHL.isGameOver()) != 0) {
+                    SetResulForHard(GO);
+                }
             }
+
+        }
     }
 
     @FXML
     private void btn2Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
-                printXOForEasy(1);
-            } else if (mode.equalsIgnoreCase("medium")) {
-                printXOForMedium(1);
-            } else if (mode.equalsIgnoreCase("hard")) {
-                int GO = AHL.isGameOver();
-                if (AHL.Move(2, 1) && GO == 0) {
-                    System.out.println("YES");
-                    btn12.setDisable(true);
+            printXOForEasy(1);
+        } else if (mode.equalsIgnoreCase("medium")) {
+            printXOForMedium(1);
+        } else if (mode.equalsIgnoreCase("hard")) {
+            int GO = AHL.isGameOver();
+            if (AHL.Move(2, 1) && GO == 0) {
+                System.out.println("YES");
+                btn12.setDisable(true);
 
-                    btn12.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
-                    btn12.setText("X");
-                    
-                    bString += btn12.getId() + btn12.getText() + "-";
-                    
-                    ComputerMove(-1, 0);
-                    if ((GO = AHL.isGameOver()) != 0) {
-                        SetResulForHard(GO);
-                    }
+                btn12.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                btn12.setText("X");
+
+                bString += btn12.getId() + btn12.getText() + "-";
+
+                ComputerMove(-1, 0);
+                if ((GO = AHL.isGameOver()) != 0) {
+                    SetResulForHard(GO);
                 }
-
             }
+
+        }
     }
 
     @FXML
     private void btn3Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
-                printXOForEasy(2);
-            } else if (mode.equalsIgnoreCase("medium")) {
-                printXOForMedium(2);
-            } else if (mode.equalsIgnoreCase("hard")) {
-                int GO = AHL.isGameOver();
-                if (AHL.Move(3, 1) && GO == 0) {
-                    System.out.println("YES");
-                    btn13.setDisable(true);
+            printXOForEasy(2);
+        } else if (mode.equalsIgnoreCase("medium")) {
+            printXOForMedium(2);
+        } else if (mode.equalsIgnoreCase("hard")) {
+            int GO = AHL.isGameOver();
+            if (AHL.Move(3, 1) && GO == 0) {
+                System.out.println("YES");
+                btn13.setDisable(true);
 
-                    btn13.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
-                    btn13.setText("X");
-                    
-                    bString += btn13.getId() + btn13.getText() + "-";
-                    
-                    ComputerMove(-1, 0);
-                    if ((GO = AHL.isGameOver()) != 0) {
-                        SetResulForHard(GO);
-                    }
+                btn13.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                btn13.setText("X");
+
+                bString += btn13.getId() + btn13.getText() + "-";
+
+                ComputerMove(-1, 0);
+                if ((GO = AHL.isGameOver()) != 0) {
+                    SetResulForHard(GO);
                 }
-
             }
+
+        }
     }
 
     @FXML
     private void btn4Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
-                printXOForEasy(3);
-            } else if (mode.equalsIgnoreCase("medium")) {
-                printXOForMedium(3);
-            } else if (mode.equalsIgnoreCase("hard")) {
-                int GO = AHL.isGameOver();
-                if (AHL.Move(4, 1) && GO == 0) {
-                    System.out.println("YES");
-                    Btn21.setDisable(true);
-                    Btn21.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
-                    Btn21.setText("X");
-                    
-                    bString += Btn21.getId() + Btn21.getText() + "-";
-                    
-                    ComputerMove(-1, 0);
-                    if ((GO = AHL.isGameOver()) != 0) {
-                        SetResulForHard(GO);
-                    }
-                }
+            printXOForEasy(3);
+        } else if (mode.equalsIgnoreCase("medium")) {
+            printXOForMedium(3);
+        } else if (mode.equalsIgnoreCase("hard")) {
+            int GO = AHL.isGameOver();
+            if (AHL.Move(4, 1) && GO == 0) {
+                System.out.println("YES");
+                Btn21.setDisable(true);
+                Btn21.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                Btn21.setText("X");
 
+                bString += Btn21.getId() + Btn21.getText() + "-";
+
+                ComputerMove(-1, 0);
+                if ((GO = AHL.isGameOver()) != 0) {
+                    SetResulForHard(GO);
+                }
             }
+
+        }
     }
 
     @FXML
     private void btn5Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
-                printXOForEasy(4);
-            } else if (mode.equalsIgnoreCase("medium")) {
-                printXOForMedium(4);
-            } else if (mode.equalsIgnoreCase("hard")) {
-                int GO = AHL.isGameOver();
-                if (AHL.Move(5, 1) && GO == 0) {
-                    System.out.println("YES");
-                    Btn22.setDisable(true);
+            printXOForEasy(4);
+        } else if (mode.equalsIgnoreCase("medium")) {
+            printXOForMedium(4);
+        } else if (mode.equalsIgnoreCase("hard")) {
+            int GO = AHL.isGameOver();
+            if (AHL.Move(5, 1) && GO == 0) {
+                System.out.println("YES");
+                Btn22.setDisable(true);
 
-                    Btn22.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
-                    Btn22.setText("X");
-                    
-                    bString += Btn22.getId() + Btn22.getText() + "-";
-                    
-                    ComputerMove(-1, 0);
-                    if ((GO = AHL.isGameOver()) != 0) {
-                        SetResulForHard(GO);
-                    }
+                Btn22.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                Btn22.setText("X");
+
+                bString += Btn22.getId() + Btn22.getText() + "-";
+
+                ComputerMove(-1, 0);
+                if ((GO = AHL.isGameOver()) != 0) {
+                    SetResulForHard(GO);
                 }
-
             }
+
+        }
     }
 
     @FXML
     private void btn6Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
-                printXOForEasy(5);
-            } else if (mode.equalsIgnoreCase("medium")) {
-                printXOForMedium(5);
-            } else if (mode.equalsIgnoreCase("hard")) {
-                int GO = AHL.isGameOver();
-                if (AHL.Move(6, 1) && GO == 0) {
-                    System.out.println("YES");
-                    Btn23.setDisable(true);
+            printXOForEasy(5);
+        } else if (mode.equalsIgnoreCase("medium")) {
+            printXOForMedium(5);
+        } else if (mode.equalsIgnoreCase("hard")) {
+            int GO = AHL.isGameOver();
+            if (AHL.Move(6, 1) && GO == 0) {
+                System.out.println("YES");
+                Btn23.setDisable(true);
 
-                    Btn23.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
-                    Btn23.setText("X");
-                    
-                    bString += Btn23.getId() + Btn23.getText() + "-";
-                    
-                    ComputerMove(-1, 0);
-                    if ((GO = AHL.isGameOver()) != 0) {
-                        SetResulForHard(GO);
-                    }
+                Btn23.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                Btn23.setText("X");
+
+                bString += Btn23.getId() + Btn23.getText() + "-";
+
+                ComputerMove(-1, 0);
+                if ((GO = AHL.isGameOver()) != 0) {
+                    SetResulForHard(GO);
                 }
-
             }
+
+        }
     }
 
     @FXML
     private void btn7Clicked(ActionEvent event) throws IOException {
-         if (mode.equalsIgnoreCase("easy")) {
-                printXOForEasy(6);
-            } else if (mode.equalsIgnoreCase("medium")) {
-                printXOForMedium(6);
-            } else if (mode.equalsIgnoreCase("hard")) {
-                int GO = AHL.isGameOver();
-                if (AHL.Move(7, 1) && GO == 0) {
-                    System.out.println("YES");
-                    Btn31.setDisable(true);
+        if (mode.equalsIgnoreCase("easy")) {
+            printXOForEasy(6);
+        } else if (mode.equalsIgnoreCase("medium")) {
+            printXOForMedium(6);
+        } else if (mode.equalsIgnoreCase("hard")) {
+            int GO = AHL.isGameOver();
+            if (AHL.Move(7, 1) && GO == 0) {
+                System.out.println("YES");
+                Btn31.setDisable(true);
 
-                    Btn31.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
-                    Btn31.setText("X");
-                    
-                    bString += Btn31.getId() + Btn31.getText() + "-";
-                    
-                    ComputerMove(-1, 0);
-                    if ((GO = AHL.isGameOver()) != 0) {
-                        SetResulForHard(GO);
-                    }
+                Btn31.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                Btn31.setText("X");
+
+                bString += Btn31.getId() + Btn31.getText() + "-";
+
+                ComputerMove(-1, 0);
+                if ((GO = AHL.isGameOver()) != 0) {
+                    SetResulForHard(GO);
                 }
-
             }
+
+        }
     }
 
     @FXML
     private void btn8Clicked(ActionEvent event) throws IOException {
-         if (mode.equalsIgnoreCase("easy")) {
-                printXOForEasy(7);
-            } else if (mode.equalsIgnoreCase("medium")) {
-                printXOForMedium(7);
-            } else if (mode.equalsIgnoreCase("hard")) {
-                int GO = AHL.isGameOver();
-                if (AHL.Move(8, 1) && GO == 0) {
-                    System.out.println("YES");
-                    Btn32.setDisable(true);
+        if (mode.equalsIgnoreCase("easy")) {
+            printXOForEasy(7);
+        } else if (mode.equalsIgnoreCase("medium")) {
+            printXOForMedium(7);
+        } else if (mode.equalsIgnoreCase("hard")) {
+            int GO = AHL.isGameOver();
+            if (AHL.Move(8, 1) && GO == 0) {
+                System.out.println("YES");
+                Btn32.setDisable(true);
 
-                    Btn32.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
-                    Btn32.setText("X");
-                    
-                    bString += Btn32.getId() + Btn32.getText() + "-";
-                    
-                    ComputerMove(-1, 0);
-                    if ((GO = AHL.isGameOver()) != 0) {
-                        SetResulForHard(GO);
-                    }
+                Btn32.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                Btn32.setText("X");
+
+                bString += Btn32.getId() + Btn32.getText() + "-";
+
+                ComputerMove(-1, 0);
+                if ((GO = AHL.isGameOver()) != 0) {
+                    SetResulForHard(GO);
                 }
-
             }
+
+        }
     }
 
     @FXML
     private void btn9Clicked(ActionEvent event) throws IOException {
         if (mode.equalsIgnoreCase("easy")) {
-                printXOForEasy(8);
-            } else if (mode.equalsIgnoreCase("medium")) {
-                printXOForMedium(8);
-            } else if (mode.equalsIgnoreCase("hard")) {
-                int GO = AHL.isGameOver();
-                if (AHL.Move(9, 1) && GO == 0) {
-                    System.out.println("YES");
-                    Btn33.setDisable(true);
+            printXOForEasy(8);
+        } else if (mode.equalsIgnoreCase("medium")) {
+            printXOForMedium(8);
+        } else if (mode.equalsIgnoreCase("hard")) {
+            int GO = AHL.isGameOver();
+            if (AHL.Move(9, 1) && GO == 0) {
+                System.out.println("YES");
+                Btn33.setDisable(true);
 
-                    Btn33.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
-                    Btn33.setText("X");
-                    
-                    bString += Btn33.getId() + Btn33.getText() + "-";
-                    
-                    ComputerMove(-1, 0);
-                    if ((GO = AHL.isGameOver()) != 0) {
-                        SetResulForHard(GO);
-                    }
+                Btn33.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                Btn33.setText("X");
+
+                bString += Btn33.getId() + Btn33.getText() + "-";
+
+                ComputerMove(-1, 0);
+                if ((GO = AHL.isGameOver()) != 0) {
+                    SetResulForHard(GO);
                 }
-
             }
+
+        }
     }
 
     @FXML
     private void onEasyClicked(ActionEvent event) {
         this.mode = "easy";
-            disableDifficultyButtons(true);
-            for (int i = 0 ; i < 9 ; i++){
+        disableDifficultyButtons(true);
+        for (int i = 0; i < 9; i++) {
             btnsArr[i].setDisable(false);
         }
     }
@@ -368,22 +386,21 @@ public class GamePlayerVsPCController implements Initializable {
     @FXML
     private void onMediumClicked(ActionEvent event) {
         this.mode = "medium";
-            disableDifficultyButtons(true);
-            for (int i = 0 ; i < 9 ; i++){
+        disableDifficultyButtons(true);
+        for (int i = 0; i < 9; i++) {
             btnsArr[i].setDisable(false);
         }
     }
 
     @FXML
     private void onHardClicked(ActionEvent event) {
-         this.mode = "hard";
-            disableDifficultyButtons(true);
-            for (int i = 0 ; i < 9 ; i++){
+        this.mode = "hard";
+        disableDifficultyButtons(true);
+        for (int i = 0; i < 9; i++) {
             btnsArr[i].setDisable(false);
         }
     }
 
-    
     private void addButtonsToArray() {
         btnsArr[0] = Btn11;
         btnsArr[1] = btn12;
@@ -402,13 +419,13 @@ public class GamePlayerVsPCController implements Initializable {
                     .setTheNextPlay(playerXMoves, moves);
             if (nextMove == -1) {
 
-                while (true) { 
-                    int index = random.nextInt(9); 
+                while (true) {
+                    int index = random.nextInt(9);
                     if (btnsArr[index].getText().equals("")) {
                         btnsArr[index].setText("O");
-                        
+
                         bString += btnsArr[index].getId() + btnsArr[index].getText() + "-";
-                        
+
                         btnsArr[index].setDisable(true);
                         btnsArr[index].setTextFill(javafx.scene.paint.Color.valueOf("#FFFFFF"));
                         playerOMoves.add(index + 1);
@@ -429,9 +446,9 @@ public class GamePlayerVsPCController implements Initializable {
                 nextMove--;
                 if (btnsArr[nextMove].getText().equals("")) {
                     btnsArr[nextMove].setText("O");
-                    
+
                     bString += btnsArr[nextMove].getId() + btnsArr[nextMove].getText() + "-";
-                    
+
                     btnsArr[nextMove].setDisable(true);
                     btnsArr[nextMove].setTextFill(javafx.scene.paint.Color.valueOf("#FFFFFF"));
                     playerOMoves.add(nextMove + 1);
@@ -450,22 +467,19 @@ public class GamePlayerVsPCController implements Initializable {
         }
     }
 
-    public void SetResultForMedium(int Num){
+    public void SetResultForMedium(int Num) {
         try {
             switch (Num) {
                 case 1:
                     xScore++;
                     xResult++;
-                   
                     break;
                 case 2:
                     oScore++;
                     oResult++;
-                    
                     break;
                 case 0:
                     draws++;
-                    
                     break;
             }
             disableAllXOButton();
@@ -474,19 +488,29 @@ public class GamePlayerVsPCController implements Initializable {
             TiedScore.setText("" + draws);
             if (xResult > oResult) {
                 getData(Player2Name.getText());
-                xResult = 0;
-                oResult = 0;
-                
-            } else if (xResult < oResult) { 
+                    PVEDetails.setpName(PlayerName.getText());
+                    PVEDetails.setpScore(PlayerScore.getText());
+                    PVEDetails.setPcScore(PCScore.getText());
+                    PVEDetails.setTie(TiedScore.getText());
+                    new Winning().start();
+//                xResult = 0;
+//                oResult = 0;
+
+            } else if (xResult < oResult) {
                 getData("PC");
-                xResult = 0;
-                oResult = 0;
-                
+                    PVEDetails.setpName(PlayerName.getText());
+                    PVEDetails.setpScore(PlayerScore.getText());
+                    PVEDetails.setPcScore(PCScore.getText());
+                    PVEDetails.setTie(TiedScore.getText());
+                    new Losing().start();
+//                xResult = 0;
+//                oResult = 0;
+
             } else {
                 getData("Tied");
                 xResult = 0;
                 oResult = 0;
-                
+
             }
         } catch (IOException ex) {
             Logger.getLogger(GamePlayerVsPCController.class.getName()).log(Level.SEVERE, null, ex);
@@ -495,11 +519,11 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     void disableAllXOButton() {
-        
-        for (int i = 0 ; i < 9 ; i++){
+
+        for (int i = 0; i < 9; i++) {
             btnsArr[i].setDisable(true);
         }
-        
+
     }
 
     void disableDifficultyButtons(boolean x) {
@@ -520,81 +544,81 @@ public class GamePlayerVsPCController implements Initializable {
                 Btn11.setDisable(true);
                 Btn11.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
                 Btn11.setText(PText);
-                
+
                 bString += Btn11.getId() + Btn11.getText() + "-";
-                
+
                 AHL.Move(move, player);
                 break;
             case 2:
                 btn12.setDisable(true);
                 btn12.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
                 btn12.setText(PText);
-                
+
                 bString += btn12.getId() + btn12.getText() + "-";
-                
+
                 AHL.Move(move, player);
                 break;
             case 3:
                 btn13.setDisable(true);
                 btn13.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
                 btn13.setText(PText);
-                
+
                 bString += btn13.getId() + btn13.getText() + "-";
-                
+
                 AHL.Move(move, player);
                 break;
             case 4:
                 Btn21.setDisable(true);
                 Btn21.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
                 Btn21.setText(PText);
-                
+
                 bString += Btn21.getId() + Btn21.getText() + "-";
-                
+
                 AHL.Move(move, player);
                 break;
             case 5:
                 Btn22.setDisable(true);
                 Btn22.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
                 Btn22.setText(PText);
-                
+
                 bString += Btn22.getId() + Btn22.getText() + "-";
-                
+
                 AHL.Move(move, player);
                 break;
             case 6:
                 Btn23.setDisable(true);
                 Btn23.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
                 Btn23.setText(PText);
-                
+
                 bString += Btn23.getId() + Btn23.getText() + "-";
-                
+
                 AHL.Move(move, player);
                 break;
             case 7:
                 Btn31.setDisable(true);
                 Btn31.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
                 Btn31.setText(PText);
-                
+
                 bString += Btn31.getId() + Btn31.getText() + "-";
-                
+
                 AHL.Move(move, player);
                 break;
             case 8:
                 Btn32.setDisable(true);
                 Btn32.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
                 Btn32.setText(PText);
-                
+
                 bString += Btn32.getId() + Btn32.getText() + "-";
-                
+
                 AHL.Move(move, player);
                 break;
             case 9:
                 Btn33.setDisable(true);
                 Btn33.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
                 Btn33.setText(PText);
-                
+
                 bString += Btn33.getId() + Btn33.getText() + "-";
-                
+
                 AHL.Move(move, player);
                 break;
         }
@@ -606,23 +630,32 @@ public class GamePlayerVsPCController implements Initializable {
             case 1:
                 xScore++;
                 xResult++;
-                
+                PVEDetails.setpName(PlayerName.getText());
+                PVEDetails.setpScore(PlayerScore.getText());
+                PVEDetails.setPcScore(PCScore.getText());
+                PVEDetails.setTie(TiedScore.getText());
+                new Winning().start();
+                break;
             case -1:
                 oScore++;
                 oResult++;
+                PVEDetails.setpName(PlayerName.getText());
+                PVEDetails.setpScore(PlayerScore.getText());
+                PVEDetails.setPcScore(PCScore.getText());
+                PVEDetails.setTie(TiedScore.getText());
+                new Losing().start();
                 break;
             case 2:
                 draws++;
-                
                 TiedScore.setText("" + draws);
                 System.out.println("" + draws);
 
                 break;
-            case 0:
-                xScore = 0;
-                oScore = 0;
-                draws = 0;
-                break;
+            //case 0:
+//                xScore = 0;
+//                oScore = 0;
+//                draws = 0;
+//                break;
         }
 
         disableAllXOButton();
@@ -673,9 +706,9 @@ public class GamePlayerVsPCController implements Initializable {
     private void printXOForEasy(int i) {
         if (btnsArr[i].getText().equals("")) {
             btnsArr[i].setText("X");
-            
+
             bString += btnsArr[i].getId() + btnsArr[i].getText() + "-";
-            
+
             btnsArr[i].setDisable(true);
             btnsArr[i].setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
             playerXMoves.add(i + 1);
@@ -684,9 +717,9 @@ public class GamePlayerVsPCController implements Initializable {
                 int o = getRandomAvailableButton();
                 if (btnsArr[o].getText().equals("")) {
                     btnsArr[o].setText("O");
-                    
+
                     bString += btnsArr[o].getId() + btnsArr[o].getText() + "-";
-                    
+
                     btnsArr[o].setDisable(true);
                     btnsArr[o].setTextFill(javafx.scene.paint.Color.valueOf("#FFFFFF"));
                     playerOMoves.add(o + 1);
@@ -712,9 +745,9 @@ public class GamePlayerVsPCController implements Initializable {
     private void printXOForMedium(int i) {
 
         btnsArr[i].setText("X");
-        
+
         bString += btnsArr[i].getId() + btnsArr[i].getText() + "-";
-        
+
         btnsArr[i].setDisable(true);
         btnsArr[i].setTextFill(javafx.scene.paint.Color.BLACK);
         playerXMoves.add(i + 1);
@@ -729,7 +762,7 @@ public class GamePlayerVsPCController implements Initializable {
 
     }
 
-    public int getResult(ArrayList<Integer> playerXSteps, ArrayList<Integer> playerOSteps){
+    public int getResult(ArrayList<Integer> playerXSteps, ArrayList<Integer> playerOSteps) {
         List<List> winningLists = new ArrayList<>();
         List topRow = Arrays.asList(1, 2, 3);
         List midRow = Arrays.asList(4, 5, 6);
@@ -751,34 +784,46 @@ public class GamePlayerVsPCController implements Initializable {
 
             for (List l : winningLists) {
                 if (playerXSteps.containsAll(l)) {
-                        return 1;
+                    PVEDetails.setpName(PlayerName.getText());
+                    PVEDetails.setpScore(PlayerScore.getText());
+                    PVEDetails.setPcScore(PCScore.getText());
+                    PVEDetails.setTie(TiedScore.getText());
+                    new Winning().start();
+                    return 1;
                 } else if (playerOSteps.containsAll(l)) {
-                        return 2;
+                    PVEDetails.setpName(PlayerName.getText());
+                    PVEDetails.setpScore(PlayerScore.getText());
+                    PVEDetails.setPcScore(PCScore.getText());
+                    PVEDetails.setTie(TiedScore.getText());
+                    new Losing().start();
+                    return 2;
                 }
             }
             if (playerXSteps.size() + playerOSteps.size() == 9) {
 
-                    return 0;
+                return 0;
             }
         }
 
         return -1;
     }
-    
+
     @FXML
     private void goToHistoryPlayerVsPc(ActionEvent event) throws IOException {
-        
+        PVEDetails.setpName(PlayerName.getText());
+        PVEDetails.setpScore(PlayerScore.getText());
+        PVEDetails.setPcScore(PCScore.getText());
+        PVEDetails.setTie(TiedScore.getText());
         SceneNavigator sceneNavigator = new SceneNavigator();
         sceneNavigator.navigateBtn(event, "/views/HistoryPlayerVsPC.fxml");
-            
+
     }
 
-     @FXML
+    @FXML
     private void goBack(MouseEvent event) throws IOException {
-    SceneNavigator sceneNavigator = new SceneNavigator();
-    sceneNavigator.navigateImg(event, "/views/PlayerVsPCName.fxml");
+        SceneNavigator sceneNavigator = new SceneNavigator();
+        sceneNavigator.navigateImg(event, "/views/PlayerVsPCName.fxml");
     }
-
 
     @FXML
     private void playAgain(ActionEvent event) {
@@ -792,9 +837,8 @@ public class GamePlayerVsPCController implements Initializable {
 
     @FXML
     private void saveGame(MouseEvent event) {
-        
-        // should create an alert here.
 
+        // should create an alert here.
         Stage stage = new Stage();
         FileChooser fc = new FileChooser();
 
@@ -838,7 +882,6 @@ public class GamePlayerVsPCController implements Initializable {
                             btnsArr[(Integer.parseInt(Character.toString(arrString[i].charAt(0))) - 1)].setDisable(true);
                         }
 
-
                     }
 
                     fis.close();
@@ -848,18 +891,78 @@ public class GamePlayerVsPCController implements Initializable {
         } catch (IOException ex) {
         }
     }
+
     public void DisplayNames(String p1Name) {
         PlayerName.setText(p1Name);
     }
-    
+
     public void getData(String winner) throws IOException {
         String date = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss").format(Calendar.getInstance().getTime());
         singleDB = new SingleDataBase();
 
         GameDataPlayerVsPC gm = new GameDataPlayerVsPC(
                 date, PlayerName.getText(), PlayerScore.getText(),
-                 Player2Name.getText(), PCScore.getText(), winner);
+                Player2Name.getText(), PCScore.getText(), winner);
         singleDB.writeData(gm);
     }
-    
+
+    class Winning extends Thread {
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(10);
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Stage stage = MenuScreen.getStage();
+                            stage.setResizable(false);
+                            Parent root = FXMLLoader.load(getClass().getResource("/views/WinnerPc.fxml"));
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(GamePlayerVsPCController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GameDataPlayerVsPC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
+    class Losing extends Thread {
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(10);
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Stage stage = MenuScreen.getStage();
+                            stage.setResizable(false);
+                            Parent root = FXMLLoader.load(getClass().getResource("/views/Loser.fxml"));
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(GamePlayerVsPCController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GameDataPlayerVsPC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
 }

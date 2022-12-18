@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -22,24 +23,27 @@ import javafx.stage.Stage;
 public class MenuScreen extends Application {
     
     Socket mySocket;
+    private static Stage stage;
+
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static void setStage(Stage stage) {
+        MenuScreen.stage = stage;
+    }
+    
+    
     
     @Override
     public void start(Stage stage) throws Exception {
-        
-        
-        
-
-        
-        
+        this.stage = stage;
         stage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("/views/Menu.fxml"));
-        
         Scene scene = new Scene(root);
-        
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
-        
-        
     }
     
     

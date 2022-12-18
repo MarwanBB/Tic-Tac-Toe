@@ -118,7 +118,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="signInBtn2" mnemonicParsing="false" onAction="#goToOnlineGame" prefHeight="46.0" prefWidth="161.0" style="-fx-background-color: #239bd7; -fx-background-radius: 25;" text="Sign in" textFill="WHITE">
+                  <Button fx:id="signInButton" mnemonicParsing="false" onAction="#signInClicked" prefHeight="46.0" prefWidth="161.0" style="-fx-background-color: #239bd7; -fx-background-radius: 25;" text="Sign in" textFill="WHITE">
                      <font>
                         <Font name="Tahoma Bold" size="24.0" />
                      </font>

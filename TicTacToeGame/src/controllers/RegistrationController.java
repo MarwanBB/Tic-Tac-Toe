@@ -34,7 +34,7 @@ public class RegistrationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        client = new Client();
+        client = Client.getInstance();
     }    
     
     @FXML
@@ -52,7 +52,7 @@ public class RegistrationController implements Initializable {
         
         System.out.println("username and password are going to be sent to the client");
         
-        client.sendMessage(user);
+        client.signUpRequest(user);
         
         
         

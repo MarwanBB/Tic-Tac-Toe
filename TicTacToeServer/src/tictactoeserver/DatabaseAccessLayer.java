@@ -35,7 +35,7 @@ public class DatabaseAccessLayer {
     
     
 
-    public static int SignUp(String username, String password) {
+    public static int signUp(String username, String password) {
         int result = 0;
         
         if (!query(username)){
@@ -62,7 +62,7 @@ public class DatabaseAccessLayer {
         return result;
     }
 
-    public static boolean Signin(String username, String password) {
+    public static boolean signIn(String username, String password) {
         
         
         
@@ -73,12 +73,13 @@ public class DatabaseAccessLayer {
                 stmt.setString(2, password);
                 ResultSet rs = stmt.executeQuery();
                 if (rs.next()) {
+                    System.out.println("user for sign in is found in database");
                     stmt.close();
                     con.close();
                     return true;
 
                 } else {
-
+                    System.out.println("user for sign in is NOT found in database");
                     stmt.close();
                     con.close();
                     return false;

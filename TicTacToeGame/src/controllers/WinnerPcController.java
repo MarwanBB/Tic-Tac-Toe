@@ -1,64 +1,57 @@
-
 package controllers;
 
-import java.net.URL;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.text.Text;
+import models.PVEDetails;
 import models.SceneNavigator;
 
+public class WinnerPcController implements Initializable {
 
-/**
- *
- * @author Yomna
- */
-public class WinnerController implements Initializable {
-    
     @FXML
     private MediaView mediaView;
-    
-    private File file;
-    private Media media;
-    private MediaPlayer mediaPlayer;
+    @FXML
+    private Text winner;
     @FXML
     private Button backBtn;
     @FXML
     private ImageView imageBack;
-    
-   
-    
+
+    private File file;
+    private Media media;
+    private MediaPlayer mediaPlayer;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         file = new File("src/Videos/Win.mp4");
         media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         mediaView.setMediaPlayer(mediaPlayer);
-        
-        
-    }    
-    public void playMedia(){
-        mediaPlayer.play();
+        winner.setText(PVEDetails.getpName());
     }
-
+    
     @FXML
     private void goBack(MouseEvent event) {
         try {
+            mediaPlayer.stop();
             SceneNavigator sceneNavigator = new SceneNavigator();
-            sceneNavigator.navigateImg(event, "/views/GamePVP.fxml");
+            sceneNavigator.navigateImg(event, "/views/GamePlayerVsPC.fxml");
         } catch (IOException ex) {
-            Logger.getLogger(WinnerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WinnerPcController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }
