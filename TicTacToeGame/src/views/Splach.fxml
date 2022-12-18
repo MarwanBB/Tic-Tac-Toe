@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="parent" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #a2cdd3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SplachController">
+   <children>
+      <ImageView fitHeight="290.0" fitWidth="800.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Onboarding.gif" />
+         </image>
+      </ImageView>
+      <Label layoutX="303.0" layoutY="517.0" prefHeight="19.0" prefWidth="195.0" text="Loading...">
+         <font>
+            <Font name="High Tower Text" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

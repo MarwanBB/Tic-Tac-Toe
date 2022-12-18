@@ -39,7 +39,7 @@ public class MenuScreen extends Application {
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         stage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getResource("/views/Menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/Splach.fxml"));
         Scene scene = new Scene(root);
         //stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);

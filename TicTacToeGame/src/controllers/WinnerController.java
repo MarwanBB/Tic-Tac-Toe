@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllers;
 
 import java.net.URL;
@@ -15,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import models.SceneNavigator;
 
 
@@ -34,6 +39,8 @@ public class WinnerController implements Initializable {
     private Button backBtn;
     @FXML
     private ImageView imageBack;
+    @FXML
+    private Text winner;
     
    
     
@@ -45,16 +52,15 @@ public class WinnerController implements Initializable {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         mediaView.setMediaPlayer(mediaPlayer);
-        
-        
-    }    
-    public void playMedia(){
-        mediaPlayer.play();
+    } 
+    public void DisplayNames(String win) {
+        winner.setText(win);
     }
-
+    
     @FXML
     private void goBack(MouseEvent event) {
         try {
+            mediaPlayer.stop();
             SceneNavigator sceneNavigator = new SceneNavigator();
             sceneNavigator.navigateImg(event, "/views/GamePVP.fxml");
         } catch (IOException ex) {

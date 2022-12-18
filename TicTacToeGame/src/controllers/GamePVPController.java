@@ -31,6 +31,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import models.PVPDetails;
 
 public class GamePVPController implements Initializable {
 
@@ -92,6 +93,18 @@ public class GamePVPController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        if (PVPDetails.getpName1() != null && PVPDetails.getpName2() != null && PVPDetails.getpScore1() != null && PVPDetails.getpScore2() != null && PVPDetails.getTie() != null) {
+            Player1Name.setText(PVPDetails.getpName1());
+            Player2Name.setText(PVPDetails.getpName2());
+            Player1Score.setText(PVPDetails.getpScore1());
+            Player2Score.setText(PVPDetails.getpScore2());
+            TieScore.setText(PVPDetails.getTie());
+            p1score = Integer.parseInt(Player1Score.getText());
+            p2score = Integer.parseInt(Player2Score.getText());
+            tiescore = Integer.parseInt(TieScore.getText());
+        }
+
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
 
         buttons.forEach(button -> {
@@ -121,12 +134,41 @@ public class GamePVPController implements Initializable {
                 setPlayerSymbol(button);
                 button.setDisable(true);
                 String check = checkIfGameIsOver();
-                if (winLoseChecker(check)==true) {
+                if (flagWin == 1) {
                     try {
-                        
-                        SceneNavigator sceneNavigator = new SceneNavigator();
-                        sceneNavigator.navigateImg(mouseEvent, "/views/Winner.fxml");
-                        
+                        PVPDetails.setpName1(Player1Name.getText());
+                        PVPDetails.setpName2(Player2Name.getText());
+                        PVPDetails.setpScore1(Player1Score.getText());
+                        PVPDetails.setpScore2(Player2Score.getText());
+                        PVPDetails.setTie(TieScore.getText());
+                        String winner = Player1Name.getText();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Winner.fxml"));
+                        root = loader.load();
+                        WinnerController win = loader.getController();
+                        win.DisplayNames(winner);
+                        stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else if (flagWin == 2) {
+                    try {
+                        PVPDetails.setpName1(Player1Name.getText());
+                        PVPDetails.setpName2(Player2Name.getText());
+                        PVPDetails.setpScore1(Player1Score.getText());
+                        PVPDetails.setpScore2(Player2Score.getText());
+                        PVPDetails.setTie(TieScore.getText());
+                        String winner = Player2Name.getText();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Winner.fxml"));
+                        root = loader.load();
+                        WinnerController win = loader.getController();
+                        win.DisplayNames(winner);
+                        stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
                     } catch (IOException ex) {
                         Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -174,7 +216,7 @@ public class GamePVPController implements Initializable {
             tiescore++;
             TieScore.setText(Integer.toString(tiescore));
         }
-        d=line;
+        d = line;
         return d;
     }
 
@@ -196,7 +238,7 @@ public class GamePVPController implements Initializable {
                 });
                 return true;
             case "OOO":
-                flagWin = 1;
+                flagWin = 2;
                 p2score++;
                 Player2Score.setText(Integer.toString(p2score));
                 getData(Player2Name.getText());
@@ -218,6 +260,11 @@ public class GamePVPController implements Initializable {
 
     @FXML
     private void goToHistoryPVP(ActionEvent event) throws IOException {
+        PVPDetails.setpName1(Player1Name.getText());
+        PVPDetails.setpName2(Player2Name.getText());
+        PVPDetails.setpScore1(Player1Score.getText());
+        PVPDetails.setpScore2(Player2Score.getText());
+        PVPDetails.setTie(TieScore.getText());
         SceneNavigator sceneNavigator = new SceneNavigator();
         sceneNavigator.navigateBtn(event, "/views/HistoryPVP.fxml");
 
@@ -256,10 +303,10 @@ public class GamePVPController implements Initializable {
                 fos.close();
             }
         } catch (FileNotFoundException ex) {
-
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @FXML

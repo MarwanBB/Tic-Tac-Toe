@@ -58,8 +58,7 @@ public class PVPNamesController implements Initializable {
 
     @FXML
     private void goToGamePVP(ActionEvent event) throws IOException {
-        if(!PlayerXTxt.getText().isEmpty()&& !PlayerOTxt.getText().isEmpty()){
-            
+        if(!PlayerXTxt.getText().isEmpty()&& !PlayerOTxt.getText().isEmpty()){ 
            String p1Name = PlayerXTxt.getText();
            String p2Name = PlayerOTxt.getText();
            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/GamePVP.fxml"));

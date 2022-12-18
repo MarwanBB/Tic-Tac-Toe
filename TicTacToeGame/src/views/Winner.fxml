@@ -10,21 +10,22 @@
 <Pane id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #90e0ef;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WinnerController">
    <children>
       <MediaView fx:id="mediaView" fitHeight="500.0" fitWidth="600.0" layoutX="150.0" layoutY="115.0" />
-      <Text layoutX="190.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="C" wrappingWidth="21.00341796875" />
-      <Text layoutX="264.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="N" />
-      <Text layoutX="225.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="O" />
-      <Text layoutX="379.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="A" />
-      <Text layoutX="335.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="R" />
-      <Text layoutX="296.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="G" />
-      <Text layoutX="420.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="T" />
-      <Text layoutX="466.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="U" />
-      <Text layoutX="510.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="L" />
-      <Text layoutX="543.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="A" />
-      <Text layoutX="682.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="N" />
-      <Text layoutX="581.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="T" />
-      <Text layoutX="640.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="O" />
-      <Text layoutX="612.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="I" />
-      <Text layoutX="717.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="S" />
+      <Text layoutX="119.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="C" wrappingWidth="21.00341796875" />
+      <Text layoutX="193.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="N" />
+      <Text layoutX="154.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="O" />
+      <Text layoutX="308.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="A" />
+      <Text layoutX="264.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="R" />
+      <Text layoutX="225.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="G" />
+      <Text layoutX="349.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="T" />
+      <Text layoutX="395.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="U" />
+      <Text layoutX="439.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="L" />
+      <Text layoutX="472.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="A" />
+      <Text layoutX="611.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="N" />
+      <Text layoutX="510.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="T" />
+      <Text layoutX="569.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="O" />
+      <Text layoutX="541.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="I" />
+      <Text layoutX="646.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="S" />
+      <Text fx:id="winner" layoutX="694.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="Winner" textAlignment="CENTER" wrappingWidth="148.0205078125" />
       <Button fx:id="backBtn" layoutX="27.0" layoutY="38.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="55.0" style="-fx-background-color: #90e0ef;" text="Button" />
       <ImageView fx:id="imageBack" fitHeight="40.0" fitWidth="40.0" layoutX="35.0" layoutY="40.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
          <image>
