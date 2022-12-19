@@ -59,12 +59,7 @@ public class WinnerController implements Initializable {
     
     @FXML
     private void goBack(MouseEvent event) {
-        try {
-            mediaPlayer.stop();
-            SceneNavigator sceneNavigator = new SceneNavigator();
-            sceneNavigator.navigateImg(event, "/views/GamePVP.fxml");
-        } catch (IOException ex) {
-            Logger.getLogger(WinnerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        mediaPlayer.stop();
+        SceneNavigator.navigate("/views/GamePVP.fxml");
     }
 }

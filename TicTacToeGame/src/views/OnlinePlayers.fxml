@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #90e0ef;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OnlinePlayersController">
+   <children>
+      <ImageView fx:id="imageStar" fitHeight="227.0" fitWidth="192.0" layoutX="23.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Winner.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="backImg" fitHeight="42.0" fitWidth="38.0" layoutX="49.0" layoutY="40.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Back.png" />
+         </image>
+      </ImageView>
+      <ScrollPane layoutX="261.0" layoutY="70.0" prefHeight="514.0" prefWidth="621.0" style="-fx-background-color: #E6E7D4;">
+         <content>
+            <TableView fx:id="tableId" prefHeight="513.0" prefWidth="619.0" style="-fx-background-color: #ffffff;">
+               <columns>
+                  <TableColumn fx:id="player1" maxWidth="500.0" minWidth="50.0" prefWidth="114.0" text="Player1" />
+               </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <Button fx:id="refreshButton" layoutX="87.0" layoutY="435.0" mnemonicParsing="false" onAction="#refreshButtonClicked" text="Refresh" />
+   </children>
+</Pane>

@@ -81,28 +81,7 @@ public class Handler extends Thread {
                             }
                             break;
 
-                        case "message":
-                            sendMessageToAll(str);
-                            break;
-
-                        case "refreshOnlineOnSignIn":
-                            this.user.setUsername(arrString[1]);
-                            this.user.setPassword(arrString[2]);
-                            this.isAvailable = 1;
-                            this.isPlaying = 0;
-                            refreshAvailablePlayers();
-                            break;
-
-                        case "refreshOnlineAnyTime":
-                            refreshAvailablePlayers();
-                            break;
-
-                        case "invitePlayer":
-                            invitePlayerHandler(str);
-                            break;
-                        case "playGame2Players":
-                            playGame(str);
-                            break;
+                       
                     }
 
                 }
@@ -124,22 +103,7 @@ public class Handler extends Thread {
 
     }
 
-    public void sendMessageToAll(String str) throws IOException {
 
-        String[] arrString = str.split("/");
-
-//            int index1 = playerOne.indexOf(arrString[1]);
-//            int index2 = playerTwo.indexOf(arrString[2]);
-        int index1 = handlerList.indexOf(playerOne.indexOf(arrString[1]));
-        int index2 = handlerList.indexOf(playerTwo.indexOf(arrString[2]));
-
-        System.out.println(index1);
-        System.out.println(index2);
-
-        handlerList.get(index1).printStream.println("message" + "/" + arrString[3]);
-        handlerList.get(index2).printStream.println("message" + "/" + arrString[3]);
-
-    }
 
     public User getUser() {
         return user;
@@ -149,51 +113,6 @@ public class Handler extends Thread {
         this.user = user;
     }
 
-    void refreshAvailablePlayers() {
-        try {
-            printStream = new PrintStream(socket.getOutputStream());
-            printStream.println("emptyAvailablePlayersList");
 
-            for (Handler handler : handlerList) {
-                if (handler.isAvailable == 1) {
-                    printStream = new PrintStream(socket.getOutputStream());
-                    printStream.println("refreshAvailable" + "/" + handler.user.getUsername());
-
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    void invitePlayerHandler(String str) {
-        String[] arrString = str.split("/");
-        for (Handler handler : handlerList) {
-            if (handler.user.getUsername().equals(arrString[2])) {
-                try {
-                    printStream = new PrintStream(socket.getOutputStream());
-                    handler.printStream.println("createRequest" + "/" + arrString[1] + "/" + arrString[2]);
-                } catch (IOException ex) {
-                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        }
-    }
-
-    void playGame(String str) {
-        String[] arrString = str.split("/");
-        for (Handler handler : handlerList) {
-            if (handler.user.getUsername().equals(arrString[1]) || handler.user.getUsername().equals(arrString[2])) {
-                try {
-                    printStream = new PrintStream(socket.getOutputStream());
-                    handler.printStream.println("goToGameView" + "/" + arrString[1] + "/" + arrString[2]);
-                } catch (IOException ex) {
-                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        }
-    }
 
 }
