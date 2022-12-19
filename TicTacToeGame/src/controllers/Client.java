@@ -92,8 +92,16 @@ public class Client implements Runnable {
                             System.out.println("i found the user");
                             
                             break;
-                       
-
+                        case "refreshAvailablePlayersList":
+                            // used to fill the available players list after emptying it by the emptyAvailablePlayersList function.
+                            // arrString[] = "refreshAvailable" + "/" + handler.user.getUsername()
+                            clientRefreshAvailableClients(arrString[1]);
+                            break;
+                        case "emptyAvailablePlayersList":
+                            //used to empty the available players list before filling it again with the current available players.
+                            //arrString[] = emptyAvailablePlayersList
+                            clientEmptyAvailablePlayersList();
+                            break;
                     }
                 }
 
@@ -139,6 +147,30 @@ public class Client implements Runnable {
         dataInputStream = new DataInputStream(mySocket.getInputStream());
         String str = dataInputStream.readLine();
         return str;
+    }
+    public void clientRefreshOnlineOnSignIn(User user) {
+        try {
+            printstream = new PrintStream(mySocket.getOutputStream());
+            printstream.println("refreshOnlineOnSignIn" + "/" + user.getUsername() + "/" + user.getPassword());
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void clientRefreshOnlineAnyTimeClient() {
+        // invoked when refresh button is clicked in online players view.
+        try {
+            printstream = new PrintStream(mySocket.getOutputStream());
+            printstream.println("refreshOnlinePlayersWhenRefreshButtonIsClicked");
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    void clientRefreshAvailableClients(String userNameAvaiable) {
+        OnlinePlayersController.addToAvailablePlayersList(userNameAvaiable);
+        System.out.println("Username available in client refreshAvailableClients::: " + userNameAvaiable);
+    }
+    void clientEmptyAvailablePlayersList() {
+        OnlinePlayersController.emptyAvailablePlayersListInView();
     }
 
 }

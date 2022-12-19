@@ -96,9 +96,6 @@ public class OnlinePlayersController implements Initializable {
 
     }
 
-    void refreshOnlineAnyTime() {
-    }
-
     @FXML
     private void goBack(MouseEvent event) {
             SceneNavigator.navigate("/views/SignIn.fxml");
@@ -106,6 +103,26 @@ public class OnlinePlayersController implements Initializable {
     }
 
     private void refresh() {
+        try {
+            client.clientRefreshOnlineAnyTimeClient();
+
+            TimeUnit.MILLISECONDS.sleep(300);
+
+            ObservableList<OnlinePlayers> elements = FXCollections.observableArrayList();
+
+            for (int i = 0; i < availablePlayers.size(); i++) {
+                System.out.println("string to be added to elements :::: " + availablePlayers.get(i));
+                elements.add(new OnlinePlayers(availablePlayers.get(i)));
+                System.out.println("element ======" + elements.get(i));
+
+            }
+
+            player1.setCellValueFactory(new PropertyValueFactory<OnlinePlayers, String>("playerUsername"));
+            tableId.setItems(elements);
+
+        } catch (InterruptedException ex) {
+            Logger.getLogger(OnlinePlayersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

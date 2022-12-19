@@ -32,6 +32,8 @@ public class SignInController implements Initializable {
     private Button signInBtn1;
 
     Client client;
+    
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
