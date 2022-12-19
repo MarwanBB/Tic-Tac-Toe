@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import models.SceneNavigator;
@@ -28,6 +29,8 @@ import models.SceneNavigator;
 public class MenuController implements Initializable {
     
     private Label label;
+    @FXML
+    private Button extraGames;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,6 +53,11 @@ public class MenuController implements Initializable {
     private void goToGameOnline(ActionEvent event)  {
         SceneNavigator.navigate("/views/SignIn.fxml");
         
+    }
+
+    @FXML
+    private void goToExtraGames(ActionEvent event) {
+        SceneNavigator.navigate("/views/ExtraGames.fxml");
     }
     
 }
