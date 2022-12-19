@@ -10,6 +10,7 @@ public class Server extends Thread {
     Socket socket;
     private static Server instance;
     private int indexHandlerMax = -1;
+
     public static Server getInstance() {
         if (instance == null) {
             instance = new Server();
@@ -22,28 +23,30 @@ public class Server extends Thread {
         try {
             System.out.println("Server inside constructor inside try");
             serverSocket = new ServerSocket(5005);
-            new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    while (true) {
-                        try {
-                            socket = serverSocket.accept();
-                            System.out.println("An acception happened !!!!!!!!!");
-                            indexHandlerMax++;
-                            new Handler(socket, indexHandlerMax);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                }
-
-            });
+            
         } catch (IOException ex) {
             System.out.println("server at catch");
             ex.printStackTrace();
         }
 
+    }
+    
+    @Override
+    public void run() {
+        while (true) {
+                        try {
+                            socket = serverSocket.accept();
+                            System.out.println("An acception happened !!!!!!!!!");
+
+                            indexHandlerMax++;
+
+                            new Handler(socket, indexHandlerMax);
+
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+        
     }
 
     public int getIndexHandlerMax() {
@@ -53,10 +56,11 @@ public class Server extends Thread {
     public void setIndexHandlerMax(int indexHandlerMax) {
         this.indexHandlerMax = indexHandlerMax;
     }
-
-    void stopAllClients() {
-        for (Handler client : Handler.handlerList) {
-            client.stop();
+    
+    void stopAllHandlers() {
+        // change to stop all handlers ya marwan
+        for (Handler handler : Handler.handlerList) {
+            handler.stop();
         }
     }
 

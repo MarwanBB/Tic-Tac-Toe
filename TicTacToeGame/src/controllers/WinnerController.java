@@ -61,5 +61,6 @@ public class WinnerController implements Initializable {
     private void goBack(MouseEvent event) {
         mediaPlayer.stop();
         SceneNavigator.navigate("/views/GamePVP.fxml");
+
     }
 }

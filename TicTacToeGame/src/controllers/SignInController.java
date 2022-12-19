@@ -1,6 +1,6 @@
 package controllers;
 
-import java.io.DataInputStream;
+import Utility.Constants;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -19,7 +20,7 @@ import models.AlertBoxOneButton;
 import models.SceneNavigator;
 import models.User;
 
-public class SignInController implements Initializable {
+public class SignInController extends Thread implements Initializable {
 
     @FXML
     private ImageView backBtn;
@@ -31,25 +32,13 @@ public class SignInController implements Initializable {
     private Button signInButton;
     @FXML
     private Button signInBtn1;
-    
+
     private static int signInRequestRunningFlag;
 
     Client client;
-    
-    
-    
-    public static int getSignInRequestRunningFlag() {
-        return signInRequestRunningFlag;
-    }
 
-    public static void setSignInRequestRunningFlag(int signInRequestRunningFlag) {
-        SignInController.signInRequestRunningFlag = signInRequestRunningFlag;
-    }
-    
-    
-    
     private static Thread threadSignIn;
-    
+
     public static Thread getThreadSignIn() {
         return threadSignIn;
     }
@@ -61,24 +50,22 @@ public class SignInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         client = Client.getInstance();
-    }
-
-    @FXML
-    private void goToRegistration(ActionEvent event)  {
-
-        SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigate("/views/SignUp.fxml");
 
     }
 
     @FXML
-    private void goBackToMenu(MouseEvent event)  {
-        SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateImg(event, "/views/Menu.fxml");
+    private void goToSignUp(ActionEvent event) {
+        SceneNavigator.navigate("/views/SignUp.fxml");
+
     }
 
     @FXML
-    private void signInClicked(ActionEvent event) throws IOException {
+    private void goBackToMenu(MouseEvent event) {
+        SceneNavigator.navigate("/views/Menu.fxml");
+    }
+
+    @FXML
+    private void signInClicked(ActionEvent event)  {
         
         System.out.println("sign in clicked");
         
@@ -101,12 +88,9 @@ public class SignInController implements Initializable {
                 @Override
                 public void run() {
 
-                    //checking if this user exists
                     client.clientSignInRequest(user);
 
-                    // waiting(suspend thread) till the result of searching for the user is returned
-                    // used thread.resume() at the Client after str = dataInputStream.readLine();, so that the next lines
-                    // are executed ONLY after the readLine() happens.
+                  
                     signInRequestRunningFlag = 1;
                     threadSignIn.suspend();
                     signInRequestRunningFlag = 0;
@@ -117,18 +101,20 @@ public class SignInController implements Initializable {
                         client.setUser(user);
 
                         SceneNavigator.navigate("/views/OnlinePlayers.fxml");
-
                     }
                 }
             };
 
             threadSignIn.start();
         }
+    }  
 
+    public static int getSignInRequestRunningFlag() {
+        return signInRequestRunningFlag;
     }
 
-    void goToOnlineGame() {
-
+    public static void setSignInRequestRunningFlag(int signInRequestRunningFlag) {
+        SignInController.signInRequestRunningFlag = signInRequestRunningFlag;
     }
 
 }

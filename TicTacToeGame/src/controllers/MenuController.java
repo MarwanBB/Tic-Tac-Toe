@@ -29,36 +29,27 @@ public class MenuController implements Initializable {
     
     private Label label;
     
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
     }    
 
     @FXML
-    private void goToGameSinglePlayer(ActionEvent event) throws IOException {
+    private void goToGameSinglePlayer(ActionEvent event) {
         
-        SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateBtn(event, "/views/PlayerVsPCName.fxml");
+        SceneNavigator.navigate("/views/PlayerVsPCName.fxml");
 
     }
 
     @FXML
-    private void goToGamePVP(ActionEvent event) throws IOException {
-        
-        SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateBtn(event, "/views/PVPNames.fxml");
+    private void goToGamePVP(ActionEvent event) {
+        SceneNavigator.navigate("/views/PVPNames.fxml");
             
     }
 
     @FXML
-    private void goToGameOnline(ActionEvent event) throws IOException {
-        SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateBtn(event, "/views/SignIn.fxml");
+    private void goToGameOnline(ActionEvent event)  {
+        SceneNavigator.navigate("/views/SignIn.fxml");
+        
     }
     
 }

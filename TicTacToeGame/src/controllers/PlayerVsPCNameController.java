@@ -49,9 +49,8 @@ public class PlayerVsPCNameController implements Initializable {
     }    
 
     @FXML
-    private void goBackToMenu(MouseEvent event) throws IOException {
-        SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateImg(event, "/views/Menu.fxml");
+    private void goBackToMenu(MouseEvent event) {
+        SceneNavigator.navigate("/views/Menu.fxml");
     }
 
     @FXML

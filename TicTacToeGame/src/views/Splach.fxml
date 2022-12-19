@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="parent" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #a2cdd3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SplachController">
+<AnchorPane id="AnchorPane" fx:id="parent" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #a2cdd3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SplachController">
    <children>
-      <ImageView fitHeight="290.0" fitWidth="800.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="290.0" fitWidth="800.0" layoutX="50.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Onboarding.gif" />
          </image>
       </ImageView>
-      <Label layoutX="303.0" layoutY="517.0" prefHeight="19.0" prefWidth="195.0" text="Loading...">
+      <Label layoutX="353.0" layoutY="449.0" prefHeight="19.0" prefWidth="195.0" text="Loading...">
          <font>
             <Font name="High Tower Text" size="30.0" />
          </font>

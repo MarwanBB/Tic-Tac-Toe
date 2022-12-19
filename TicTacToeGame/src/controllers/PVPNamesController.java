@@ -51,14 +51,14 @@ public class PVPNamesController implements Initializable {
     }    
 
     @FXML
-    private void goBackToMenu(MouseEvent event) throws IOException {
-        SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateImg(event, "/views/Menu.fxml");
+    private void goBackToMenu(MouseEvent event) {
+        SceneNavigator.navigate("/views/Menu.fxml");
     }
 
     @FXML
     private void goToGamePVP(ActionEvent event) throws IOException {
-        if(!PlayerXTxt.getText().isEmpty()&& !PlayerOTxt.getText().isEmpty()){ 
+        if(!PlayerXTxt.getText().isEmpty()&& !PlayerOTxt.getText().isEmpty()){
+            
            String p1Name = PlayerXTxt.getText();
            String p2Name = PlayerOTxt.getText();
            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/GamePVP.fxml"));

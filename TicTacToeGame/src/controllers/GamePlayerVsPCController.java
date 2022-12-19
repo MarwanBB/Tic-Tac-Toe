@@ -822,7 +822,7 @@ public class GamePlayerVsPCController implements Initializable {
     @FXML
     private void goBack(MouseEvent event) throws IOException {
         SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateImg(event, "/views/PlayerVsPCName.fxml");
+        sceneNavigator.navigateImg(event, "/views/Menu.fxml");
     }
 
     @FXML

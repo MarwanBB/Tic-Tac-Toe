@@ -14,7 +14,8 @@ public class DatabaseAccessLayer {
     public static Connection con;
 
     private static Connection startConnection() {
-
+        //driver
+        //connect DB
         try {
             DriverManager.registerDriver(new ClientDriver());
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/RegisteredUsers", "root", "root");
@@ -28,30 +29,29 @@ public class DatabaseAccessLayer {
     }
 
     public static Boolean signUp(String username, String password) {
-       
 
-        if (!ifUserExist(username)) {
+        if (!query(username)) {
             try {
                 con = startConnection();
-                PreparedStatement query = con.prepareStatement("insert into USERS (username,password, isonline) values(?,?,?)");
-                query.setString(1, username);
-                query.setString(2, password);
-                query.setBoolean(3, false);
-                query.executeUpdate();
-         
-                query.close();
+                PreparedStatement stmt = con.prepareStatement("insert into USERS (username,password,isOnline) values(?,?,?)");
+                stmt.setString(1, username);
+                stmt.setString(2, password);
+                stmt.setBoolean(3, false);
+                stmt.executeUpdate();
+                stmt.close();
                 con.close();
                 return true;
+                // do we need to commit?
 
             } catch (SQLException ex) {
                 Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
+
             }
-        }else {
+        } else {
             return false;
         }
-     
-        
+
     }
 
     public static boolean signIn(String username, String password) {
@@ -74,15 +74,16 @@ public class DatabaseAccessLayer {
                 con.close();
                 return false;
             }
-
+            // do we need to commit?
         } catch (SQLException ex) {
+            System.out.println("catch of sign in in database");
             Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return false;
     }
 
-    public static Boolean ifUserExist(String username) {
+    public static Boolean query(String username) {
         try {
             con = startConnection();
             PreparedStatement stmt = con.prepareStatement("Select * FROM USERS WHERE username=?");
@@ -103,17 +104,17 @@ public class DatabaseAccessLayer {
         return null;
     }
 
-    static ResultSet getOnlinePlayers() {
-        ResultSet resultSet = null;
+    public ResultSet getOnlinePlayers() {
+        ResultSet rs = null;
         try {
 
-            PreparedStatement query = con.prepareStatement("Select name,Score FROM USERS where isOnline = true ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            resultSet = query.executeQuery();
+            PreparedStatement stmt = con.prepareStatement("Select name,Score FROM USERS where isOnline = true ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return resultSet;
+        return rs;
 
     }
 

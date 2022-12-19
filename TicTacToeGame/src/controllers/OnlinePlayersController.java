@@ -70,7 +70,14 @@ public class OnlinePlayersController implements Initializable {
         tableId.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                System.out.println("finally?");
                 if (tableId.getSelectionModel().getSelectedItem() != null) {
+                    System.out.println(tableId.getSelectionModel().getSelectedItem().getPlayerUsername());
+                    // to invite the player clicked on the tableview.
+                    client.clientInvitePlayer(tableId.getSelectionModel().getSelectedItem().getPlayerUsername());
+                    
+                    //to remove the selection from the row instantly after clicking any row.
+                    tableId.getSelectionModel().clearSelection();
 
                 }
 
@@ -90,6 +97,7 @@ public class OnlinePlayersController implements Initializable {
 
     public static void addToAvailablePlayersList(String str) {
         availablePlayers.add(str);
+        //new OnlinePlayersController().refresh();
     }
 
     public static void removeFromAvailablePlayersList(String str) {

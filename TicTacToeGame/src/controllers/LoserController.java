@@ -57,6 +57,7 @@ public class LoserController implements Initializable {
     private void goBack(MouseEvent event) {
         mediaPlayer.stop();
         SceneNavigator.navigate("/views/GamePlayerVsPC.fxml");
+
     }
 
 }

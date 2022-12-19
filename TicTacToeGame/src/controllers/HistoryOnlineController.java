@@ -58,9 +58,8 @@ public class HistoryOnlineController implements Initializable {
     }    
 
     @FXML
-    private void goBackToGameOnline(MouseEvent event) throws IOException {
-    SceneNavigator sceneNavigator = new SceneNavigator();
-    sceneNavigator.navigateImg(event, "/views/GameOnline.fxml");
+    private void goBackToGameOnline(MouseEvent event) {
+    SceneNavigator.navigate("/views/GameOnline.fxml");
     }
     
 }

@@ -14,14 +14,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  *
  * @author Copy Center
  */
 public class MenuScreen extends Application {
-    
+
     Socket mySocket;
     private static Stage stage;
 
@@ -32,24 +31,23 @@ public class MenuScreen extends Application {
     public static void setStage(Stage stage) {
         MenuScreen.stage = stage;
     }
-    
-    
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
+
         stage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("/views/Splach.fxml"));
+
         Scene scene = new Scene(root);
-        //stage.initStyle(StageStyle.UNDECORATED);
+
         stage.setScene(scene);
         stage.show();
+
     }
-    
-    
+
     public static void main(String[] args) {
         launch(args);
     }
-    
-}
 
+}

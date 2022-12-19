@@ -135,7 +135,7 @@
                         <Insets left="15.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="signInBtn1" mnemonicParsing="false" onAction="#goToRegistration" prefHeight="46.0" prefWidth="165.0" style="-fx-background-color: transparent; -fx-background-radius: 25;" text="Register Now" textFill="#239bd7">
+                  <Button fx:id="signInBtn1" mnemonicParsing="false" onAction="#goToSignUp" prefHeight="46.0" prefWidth="165.0" style="-fx-background-color: transparent; -fx-background-radius: 25;" text="Register Now" textFill="#239bd7">
                      <font>
                         <Font name="Tahoma Bold" size="20.0" />
                      </font>

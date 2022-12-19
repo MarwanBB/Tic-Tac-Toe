@@ -81,35 +81,62 @@ public class Client implements Runnable {
                 dataInputStream = new DataInputStream(mySocket.getInputStream());
                 str = dataInputStream.readLine();
 
-                
+                if (SignInController.getSignInRequestRunningFlag() == 1) { //if a sign in request is running
+                    SignInController.getThreadSignIn().resume();
+                }
 
                 if (str != null) {
                     String[] arrString = str.split("/");
 
                     //checking first element of the String array (the key)
                     switch (arrString[0]) {
-                        case "signUpSucceded":
-                           // System.out.println("i found the user");
+                        case Constants.signUpSucceded:
+                            //arrString[] = signUpSucceded
                             AlertBoxOneButton.createAlert("Sign Up", "Sign Up was successful.", "Ok");
                             break;
-                        case "signUpFailed":
+                        case Constants.signUpFailed:
                             //arrString[] = signUpFailed
                             AlertBoxOneButton.createAlert("Sign Up", "Sign Up failed, username already exists.", "Ok");
                             break;
 
-                        case "userNotFoundAfterSignInRequest":
+                        case Constants.userNotFoundAfterSignInRequest:
                             AlertBoxOneButton.createAlert("Sign In", "Sign In failed, Wrong username or password.", "Ok");
                             break;
-                        case "refreshAvailablePlayersList":
-                            // used to fill the available players list after emptying it by the emptyAvailablePlayersList function.
-                            // arrString[] = "refreshAvailable" + "/" + handler.user.getUsername()
-                            clientRefreshAvailableClients(arrString[1]);
-                            break;
-                        case "emptyAvailablePlayersList":
+
+                        case Constants.emptyAvailablePlayersList:
                             //used to empty the available players list before filling it again with the current available players.
                             //arrString[] = emptyAvailablePlayersList
                             clientEmptyAvailablePlayersList();
                             break;
+
+                        case Constants.refreshAvailablePlayersList:
+                            // used to fill the available players list after emptying it by the emptyAvailablePlayersList function.
+                            // arrString[] = "refreshAvailable" + "/" + handler.user.getUsername()
+                            clientRefreshAvailableClients(arrString[1]);
+                            break;
+
+                        case Constants.showAlertForInvitedPlayer:
+                            //arrString[] = showAlertForInvitedPlayer , username p1 , username p2
+                            clientCreateRequest(str);
+                            break;
+
+                        case Constants.takeTheTwoPlayersToTheGameViewSincePlayerTwoAcceptedInvitation:
+                            //arrString[] = takeTheTwoPlayersToTheGameView , username p1 , username p2 , (1 or 0)
+                            // "1" for p1 and "0" for p2
+                            clientGoToGameView(str);
+                            break;
+
+                        case Constants.showDeclineAlertForPlayerOne:
+                            //arrString[] = player2DeclinedGameInvitation , username p1 , username p2
+                            clientShowDeclineAlertForPlayerOne(str);
+                            break;
+
+                        case Constants.refreshGameBoardResponse:
+                            //arrString[] = refreshGameBoardResponse , bString 
+                            // where bString is the string that loads the game board
+                            refreshGameBoardResponse(str);
+                            break;
+
                     }
                 }
 
@@ -128,7 +155,7 @@ public class Client implements Runnable {
             System.out.println(user.getPassword());
 
             printstream = new PrintStream(mySocket.getOutputStream());
-            printstream.println(Constants.signUp + "/" + user.getUsername() + "/" + user.getPassword());
+            printstream.println(Constants.signUpRequest + "/" + user.getUsername() + "/" + user.getPassword());
 
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
@@ -141,7 +168,7 @@ public class Client implements Runnable {
         try {
 
             printstream = new PrintStream(mySocket.getOutputStream());
-            printstream.println(Constants.signIn + "/" + user.getUsername() + "/" + user.getPassword());
+            printstream.println(Constants.signInRequest + "/" + user.getUsername() + "/" + user.getPassword());
 
         } catch (IOException ex) {
             System.out.println("catch of sign in request");
@@ -150,44 +177,142 @@ public class Client implements Runnable {
 
     }
 
+//    public void clientSendMessage(String st) {
+//        try {
+//            printstream = new PrintStream(mySocket.getOutputStream());
+//            printstream.println(st);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     public void clientRefreshOnlineOnSignIn(User user) {
         try {
             printstream = new PrintStream(mySocket.getOutputStream());
-            printstream.println("refreshOnlineOnSignIn" + "/" + user.getUsername() + "/" + user.getPassword());
+            printstream.println(Constants.refreshOnlineOnSignIn + "/" + user.getUsername() + "/" + user.getPassword());
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public String readResponse() throws IOException {
-        DataInputStream dataInputStream;
-        dataInputStream = new DataInputStream(mySocket.getInputStream());
-        String str = dataInputStream.readLine();
-        return str;
-    }
-    public void clientRefreshOnlineOnSignIn(User user) {
-        try {
-            printstream = new PrintStream(mySocket.getOutputStream());
-            printstream.println("refreshOnlineOnSignIn" + "/" + user.getUsername() + "/" + user.getPassword());
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
     public void clientRefreshOnlineAnyTimeClient() {
         // invoked when refresh button is clicked in online players view.
         try {
             printstream = new PrintStream(mySocket.getOutputStream());
-            printstream.println("refreshOnlinePlayersWhenRefreshButtonIsClicked");
+            printstream.println(Constants.refreshOnlinePlayersWhenRefreshButtonIsClicked);
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    void clientEmptyAvailablePlayersList() {
+        OnlinePlayersController.emptyAvailablePlayersListInView();
+    }
+
     void clientRefreshAvailableClients(String userNameAvaiable) {
         OnlinePlayersController.addToAvailablePlayersList(userNameAvaiable);
         System.out.println("Username available in client refreshAvailableClients::: " + userNameAvaiable);
     }
-    void clientEmptyAvailablePlayersList() {
-        OnlinePlayersController.emptyAvailablePlayersListInView();
+
+    public void clientInvitePlayer(String userNameOfPlayerInvited) {
+        try {
+            printstream = new PrintStream(mySocket.getOutputStream());
+            printstream.println(Constants.invitePlayer + "/" + this.user.getUsername() + "/" + userNameOfPlayerInvited);
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void clientCreateRequest(String str) {
+        //arrString[] = showAlertForInvitedPlayer , username p1 , username p2
+        String[] arrString = str.split("/");
+
+        ButtonType Accept = new ButtonType("Accept");
+        ButtonType Decline = new ButtonType("Decline");
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.NONE, "", Accept, Decline);
+                alert.setTitle("Game Invitation");
+                alert.setContentText(arrString[1] + " would like to play with you.");
+                Window window = alert.getDialogPane().getScene().getWindow();
+                window.setOnCloseRequest(e -> alert.hide());
+                Optional<ButtonType> result = alert.showAndWait();
+                result.ifPresent(res -> {
+                    if (res.equals(Accept)) {
+                        clientResponseOfInvitation(Constants.invitedPlayerAcceptedGameInvitation + "/" + arrString[1] + "/" + arrString[2]);
+                    } else if (res.equals(Decline)) {
+                        clientResponseOfInvitation(Constants.invitedPlayerDeclinedGameInvitation + "/" + arrString[1] + "/" + arrString[2]);
+                    }
+                });
+            }
+        });
+
+    }
+
+    void clientResponseOfInvitation(String str) {
+        //arrString[] = invitedPlayerAcceptedGameInvitation , username p1 , username p2
+        //or arrString[] = invitedPlayerDeclinedGameInvitation , username p1 , username p2
+        try {
+            printstream = new PrintStream(mySocket.getOutputStream());
+            printstream.println(str);
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void clientGoToGameView(String str) {
+        //arrString[] = takeTheTwoPlayersToTheGameView , username p1 , username p2 , (1 or 0)
+        // "1" for p1 and "0" for p2
+
+        String[] arrString = str.split("/");
+
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+//                try {
+
+                Room.setPlayerOneUserName(arrString[1]);
+                Room.setPlayerTwoUserName(arrString[2]);
+                Room.setTurn(arrString[3]);
+
+
+                SceneNavigator.navigate("/views/GameOnline.fxml");
+
+            }
+        });
+
+    }
+
+    public void clientRefreshGameBoardRequest(String str) {
+        //arrString[]= "refreshGameBoardAfterEveryTurn" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName() + "/" + bString
+        //so arrString[] = "refreshGameBoardAfterEveryTurn" + username1 + username2 + String that loads the game board after every game button clicked.
+        String[] arrString = str.split("/");
+        try {
+            printstream = new PrintStream(mySocket.getOutputStream());
+            printstream.println(str);
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void refreshGameBoardResponse(String str) {
+        //arrString[] = refreshGameBoardResponse , bString 
+        // where bString is the string that loads the game board
+
+        String[] arrString = str.split("/");
+
+        Room.setBoardDataAsString(arrString[1]);
+
+        SceneNavigator.navigate("/views/GameOnline.fxml");
+
+    }
+
+    void clientShowDeclineAlertForPlayerOne(String str) {
+        //arrString[] = player2DeclinedGameInvitation , username p1 , username p2
+        String[] arrString = str.split("/");
+        AlertBoxOneButton.createAlert("Game Invitation", arrString[2] + " declined your invitation", "Ok");
     }
 
 }
