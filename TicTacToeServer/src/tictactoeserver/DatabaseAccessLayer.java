@@ -27,27 +27,31 @@ public class DatabaseAccessLayer {
         return con;
     }
 
-    public static int signUp(String username, String password) {
-        int result = 0;
+    public static Boolean signUp(String username, String password) {
+       
 
         if (!ifUserExist(username)) {
             try {
                 con = startConnection();
-                PreparedStatement query = con.prepareStatement("insert into USERS (username,password) values(?,?)");
+                PreparedStatement query = con.prepareStatement("insert into USERS (username,password, isonline) values(?,?,?)");
                 query.setString(1, username);
                 query.setString(2, password);
-                result = query.executeUpdate();
-                System.out.println(result);
+                query.setBoolean(3, false);
+                query.executeUpdate();
+         
                 query.close();
                 con.close();
+                return true;
 
             } catch (SQLException ex) {
                 Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
-
+                return false;
             }
+        }else {
+            return false;
         }
-
-        return result;
+     
+        
     }
 
     public static boolean signIn(String username, String password) {

@@ -72,13 +72,13 @@ public class Handler extends Thread {
 
                         case Constants.signIn:
                             System.out.println("check true for sign in in handler");
-                            System.out.println(arrString);
-                            if (DatabaseAccessLayer.signIn(arrString[1], arrString[2])) {
-                                sendMessage("userFound");
-
-                                System.out.println(arrString[1]);
-                                System.out.println(arrString[2]);
-                            }
+                            //System.out.println(arrString);
+                                if (DatabaseAccessLayer.signIn(arrString[1], arrString[2])) {
+                                                   signInResponse("userFoundAfterSignInRequest");
+                                               }
+                                               else{
+                                                   signInResponse("userNotFoundAfterSignInRequest");
+                                               }
                             break;
 
                        
@@ -103,6 +103,25 @@ public class Handler extends Thread {
 
     }
 
+    void handlerSignUpResponse(Boolean bol){
+        try {
+            printStream = new PrintStream(socket.getOutputStream());
+            if(bol == true){
+                printStream.println("signUpSucceded");
+            } else{
+                printStream.println("signUpFailed");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void signInResponse(String response) throws IOException {
+        //response is either "userFoundAfterSignInRequest" or "userNotFoundAfterSignInRequest"
+        printStream = new PrintStream(socket.getOutputStream());
+        printStream.println(response);
+
+    }    
 
 
     public User getUser() {

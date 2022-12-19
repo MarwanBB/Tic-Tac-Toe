@@ -49,7 +49,7 @@ public class SignUpController implements Initializable {
         
         System.out.println("username and password are going to be sent to the client");
         
-        
+        client.clientSignUpRequest(user);
         
         
     }

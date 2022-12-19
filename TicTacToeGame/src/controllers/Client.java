@@ -88,9 +88,17 @@ public class Client implements Runnable {
 
                     //checking first element of the String array (the key)
                     switch (arrString[0]) {
-                        case "userFound":
-                            System.out.println("i found the user");
-                            
+                        case "signUpSucceded":
+                           // System.out.println("i found the user");
+                            AlertBoxOneButton.createAlert("Sign Up", "Sign Up was successful.", "Ok");
+                            break;
+                        case "signUpFailed":
+                            //arrString[] = signUpFailed
+                            AlertBoxOneButton.createAlert("Sign Up", "Sign Up failed, username already exists.", "Ok");
+                            break;
+
+                        case "userNotFoundAfterSignInRequest":
+                            AlertBoxOneButton.createAlert("Sign In", "Sign In failed, Wrong username or password.", "Ok");
                             break;
                        
 
@@ -134,6 +142,15 @@ public class Client implements Runnable {
 
     }
 
+    public void clientRefreshOnlineOnSignIn(User user) {
+        try {
+            printstream = new PrintStream(mySocket.getOutputStream());
+            printstream.println("refreshOnlineOnSignIn" + "/" + user.getUsername() + "/" + user.getPassword());
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public String readResponse() throws IOException {
         DataInputStream dataInputStream;
         dataInputStream = new DataInputStream(mySocket.getInputStream());
