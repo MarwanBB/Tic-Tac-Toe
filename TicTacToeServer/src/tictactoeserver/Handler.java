@@ -20,12 +20,12 @@ public class Handler extends Thread {
     private int isPlaying;
 
     public static Vector<Handler> handlerList = new Vector<Handler>();
-//    public static String playerOne;
-//    public static String playerTwo;
+
     public static Vector<String> playerOne = new Vector<String>();
     public static Vector<String> playerTwo = new Vector<String>();
 
     private int indexHandler;
+   
 
     public Handler(Socket socket, int countHandlersFromServer) {
 
@@ -54,6 +54,7 @@ public class Handler extends Thread {
     public void run() {
         System.out.println("Handler inside run outside while loop");
         while (true) {
+            
             try {
                 String str = dataInputStream.readLine();
                 System.out.println("Inside Handler, in while loop in try dataInputStream.readLine() in run");
@@ -61,7 +62,7 @@ public class Handler extends Thread {
 
                 if (str != null) {
                     String[] arrString = str.split("/");
-                        
+
                     switch (arrString[0]) {
                         case Constants.signUpRequest:
                             //arrString[] = Constants.signUpRequest ,  username , password
@@ -73,8 +74,7 @@ public class Handler extends Thread {
                             //arrString[] = Constants.signInRequest ,  username ,  password
                             if (DatabaseAccessLayer.signIn(arrString[1], arrString[2])) {
                                 signInResponse(Constants.userFoundAfterSignInRequest);
-                            }
-                            else{
+                            } else {
                                 signInResponse(Constants.userNotFoundAfterSignInRequest);
                             }
                             break;
@@ -93,19 +93,19 @@ public class Handler extends Thread {
                             handlerRefreshAvailablePlayers();
                             break;
 
-                        case Constants.invitePlayer :
+                        case Constants.invitePlayer:
                             handlerInvitePlayer(str);
                             break;
                         case Constants.invitedPlayerAcceptedGameInvitation:
                             //arrString[] = invitedPlayerAcceptedGameInvitation , username p1 , username p2
                             clientPlayGame(str);
                             break;
-                            
-                            case Constants.invitedPlayerDeclinedGameInvitation:
+
+                        case Constants.invitedPlayerDeclinedGameInvitation:
                             //arrString[] = invitedPlayerDeclinedGameInvitation , username p1 , username p2
                             clientPlayGame(str);
                             break;
-                            
+
                         case Constants.refreshGameBoardAfterEveryTurn:
                             //arrString[]= "refreshGameBoardAfterEveryTurn" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName() + "/" + bString
                             //so arrString[] = "refreshGameBoardAfterEveryTurn" + username1 + username2 + String that loads the game board after every game button clicked.
@@ -117,6 +117,7 @@ public class Handler extends Thread {
 
             } catch (IOException ex) {
                 System.out.println("in catch of handler of the while loop in run");
+                
                 ex.printStackTrace();
             }
         }
@@ -176,59 +177,58 @@ public class Handler extends Thread {
         //arrString[] if p2 accepted = invitedPlayerAcceptedGameInvitation , username p1 , username p2
         //arrString[] if p2 declined = invitedPlayerDeclinedGameInvitation , username p1 , username p2
         String[] arrString = str.split("/");
-        
-        if (arrString[0].equals(Constants.invitedPlayerAcceptedGameInvitation)){
-        
-        for (Handler handler : handlerList) {
-            if (handler.user.getUsername().equals(arrString[1])) {
-                try {
-                    printStream = new PrintStream(socket.getOutputStream());
-                    //added "1" at the end of the first player to indicate that this is the first player to play.
-                    handler.printStream.println(Constants.takeTheTwoPlayersToTheGameViewSincePlayerTwoAcceptedInvitation+ "/" + arrString[1] + "/" + arrString[2] + "/" + "1");
-                } catch (IOException ex) {
-                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-                }
 
-            }
-            if (handler.user.getUsername().equals(arrString[2])) {
-                try {
-                    printStream = new PrintStream(socket.getOutputStream());
-                    //added "0" at the end of the first player to indicate that this is the second player to play.
-                    handler.printStream.println(Constants.takeTheTwoPlayersToTheGameViewSincePlayerTwoAcceptedInvitation+ "/" + arrString[1] + "/" + arrString[2] + "/" + "0" );
-                } catch (IOException ex) {
-                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if (arrString[0].equals(Constants.invitedPlayerAcceptedGameInvitation)) {
 
-            }
-        }
-    }
-        else{
             for (Handler handler : handlerList) {
-            if (handler.user.getUsername().equals(arrString[1])) {
-                try {
-                    printStream = new PrintStream(socket.getOutputStream());
-                    //arrString[] = player2DeclinedGameInvitation , username p1 , username p2
-                    handler.printStream.println(Constants.showDeclineAlertForPlayerOne+ "/" + arrString[1] + "/" + arrString[2]);
-                } catch (IOException ex) {
-                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                if (handler.user.getUsername().equals(arrString[1])) {
+                    try {
+                        printStream = new PrintStream(socket.getOutputStream());
+                        //added "1" at the end of the first player to indicate that this is the first player to play.
+                        handler.printStream.println(Constants.takeTheTwoPlayersToTheGameViewSincePlayerTwoAcceptedInvitation + "/" + arrString[1] + "/" + arrString[2] + "/" + "1");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+                if (handler.user.getUsername().equals(arrString[2])) {
+                    try {
+                        printStream = new PrintStream(socket.getOutputStream());
+                        //added "0" at the end of the first player to indicate that this is the second player to play.
+                        handler.printStream.println(Constants.takeTheTwoPlayersToTheGameViewSincePlayerTwoAcceptedInvitation + "/" + arrString[1] + "/" + arrString[2] + "/" + "0");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+            }
+        } else {
+            for (Handler handler : handlerList) {
+                if (handler.user.getUsername().equals(arrString[1])) {
+                    try {
+                        printStream = new PrintStream(socket.getOutputStream());
+                        //arrString[] = player2DeclinedGameInvitation , username p1 , username p2
+                        handler.printStream.println(Constants.showDeclineAlertForPlayerOne + "/" + arrString[1] + "/" + arrString[2]);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
 
             }
-            
-        }
         }
     }
-    
-    void handlerChangeBoard(String str){
+
+    void handlerChangeBoard(String str) {
         //arrString[]= "refreshGameBoardAfterEveryTurn" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName() + "/" + bString
         //so arrString[] = "refreshGameBoardAfterEveryTurn" + username1 + username2 + String that loads the game board after every game button clicked.
-                            
+
         String[] arrString = str.split("/");
         for (Handler handler : handlerList) {
             if (handler.user.getUsername().equals(arrString[1]) || handler.user.getUsername().equals(arrString[2])) {
                 try {
                     printStream = new PrintStream(socket.getOutputStream());
-                    handler.printStream.println(Constants.refreshGameBoardResponse+ "/" + arrString[3] );
+                    handler.printStream.println(Constants.refreshGameBoardResponse + "/" + arrString[3]);
                 } catch (IOException ex) {
                     Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -236,18 +236,28 @@ public class Handler extends Thread {
             }
         }
     }
-    
-    void handlerSignUpResponse(Boolean bol){
+
+    void handlerSignUpResponse(Boolean bol) {
         try {
             printStream = new PrintStream(socket.getOutputStream());
-            if(bol == true){
+            if (bol == true) {
                 printStream.println(Constants.signUpSucceded);
-            } else{
+            } else {
                 printStream.println(Constants.signUpFailed);
             }
         } catch (IOException ex) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    void closeClient() throws IOException {
+        
+
+        this.dataInputStream.close();
+        this.printStream.close();
+        this.socket.close();
+
+        this.stop();
     }
 
 }

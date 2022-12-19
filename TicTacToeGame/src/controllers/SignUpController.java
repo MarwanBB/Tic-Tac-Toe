@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import models.AlertBoxOneButton;
 import models.SceneNavigator;
 import models.User;
 
@@ -29,6 +30,8 @@ public class SignUpController implements Initializable {
     private Button signupBtn;
     
     Client client;
+    String nameregex = "[a-zA-Z0-9\\._\\-]{3,}";
+    String passregex = "[a-zA-Z0-9\\._\\-]{4,15}";
 
 
     @Override
@@ -44,12 +47,22 @@ public class SignUpController implements Initializable {
 
     @FXML
     private void signUpClicked(ActionEvent event) {
-
+        if(userTxt.getText().matches(nameregex)&&passwordTxt.getText().matches(passregex)){
+        
         User user = new User(userTxt.getText(), passwordTxt.getText());
         
         System.out.println("username and password are going to be sent to the client");
         
         client.clientSignUpRequest(user);
+        
+        }else{
+            AlertBoxOneButton.createAlert("invalid Input","Please enter a valid Username or Password", "ok");
+        
+        
+        }
+
+        
+        
         
         
     }
