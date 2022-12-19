@@ -61,7 +61,7 @@ public class SignInController implements Initializable {
             @Override
             public void run() {
                 try {
-                    client.signInRequest(user);
+                    client.clientSignInRequest(user);
                     if (client.readResponse().equals("userFound")) {
                         System.out.println("found the user in platform run later");
                         SceneNavigator sceneNavigator = new SceneNavigator();

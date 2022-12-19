@@ -17,7 +17,7 @@ import models.User;
 
 
 
-public class RegistrationController implements Initializable {
+public class SignUpController implements Initializable {
 
     @FXML
     private TextField userTxt;
@@ -38,25 +38,19 @@ public class RegistrationController implements Initializable {
     }    
     
     @FXML
-    private void goBackToSignIn(MouseEvent event) throws IOException {
-    SceneNavigator sceneNavigator = new SceneNavigator();
-    sceneNavigator.navigateImg(event, "/views/SignIn.fxml");
+    private void goBackToSignIn(MouseEvent event){
+    SceneNavigator.navigate("/views/SignIn.fxml");
     }
 
     @FXML
     private void signUpClicked(ActionEvent event) {
-        //        SceneNavigator sceneNavigator = new SceneNavigator();
-        //        sceneNavigator.navigateBtn(event, "/views/GameOnline.fxml");
 
         User user = new User(userTxt.getText(), passwordTxt.getText());
         
         System.out.println("username and password are going to be sent to the client");
         
-        client.signUpRequest(user);
         
         
-        
-        //DataBaseAccessLayer.SignUp();
         
     }
     

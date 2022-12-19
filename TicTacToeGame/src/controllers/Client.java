@@ -5,73 +5,107 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Window;
+import models.AlertBoxOneButton;
+import models.Room;
+import models.SceneNavigator;
 import models.User;
 
-public class Client {
+public class Client implements Runnable {
 
     Socket mySocket;
     PrintStream printstream;
     private static Client instance;
-    //private DataInputStream dataInputStream;;
+    private DataInputStream dataInputStream;
+    private String str = "";
+    private Thread threadClient;
+    private User user;
 
     public static Client getInstance() {
+        String s = "";
+
         if (instance == null) {
-            return new Client();
-        } else {
-            return instance;
+            instance = new Client();
         }
+        return instance;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Thread getThreadClient() {
+        return threadClient;
+    }
+
+    public void setThreadClient(Thread threadClient) {
+        this.threadClient = threadClient;
+    }
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
     }
 
     private Client() {
         try {
+
             mySocket = new Socket("127.0.0.1", 5005);
+            user = new User();
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        //createThread();
+        threadClient = new Thread(this);
+        threadClient.start();
     }
 
-//    public void createThread() {
-//
-//        new Thread() {
-//            @Override
-//            public void run() {
-//
-//                while (true) {
-//                    DataInputStream dataInputStream;
-//                    try {
-//                        System.out.println("in try of client");
-//                        dataInputStream = new DataInputStream(mySocket.getInputStream());
-//                        String str = dataInputStream.readLine();
-//                        
-//                        System.out.println(dataInputStream.readLine());
-//                        
-//                        if (str != null) {
-//                            switch(str){
-//                                case "userFound":
-//                                    System.out.println("i found the user!");
-//                                    
-//
-//                                    
-//                            }
-//                        }
-//                    } catch (IOException e) {
-//                        System.out.println("in catch of client");
-//                        System.out.println(e.toString());
-//                    }
-//                }
-//            }
-//        }.start();
-//    }
-    public void signUpRequest(User user) {
+    public void run() {
+
+        while (true) {
+            try {
+
+                dataInputStream = new DataInputStream(mySocket.getInputStream());
+                str = dataInputStream.readLine();
+
+                
+
+                if (str != null) {
+                    String[] arrString = str.split("/");
+
+                    //checking first element of the String array (the key)
+                    switch (arrString[0]) {
+                        case "userFound":
+                            System.out.println("i found the user");
+                            
+                            break;
+                       
+
+                    }
+                }
+
+            } catch (IOException e) {
+                str = "";
+                System.out.println("in catch of client");
+            }
+        }
+
+    }
+
+    public void clientSignUpRequest(User user) {
         try {
 
             System.out.println(user.getUsername());
@@ -86,17 +120,13 @@ public class Client {
 
     }
 
-    public void signInRequest(User user) {
-        System.out.println("atop of sign in request in client");
+    public void clientSignInRequest(User user) {
+        System.out.println("sign in request in client");
         try {
-
-            System.out.println(user.getUsername());
-            System.out.println(user.getPassword());
 
             printstream = new PrintStream(mySocket.getOutputStream());
             printstream.println(Constants.signIn + "/" + user.getUsername() + "/" + user.getPassword());
 
-            //printStream.println();
         } catch (IOException ex) {
             System.out.println("catch of sign in request");
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
