@@ -80,8 +80,19 @@ public class Handler extends Thread {
                                                    signInResponse("userNotFoundAfterSignInRequest");
                                                }
                             break;
-
-                       
+                            case "refreshOnlineOnSignIn":
+                            //arrString[] = "refreshOnlineOnSignIn" ,  username ,  password
+                            this.user.setUsername(arrString[1]);
+                            this.user.setPassword(arrString[2]);
+                            this.isAvailable = 1;
+                            this.isPlaying = 0;
+                            handlerRefreshAvailablePlayers();
+                            break;
+                        case "refreshOnlinePlayersWhenRefreshButtonIsClicked":
+                            //arrString[] = refreshOnlinePlayersWhenRefreshButtonIsClicked
+                            handlerRefreshAvailablePlayers();
+                            break;
+                        
                     }
 
                 }
@@ -131,7 +142,23 @@ public class Handler extends Thread {
     public void setUser(User user) {
         this.user = user;
     }
+    void handlerRefreshAvailablePlayers() {
+        try {
+            printStream = new PrintStream(socket.getOutputStream());
+            //used to empty the available players list before filling it again with the current available players.
+            printStream.println("emptyAvailablePlayersList");
 
+            for (Handler handler : handlerList) {
+                if (handler.isAvailable == 1) {
+                    printStream = new PrintStream(socket.getOutputStream());
+                    // used to fill the available players list after emptying it by the emptyAvailablePlayersList function.
+                    printStream.println("refreshAvailablePlayersList" + "/" + handler.user.getUsername());
 
-
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
