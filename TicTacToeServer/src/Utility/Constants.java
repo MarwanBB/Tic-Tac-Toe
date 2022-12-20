@@ -22,7 +22,9 @@ public class Constants {
     public static final String takeTheTwoPlayersToTheGameViewSincePlayerTwoAcceptedInvitation = "takeTheTwoPlayersToTheGameViewSincePlayerTwoAcceptedInvitation";
     public static final String showDeclineAlertForPlayerOne = "showDeclineAlertForPlayerOne";
     public static final String refreshGameBoardResponse = "refreshGameBoardResponse";
-//    public static final String  = "";
+    public static final String closeClient = "closeClient";
+
+    
 //    public static final String  = "";
 //    public static final String  = "";
 //    public static final String  = "";

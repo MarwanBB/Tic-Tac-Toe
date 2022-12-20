@@ -4,6 +4,7 @@ import Utility.Constants;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -52,11 +53,11 @@ public class Client implements Runnable {
         this.threadClient = threadClient;
     }
 
-    public String getStr() {
+    public synchronized String getStr() {
         return str;
     }
 
-    public void setStr(String str) {
+    public synchronized void setStr(String str) {
         this.str = str;
     }
 
@@ -65,12 +66,20 @@ public class Client implements Runnable {
 
             mySocket = new Socket("127.0.0.1", 5005);
             user = new User();
+            threadClient = new Thread(this);
+            threadClient.start();
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+
+            if (ex instanceof ConnectException) {
+                // SignInController.getThreadSignIn().stop();
+                AlertBoxOneButton.createAlert("connection Exeption", "server is Off", "ok");
+                this.closeClient();
+
+            }
+
         }
-        threadClient = new Thread(this);
-        threadClient.start();
+
     }
 
     public void run() {
@@ -81,10 +90,9 @@ public class Client implements Runnable {
                 dataInputStream = new DataInputStream(mySocket.getInputStream());
                 str = dataInputStream.readLine();
 
-                if (SignInController.getSignInRequestRunningFlag() == 1) { //if a sign in request is running
+                /*if (SignInController.getSignInRequestRunningFlag() == 1) { //if a sign in request is running
                     SignInController.getThreadSignIn().resume();
-                }
-
+                }*/
                 if (str != null) {
                     String[] arrString = str.split("/");
 
@@ -129,6 +137,10 @@ public class Client implements Runnable {
                         case Constants.showDeclineAlertForPlayerOne:
                             //arrString[] = player2DeclinedGameInvitation , username p1 , username p2
                             clientShowDeclineAlertForPlayerOne(str);
+                            break;
+                        case "userFoundAfterSignInRequest":
+                            clientRefreshOnlineOnSignIn(user);
+                            SceneNavigator.navigate("/views/OnlinePlayers.fxml");
                             break;
 
                         case Constants.refreshGameBoardResponse:
@@ -267,7 +279,6 @@ public class Client implements Runnable {
 
         String[] arrString = str.split("/");
 
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -276,7 +287,6 @@ public class Client implements Runnable {
                 Room.setPlayerOneUserName(arrString[1]);
                 Room.setPlayerTwoUserName(arrString[2]);
                 Room.setTurn(arrString[3]);
-
 
                 SceneNavigator.navigate("/views/GameOnline.fxml");
 
@@ -313,6 +323,25 @@ public class Client implements Runnable {
         //arrString[] = player2DeclinedGameInvitation , username p1 , username p2
         String[] arrString = str.split("/");
         AlertBoxOneButton.createAlert("Game Invitation", arrString[2] + " declined your invitation", "Ok");
+    }
+
+    public void closeClient() {
+        try {
+            this.dataInputStream.close();
+            this.printstream.close();
+            this.mySocket.close();
+            this.threadClient.stop();
+            instance = null;
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void CloseRequest() {
+
+        // printstream = new PrintStream(mySocket.getOutputStream());
+        printstream.println(Constants.closeClient + "/" + user.getUsername());
+
     }
 
 }

@@ -25,7 +25,7 @@ public class Handler extends Thread {
     public static Vector<String> playerTwo = new Vector<String>();
 
     private int indexHandler;
-   
+    private boolean closed = false;
 
     public Handler(Socket socket, int countHandlersFromServer) {
 
@@ -53,72 +53,83 @@ public class Handler extends Thread {
     @Override
     public void run() {
         System.out.println("Handler inside run outside while loop");
-        while (true) {
-            
+        while (!closed) {
+
             try {
                 String str = dataInputStream.readLine();
+                if(str==null){closeClient();}
                 System.out.println("Inside Handler, in while loop in try dataInputStream.readLine() in run");
                 System.out.println("str recieved by handler: " + str);
 
-                if (str != null) {
-                    String[] arrString = str.split("/");
+                String[] arrString = str.split("/");
 
-                    switch (arrString[0]) {
-                        case Constants.signUpRequest:
-                            //arrString[] = Constants.signUpRequest ,  username , password
-                            handlerSignUpResponse(DatabaseAccessLayer.signUp(arrString[1], arrString[2]));
-                            break;
+                switch (arrString[0]) {
+                    case Constants.signUpRequest:
+                        //arrString[] = Constants.signUpRequest ,  username , password
+                        handlerSignUpResponse(DatabaseAccessLayer.signUp(arrString[1], arrString[2]));
+                        break;
 
-                        case Constants.signInRequest:
-                            System.out.println("sign in request in handler");
-                            //arrString[] = Constants.signInRequest ,  username ,  password
-                            if (DatabaseAccessLayer.signIn(arrString[1], arrString[2])) {
-                                signInResponse(Constants.userFoundAfterSignInRequest);
-                            } else {
-                                signInResponse(Constants.userNotFoundAfterSignInRequest);
-                            }
-                            break;
+                    case Constants.signInRequest:
+                        System.out.println("sign in request in handler");
+                        //arrString[] = Constants.signInRequest ,  username ,  password
+                        if (DatabaseAccessLayer.signIn(arrString[1], arrString[2])) {
+                            signInResponse(Constants.userFoundAfterSignInRequest);
+                        } else {
+                            signInResponse(Constants.userNotFoundAfterSignInRequest);
+                        }
+                        break;
 
-                        case Constants.refreshOnlineOnSignIn:
-                            //arrString[] = "refreshOnlineOnSignIn" ,  username ,  password
-                            this.user.setUsername(arrString[1]);
-                            this.user.setPassword(arrString[2]);
-                            this.isAvailable = 1;
-                            this.isPlaying = 0;
-                            handlerRefreshAvailablePlayers();
-                            break;
+                    case Constants.refreshOnlineOnSignIn:
+                        //arrString[] = "refreshOnlineOnSignIn" ,  username ,  password
+                        this.user.setUsername(arrString[1]);
+                        this.user.setPassword(arrString[2]);
+                        this.isAvailable = 1;
+                        this.isPlaying = 0;
+                        handlerRefreshAvailablePlayers();
+                        break;
 
-                        case Constants.refreshOnlinePlayersWhenRefreshButtonIsClicked:
-                            //arrString[] = refreshOnlinePlayersWhenRefreshButtonIsClicked
-                            handlerRefreshAvailablePlayers();
-                            break;
+                    case Constants.refreshOnlinePlayersWhenRefreshButtonIsClicked:
+                        //arrString[] = refreshOnlinePlayersWhenRefreshButtonIsClicked
+                        handlerRefreshAvailablePlayers();
+                        break;
 
-                        case Constants.invitePlayer:
-                            handlerInvitePlayer(str);
-                            break;
-                        case Constants.invitedPlayerAcceptedGameInvitation:
-                            //arrString[] = invitedPlayerAcceptedGameInvitation , username p1 , username p2
-                            clientPlayGame(str);
-                            break;
+                    case Constants.invitePlayer:
+                        handlerInvitePlayer(str);
+                        break;
+                    case Constants.invitedPlayerAcceptedGameInvitation:
+                        //arrString[] = invitedPlayerAcceptedGameInvitation , username p1 , username p2
+                        clientPlayGame(str);
+                        break;
 
-                        case Constants.invitedPlayerDeclinedGameInvitation:
-                            //arrString[] = invitedPlayerDeclinedGameInvitation , username p1 , username p2
-                            clientPlayGame(str);
-                            break;
+                    case Constants.invitedPlayerDeclinedGameInvitation:
+                        //arrString[] = invitedPlayerDeclinedGameInvitation , username p1 , username p2
+                        clientPlayGame(str);
+                        break;
+                    case Constants.closeClient:
+                        //arrString[] = closeClient , username
+                        System.out.println(str);
+                        handleCloseClientRequest(str);
 
-                        case Constants.refreshGameBoardAfterEveryTurn:
-                            //arrString[]= "refreshGameBoardAfterEveryTurn" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName() + "/" + bString
-                            //so arrString[] = "refreshGameBoardAfterEveryTurn" + username1 + username2 + String that loads the game board after every game button clicked.
-                            handlerChangeBoard(str);
-                            break;
-                    }
+                        break;
 
+                    case Constants.refreshGameBoardAfterEveryTurn:
+                        //arrString[]= "refreshGameBoardAfterEveryTurn" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName() + "/" + bString
+                        //so arrString[] = "refreshGameBoardAfterEveryTurn" + username1 + username2 + String that loads the game board after every game button clicked.
+                        handlerChangeBoard(str);
+                        break;
                 }
 
-            } catch (IOException ex) {
-                System.out.println("in catch of handler of the while loop in run");
+            } catch (NullPointerException e) {
+                closed = true;
                 
-                ex.printStackTrace();
+                closeClient();
+
+            } catch (IOException ex) {
+                
+                closed = true;
+                closeClient();
+
+                
             }
         }
     }
@@ -250,14 +261,38 @@ public class Handler extends Thread {
         }
     }
 
-    void closeClient() throws IOException {
-        
+    void closeClient() {
+        try {
+            closed = true;
+            System.out.println(closed);
 
-        this.dataInputStream.close();
-        this.printStream.close();
-        this.socket.close();
+            this.dataInputStream.close();
+            this.printStream.close();
+            this.socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        this.stop();
+    }
+
+    void handleCloseClientRequest(String msg) {
+
+        String[] arr = msg.split("/");
+        System.out.println(arr[1]);
+        for (Handler handler : handlerList) {
+            if (handler.getUser().getUsername().equals(arr[1])) {
+                System.out.println(handler.getUser().getUsername() + "closed success");
+                handler.closeClient();
+                int x = handlerList.indexOf(handler);
+                System.out.println("x::" + x);
+                Handler removed = handlerList.remove(x);
+                System.out.println(removed.getUser().getUsername());
+                this.stop();
+
+            }
+
+        }
+
     }
 
 }

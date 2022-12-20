@@ -5,15 +5,19 @@
  */
 package main;
 
+import controllers.Client;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -43,6 +47,20 @@ public class MenuScreen extends Application {
 
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                    Client.getInstance().CloseRequest();
+                    Client.getInstance().closeClient();
+                    
+                    System.out.println("close");
+                    Platform.exit();
+                    System.exit(0);
+                } 
+
+            
+
+        });
 
     }
 

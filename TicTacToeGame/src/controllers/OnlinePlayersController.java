@@ -107,6 +107,8 @@ public class OnlinePlayersController implements Initializable {
     @FXML
     private void goBack(MouseEvent event) {
             SceneNavigator.navigate("/views/SignIn.fxml");
+            client.CloseRequest();
+            client.closeClient();
         
     }
 

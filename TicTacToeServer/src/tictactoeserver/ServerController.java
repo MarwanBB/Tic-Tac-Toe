@@ -50,7 +50,7 @@ public class ServerController implements Initializable {
         );
 
         chart.setData(pieChartData);
-        
+
         chart.setVisible(false);
 
     }
@@ -58,8 +58,7 @@ public class ServerController implements Initializable {
     @FXML
     private void turnOnServer(ActionEvent event) {
         if (isNotOpenedYet) {
-            
-            
+
             Server.getInstance().start();
             buttonTurnOnServer.setDisable(true);
             buttonTurnOffServer.setDisable(false);
@@ -81,7 +80,7 @@ public class ServerController implements Initializable {
         try {
             buttonTurnOnServer.setDisable(false);
             buttonTurnOffServer.setDisable(true);
-            
+
             Server.getInstance().stopAllClients();
             Server.getInstance().suspend();
             chart.setVisible(false);
