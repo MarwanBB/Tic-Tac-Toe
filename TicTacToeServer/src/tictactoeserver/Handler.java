@@ -117,6 +117,19 @@ public class Handler extends Thread {
                         //so arrString[] = "refreshGameBoardAfterEveryTurn" + username1 + username2 + String that loads the game board after every game button clicked.
                         handlerChangeBoard(str);
                         break;
+                        
+                        case "playerOneWon":
+                            goToVideoView(str);
+                            break;
+                            
+                        case "playerTwoWon":
+                            goToVideoView(str);
+                            break;
+                            
+                        case "appearOffline":
+                            System.out.println("appear offline in handler !!");
+                            DatabaseAccessLayer.appearOffline(arrString[1]);
+                            break;
                 }
 
             } catch (NullPointerException e) {
@@ -259,6 +272,56 @@ public class Handler extends Thread {
         } catch (IOException ex) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    void goToVideoView(String str){
+        System.out.println(str);
+        String[] arrString = str.split("/");
+        for (Handler handler : handlerList) {
+            System.out.println(handler.user.getUsername());
+            if (handler.user.getUsername().equals(arrString[1]) && "playerOneWon".equals(arrString[0])) {
+                System.out.println("11111111111111111111 " + handler.user.getUsername());
+                try {
+                    printStream = new PrintStream(socket.getOutputStream());
+                    handler.printStream.println("showWinningVideo");
+                } catch (IOException ex) {
+                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            else if (handler.user.getUsername().equals(arrString[1]) && "playerTwoWon".equals(arrString[0])) {
+                System.out.println("22222222222222222 " + handler.user.getUsername());
+                try {
+                    printStream = new PrintStream(socket.getOutputStream());
+                    handler.printStream.println("showLosingVideo");
+                } catch (IOException ex) {
+                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            else if (handler.user.getUsername().equals(arrString[2]) && "playerTwoWon".equals(arrString[0])) {
+                System.out.println("3333333333333333 " + handler.user.getUsername());
+                try {
+                    printStream = new PrintStream(socket.getOutputStream());
+                    handler.printStream.println("showWinningVideo");
+                } catch (IOException ex) {
+                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            else if (handler.user.getUsername().equals(arrString[2]) && "playerOneWon".equals(arrString[0])) {
+                System.out.println("444444444444444 " + handler.user.getUsername());
+                try {
+                    printStream = new PrintStream(socket.getOutputStream());
+                    handler.printStream.println("showLosingVideo");
+                } catch (IOException ex) {
+                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        
+    }
+        
     }
 
     void closeClient() {

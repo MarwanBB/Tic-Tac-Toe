@@ -24,7 +24,7 @@
          <content>
             <TableView fx:id="tableId" prefHeight="513.0" prefWidth="619.0" style="-fx-background-color: #ffffff;">
                <columns>
-                  <TableColumn fx:id="player1" maxWidth="500.0" minWidth="50.0" prefWidth="114.0" text="Player1" />
+                  <TableColumn fx:id="player1" maxWidth="500.0" minWidth="50.0" prefWidth="147.0" text="Available Players" />
                </columns>
             </TableView>
          </content>

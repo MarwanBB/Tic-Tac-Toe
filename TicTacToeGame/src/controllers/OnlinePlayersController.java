@@ -40,6 +40,8 @@ public class OnlinePlayersController implements Initializable {
     @FXML
     private ImageView backImg;
 
+    public static String playerUsername;
+
     @FXML
     private TableView<OnlinePlayers> tableId;
 
@@ -71,11 +73,11 @@ public class OnlinePlayersController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("finally?");
-                if (tableId.getSelectionModel().getSelectedItem() != null) {
+                if (tableId.getSelectionModel().getSelectedItem() != null & !tableId.getSelectionModel().getSelectedItem().getPlayerUsername().equals(client.getUser().getUsername())) {
                     System.out.println(tableId.getSelectionModel().getSelectedItem().getPlayerUsername());
                     // to invite the player clicked on the tableview.
                     client.clientInvitePlayer(tableId.getSelectionModel().getSelectedItem().getPlayerUsername());
-                    
+
                     //to remove the selection from the row instantly after clicking any row.
                     tableId.getSelectionModel().clearSelection();
 
@@ -104,14 +106,6 @@ public class OnlinePlayersController implements Initializable {
 
     }
 
-    @FXML
-    private void goBack(MouseEvent event) {
-            SceneNavigator.navigate("/views/SignIn.fxml");
-            client.CloseRequest();
-            client.closeClient();
-        
-    }
-
     private void refresh() {
         try {
             client.clientRefreshOnlineAnyTimeClient();
@@ -133,6 +127,16 @@ public class OnlinePlayersController implements Initializable {
         } catch (InterruptedException ex) {
             Logger.getLogger(OnlinePlayersController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void goBack(MouseEvent event) {
+        System.out.println("player username that hsould apepar offline" + playerUsername);
+        client.appearOffline(playerUsername);
+        SceneNavigator.navigate("/views/SignIn.fxml");
+        client.CloseRequest();
+        client.closeClient();
+
     }
 
 }

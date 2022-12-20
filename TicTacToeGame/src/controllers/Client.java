@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Window;
 import models.AlertBoxOneButton;
 import models.Room;
@@ -64,7 +66,17 @@ public class Client implements Runnable {
     private Client() {
         try {
 
+            TextInputDialog textInput = new TextInputDialog();
+            textInput.setTitle("Ip of the server");
+            textInput.getDialogPane().setContentText("Please enter the IP of the server");
+            Optional<String> result = textInput.showAndWait();
+            TextField input = textInput.getEditor();
+//            
+//            System.out.println("input text is" + input.getText());
+
             mySocket = new Socket("127.0.0.1", 5005);
+            //mySocket = new Socket(input.getText(), 5005);
+            //mySocket = new Socket("127.0.0.1", 5005);
             user = new User();
             threadClient = new Thread(this);
             threadClient.start();
@@ -138,15 +150,29 @@ public class Client implements Runnable {
                             //arrString[] = player2DeclinedGameInvitation , username p1 , username p2
                             clientShowDeclineAlertForPlayerOne(str);
                             break;
-                        case "userFoundAfterSignInRequest":
-                            clientRefreshOnlineOnSignIn(user);
-                            SceneNavigator.navigate("/views/OnlinePlayers.fxml");
-                            break;
 
                         case Constants.refreshGameBoardResponse:
                             //arrString[] = refreshGameBoardResponse , bString 
                             // where bString is the string that loads the game board
                             refreshGameBoardResponse(str);
+                            break;
+                            
+                            case "userFoundAfterSignInRequest":
+                            OnlinePlayersController.playerUsername = user.getUsername();
+                            setUser(user);
+                            clientRefreshOnlineOnSignIn(user);
+                            SceneNavigator.navigate("/views/OnlinePlayers.fxml");
+                            
+                            
+                            
+                            break;
+                            
+                            case "showWinningVideo":
+                            showWinningVideo();
+                            break;
+                            
+                        case "showLosingVideo":
+                            showLosingVideo();
                             break;
 
                     }
@@ -287,6 +313,9 @@ public class Client implements Runnable {
                 Room.setPlayerOneUserName(arrString[1]);
                 Room.setPlayerTwoUserName(arrString[2]);
                 Room.setTurn(arrString[3]);
+                //Room.setPlayerStartTurn(arrString[3]);
+
+                System.out.println("before trying to go to game");
 
                 SceneNavigator.navigate("/views/GameOnline.fxml");
 
@@ -342,6 +371,44 @@ public class Client implements Runnable {
         // printstream = new PrintStream(mySocket.getOutputStream());
         printstream.println(Constants.closeClient + "/" + user.getUsername());
 
+    }
+    
+    void playerOneWon(){
+        System.out.println("player one won called");
+        try {
+            printstream = new PrintStream(mySocket.getOutputStream());
+            printstream.println("playerOneWon" + "/" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName());
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    void playerTwoWon(){
+        System.out.println("player two won called");
+        try {
+            printstream = new PrintStream(mySocket.getOutputStream());
+            printstream.println("playerTwoWon" + "/" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName());
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    void showWinningVideo(){
+        setStr("");
+        Room.setBoardDataAsString("");
+        System.out.println("show winning video called" + user.getUsername());
+        SceneNavigator.navigate("/views/WinnerOnline.fxml");
+    }
+    
+    void showLosingVideo(){
+        setStr("");
+        Room.setBoardDataAsString("");
+        System.out.println("show losing video called" + user.getUsername());
+        SceneNavigator.navigate("/views/LoserOnline.fxml");
+    }
+    
+    void appearOffline(String username){
+        printstream.println("appearOffline" + "/" + username);
     }
 
 }

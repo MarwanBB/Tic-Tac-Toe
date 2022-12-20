@@ -40,7 +40,7 @@ public class SignInController extends Thread implements Initializable {
 
     //private static Thread threadSignIn;
     String nameregex = "[a-zA-Z0-9\\._\\-]{3,}";
-    String passregex = "[a-zA-Z0-9\\._\\-]{4,15}";
+    String passregex = "[a-zA-Z0-9\\._\\-]{3,15}";
 
     /* public static Thread getThreadSignIn() {
         return threadSignIn;
@@ -92,6 +92,15 @@ public class SignInController extends Thread implements Initializable {
                     client = Client.getInstance();
                     client.setUser(user);
                     client.clientSignInRequest(user);
+                    
+//                    if (client.getStr().equals("userFoundAfterSignInRequest")) {
+//                            OnlinePlayersController.playerUsername = user.getUsername();
+//                            client.clientRefreshOnlineOnSignIn(user);
+//                            client.setUser(user);
+//
+//                            SceneNavigator.navigate("/views/OnlinePlayers.fxml");
+//
+//                        }
 
                     // threadSignIn = new Thread() {
                     //   @Override
