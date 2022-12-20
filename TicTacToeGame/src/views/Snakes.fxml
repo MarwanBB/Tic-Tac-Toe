@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SnakesController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Game">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#newAction" text="New Game" />
+              <MenuItem mnemonicParsing="false" onAction="#exitAction" text="Exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#showColorPicker" text="Set snake color" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <HBox BorderPane.alignment="CENTER"> 
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                   <Text fx:id="text" fill="#0a8017" layoutX="19.0" layoutY="112.0" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font></Text>
+                  <ImageView fx:id="imageScore" fitHeight="63.0" fitWidth="58.0" layoutX="63.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/score.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="backButton" fitHeight="58.0" fitWidth="63.0" layoutX="14.0" layoutY="27.0" onMouseClicked="#backButtonClicked" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/arr.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <Canvas fx:id="canvas" focusTraversable="true" height="556.0" onKeyPressed="#keyHandler" width="539.0">
+            </Canvas>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

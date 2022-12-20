@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #a2cdd3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryPlayerVsPCController">
+   <children>
+      <ImageView fitHeight="602.0" fitWidth="315.0" layoutX="633.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/tic-tac221.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="600.0" fitWidth="636.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/tic-tac22.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="table" layoutX="131.0" layoutY="107.0" prefHeight="465.0" prefWidth="705.0" style="-fx-border-weight: 3px; -fx-padding: 0 0 5px 0;">
+         <columns>
+            <TableColumn fx:id="gameDate" prefWidth="214.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Game Date" />
+            <TableColumn fx:id="player" prefWidth="154.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Player" />
+            <TableColumn fx:id="score" prefWidth="100.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Score" />
+            <TableColumn fx:id="pcScore" prefWidth="100.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Pc Score" />
+            <TableColumn fx:id="winner" prefWidth="137.0" sortable="false" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: 'cursive';" text="Winner" />
+         </columns>
+      </TableView>
+      <ImageView fx:id="backImg" fitHeight="42.0" fitWidth="38.0" layoutX="49.0" layoutY="40.0" onMouseClicked="#goBackToGamePlayerVsPc" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/left-512.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="342.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="H" />
+      <Text layoutX="393.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="I" />
+      <Text layoutX="438.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="S" />
+      <Text layoutX="483.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="T" />
+      <Text layoutX="528.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="O" />
+      <Text layoutX="575.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="R" />
+      <Text layoutX="620.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="Y" />
+   </children>
+</Pane>

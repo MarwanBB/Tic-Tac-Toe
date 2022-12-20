@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Text?>
+
+<Pane id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #a2cdd3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WinnerPcController">
+   <children>
+      <MediaView fx:id="mediaView" fitHeight="500.0" fitWidth="600.0" layoutX="150.0" layoutY="115.0" />
+      <Text layoutX="103.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="C" wrappingWidth="21.00341796875" />
+      <Text layoutX="177.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="N" />
+      <Text layoutX="138.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="O" />
+      <Text layoutX="292.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="A" />
+      <Text layoutX="248.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="R" />
+      <Text layoutX="209.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="G" />
+      <Text layoutX="333.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="T" />
+      <Text layoutX="379.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="U" />
+      <Text layoutX="423.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="L" />
+      <Text layoutX="456.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="A" />
+      <Text layoutX="595.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="N" />
+      <Text layoutX="494.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="T" />
+      <Text layoutX="553.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="O" />
+      <Text layoutX="525.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="I" />
+      <Text layoutX="630.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="S" />
+      <Text fx:id="winner" layoutX="704.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 35; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="Winner" textAlignment="CENTER" wrappingWidth="148.0205078125" />
+      <ImageView fx:id="imageBack" fitHeight="40.0" fitWidth="40.0" layoutX="35.0" layoutY="40.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/left-512.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
