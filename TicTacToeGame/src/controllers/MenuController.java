@@ -53,6 +53,7 @@ public class MenuController implements Initializable {
         
     }
 
+    @FXML
     private void goToExtraGames(ActionEvent event) {
         SceneNavigator.navigate("/views/ExtraGames.fxml");
     }

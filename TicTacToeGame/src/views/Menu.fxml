@@ -30,5 +30,11 @@
             <Image url="@../Images/OnlineGame.png" />
          </image>
       </ImageView>
+      <Button layoutX="523.0" layoutY="480.0" mnemonicParsing="false" onAction="#goToExtraGames" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Go To Extra Games" />
+      <ImageView fitHeight="73.0" fitWidth="46.0" layoutX="500.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/ExtraGames.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -51,7 +51,7 @@
                   </ImageView>
                   <ImageView fx:id="backButton" fitHeight="58.0" fitWidth="63.0" layoutX="14.0" layoutY="27.0" onMouseClicked="#backButtonClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Images/Back.png" />
+                        <Image url="@../Images/arr.png" />
                      </image>
                   </ImageView>
                </children></Pane>

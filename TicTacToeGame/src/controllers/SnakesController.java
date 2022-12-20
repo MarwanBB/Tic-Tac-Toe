@@ -159,7 +159,7 @@ public class SnakesController implements Initializable {
                     Stage stage = MenuScreen.getStage();
 
                     stage.setResizable(false);
-                    Parent root = FXMLLoader.load(getClass().getResource("/views/Menu.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/views/ExtraGames.fxml"));
 
                     Scene scene = new Scene(root);
 
