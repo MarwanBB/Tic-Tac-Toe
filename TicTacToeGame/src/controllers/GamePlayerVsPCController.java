@@ -38,11 +38,7 @@ import models.GameDataPlayerVsPC;
 import models.PVEDetails;
 import models.SceneNavigator;
 
-/**
- * FXML Controller class
- *
- * @author boory
- */
+
 public class GamePlayerVsPCController implements Initializable {
 
     @FXML
@@ -101,17 +97,19 @@ public class GamePlayerVsPCController implements Initializable {
     String nameOfPlayerTwoRecorder = "";
     private AiHardLevel AHL;
     @FXML
-    private Button playAgainButton;
-    @FXML
     private ImageView loadImg;
-    @FXML
-    private ImageView saveImg;
     @FXML
     private Label PlayerName;
     @FXML
     private Label Player2Name;
 
     SingleDataBase singleDB;
+    @FXML
+    private Button EasyBtn1;
+    @FXML
+    private Button EasyBtn11;
+    @FXML
+    private ImageView loadImg1;
 
     /**
      * Initializes the controller class.
@@ -153,9 +151,8 @@ public class GamePlayerVsPCController implements Initializable {
             if (AHL.Move(1, 1) && GO == 0) {
                 System.out.println("YES");
                 Btn11.setDisable(true);
-                Btn11.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
+                //Btn11.setTextFill(javafx.scene.paint.Color.valueOf("#CA2727"));
                 Btn11.setText("X");
-
                 bString += Btn11.getId() + Btn11.getText() + "-";
 
                 ComputerMove(-1, 0);
@@ -488,28 +485,33 @@ public class GamePlayerVsPCController implements Initializable {
             TiedScore.setText("" + draws);
             if (xResult > oResult) {
                 getData(Player2Name.getText());
-                    PVEDetails.setpName(PlayerName.getText());
-                    PVEDetails.setpScore(PlayerScore.getText());
-                    PVEDetails.setPcScore(PCScore.getText());
-                    PVEDetails.setTie(TiedScore.getText());
-                    new Winning().start();
+                PVEDetails.setpName(PlayerName.getText());
+                PVEDetails.setpScore(PlayerScore.getText());
+                PVEDetails.setPcScore(PCScore.getText());
+                PVEDetails.setTie(TiedScore.getText());
+                new Winning().start();
 //                xResult = 0;
 //                oResult = 0;
 
             } else if (xResult < oResult) {
                 getData("PC");
-                    PVEDetails.setpName(PlayerName.getText());
-                    PVEDetails.setpScore(PlayerScore.getText());
-                    PVEDetails.setPcScore(PCScore.getText());
-                    PVEDetails.setTie(TiedScore.getText());
-                    new Losing().start();
+                PVEDetails.setpName(PlayerName.getText());
+                PVEDetails.setpScore(PlayerScore.getText());
+                PVEDetails.setPcScore(PCScore.getText());
+                PVEDetails.setTie(TiedScore.getText());
+                new Losing().start();
 //                xResult = 0;
 //                oResult = 0;
 
             } else {
+                PVEDetails.setpName(PlayerName.getText());
+                PVEDetails.setpScore(PlayerScore.getText());
+                PVEDetails.setPcScore(PCScore.getText());
+                PVEDetails.setTie(TiedScore.getText());
+                new Drowing().start();
                 getData("Tied");
-                xResult = 0;
-                oResult = 0;
+//                xResult = 0;
+//                oResult = 0;
 
             }
         } catch (IOException ex) {
@@ -543,6 +545,7 @@ public class GamePlayerVsPCController implements Initializable {
             case 1:
                 Btn11.setDisable(true);
                 Btn11.setTextFill(javafx.scene.paint.Color.valueOf("#edf1f2"));
+
                 Btn11.setText(PText);
 
                 bString += Btn11.getId() + Btn11.getText() + "-";
@@ -630,28 +633,21 @@ public class GamePlayerVsPCController implements Initializable {
             case 1:
                 xScore++;
                 xResult++;
-                PVEDetails.setpName(PlayerName.getText());
-                PVEDetails.setpScore(PlayerScore.getText());
-                PVEDetails.setPcScore(PCScore.getText());
-                PVEDetails.setTie(TiedScore.getText());
-                new Winning().start();
+
                 break;
             case -1:
                 oScore++;
                 oResult++;
-                PVEDetails.setpName(PlayerName.getText());
-                PVEDetails.setpScore(PlayerScore.getText());
-                PVEDetails.setPcScore(PCScore.getText());
-                PVEDetails.setTie(TiedScore.getText());
-                new Losing().start();
+
                 break;
             case 2:
                 draws++;
+
                 TiedScore.setText("" + draws);
                 System.out.println("" + draws);
 
                 break;
-            //case 0:
+//            case 0:
 //                xScore = 0;
 //                oScore = 0;
 //                draws = 0;
@@ -663,18 +659,33 @@ public class GamePlayerVsPCController implements Initializable {
         PCScore.setText("" + oScore);
         if (xResult > oResult) {
             getData(PlayerName.getText());
-            xResult = 0;
-            oResult = 0;
+//            xResult = 0;
+//            oResult = 0;
+            PVEDetails.setpName(PlayerName.getText());
+            PVEDetails.setpScore(PlayerScore.getText());
+            PVEDetails.setPcScore(PCScore.getText());
+            PVEDetails.setTie(TiedScore.getText());
+            new Winning().start();
 
         } else if (xResult < oResult) {
             getData("PC");
-            xResult = 0;
-            oResult = 0;
+            PVEDetails.setpName(PlayerName.getText());
+            PVEDetails.setpScore(PlayerScore.getText());
+            PVEDetails.setPcScore(PCScore.getText());
+            PVEDetails.setTie(TiedScore.getText());
+            new Losing().start();
+//            xResult = 0;
+//            oResult = 0;
 
         } else {
             getData("Tied");
-            xResult = 0;
-            oResult = 0;
+            PVEDetails.setpName(PlayerName.getText());
+            PVEDetails.setpScore(PlayerScore.getText());
+            PVEDetails.setPcScore(PCScore.getText());
+            PVEDetails.setTie(TiedScore.getText());
+            new Drowing().start();
+//            xResult = 0;
+//            oResult = 0;
         }
 
     }
@@ -800,7 +811,11 @@ public class GamePlayerVsPCController implements Initializable {
                 }
             }
             if (playerXSteps.size() + playerOSteps.size() == 9) {
-
+                PVEDetails.setpName(PlayerName.getText());
+                PVEDetails.setpScore(PlayerScore.getText());
+                PVEDetails.setPcScore(PCScore.getText());
+                PVEDetails.setTie(TiedScore.getText());
+                new Drowing().start();
                 return 0;
             }
         }
@@ -822,45 +837,25 @@ public class GamePlayerVsPCController implements Initializable {
     @FXML
     private void goBack(MouseEvent event) throws IOException {
         SceneNavigator sceneNavigator = new SceneNavigator();
-        sceneNavigator.navigateImg(event, "/views/Menu.fxml");
+        sceneNavigator.navigateImg(event, "/views/PlayerVsPCName.fxml");
+    }
+
+    public void DisplayNames(String p1Name) {
+        PlayerName.setText(p1Name);
+    }
+
+    public void getData(String winner) throws IOException {
+        String date = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss").format(Calendar.getInstance().getTime());
+        singleDB = new SingleDataBase();
+
+        GameDataPlayerVsPC gm = new GameDataPlayerVsPC(
+                date, PlayerName.getText(), PlayerScore.getText(),
+                Player2Name.getText(), PCScore.getText(), winner);
+        singleDB.writeData(gm);
     }
 
     @FXML
-    private void playAgain(ActionEvent event) {
-//        for (int i = 0 ; i < 9 ; i++){
-//            btnsArr[i].setText("");
-//            btnsArr[i].setDisable(true);
-//            btnsArr[i].setVisible(true);
-//        }
-//        disableDifficultyButtons(false);
-    }
-
-    @FXML
-    private void saveGame(MouseEvent event) {
-
-        // should create an alert here.
-        Stage stage = new Stage();
-        FileChooser fc = new FileChooser();
-
-        File file = fc.showSaveDialog(stage);
-        FileOutputStream fos;
-        try {
-            if (file != null) {
-                fos = new FileOutputStream(file);
-                b = bString.getBytes();
-                fos.write(b);
-                // 0X-1O-3X
-                fos.close();
-            }
-        } catch (FileNotFoundException ex) {
-
-        } catch (IOException ex) {
-        }
-
-    }
-
-    @FXML
-    private void loadGame(MouseEvent event) {
+    private void loadGame(ActionEvent event) {
         Stage stage = new Stage();
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(stage);
@@ -892,18 +887,31 @@ public class GamePlayerVsPCController implements Initializable {
         }
     }
 
-    public void DisplayNames(String p1Name) {
-        PlayerName.setText(p1Name);
+    @FXML
+    private void saveGame(ActionEvent event) {
+        // should create an alert here.
+        Stage stage = new Stage();
+        FileChooser fc = new FileChooser();
+
+        File file = fc.showSaveDialog(stage);
+        FileOutputStream fos;
+        try {
+            if (file != null) {
+                fos = new FileOutputStream(file);
+                b = bString.getBytes();
+                fos.write(b);
+                // 0X-1O-3X
+                fos.close();
+            }
+        } catch (FileNotFoundException ex) {
+
+        } catch (IOException ex) {
+        }
+
     }
 
-    public void getData(String winner) throws IOException {
-        String date = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss").format(Calendar.getInstance().getTime());
-        singleDB = new SingleDataBase();
-
-        GameDataPlayerVsPC gm = new GameDataPlayerVsPC(
-                date, PlayerName.getText(), PlayerScore.getText(),
-                Player2Name.getText(), PCScore.getText(), winner);
-        singleDB.writeData(gm);
+    @FXML
+    private void loadGame(MouseEvent event) {
     }
 
     class Winning extends Thread {
@@ -950,6 +958,36 @@ public class GamePlayerVsPCController implements Initializable {
                             Stage stage = MenuScreen.getStage();
                             stage.setResizable(false);
                             Parent root = FXMLLoader.load(getClass().getResource("/views/Loser.fxml"));
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(GamePlayerVsPCController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GameDataPlayerVsPC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
+    class Drowing extends Thread {
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(10);
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Stage stage = MenuScreen.getStage();
+                            stage.setResizable(false);
+                            Parent root = FXMLLoader.load(getClass().getResource("/views/TiedPc.fxml"));
                             Scene scene = new Scene(root);
                             stage.setScene(scene);
                             stage.show();

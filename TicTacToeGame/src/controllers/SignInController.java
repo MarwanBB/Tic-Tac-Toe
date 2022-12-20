@@ -55,7 +55,6 @@ public class SignInController extends Thread implements Initializable {
 
     }
 
-    @FXML
     private void goToSignUp(ActionEvent event) {
         SceneNavigator.navigate("/views/SignUp.fxml");
 
@@ -129,6 +128,10 @@ public class SignInController extends Thread implements Initializable {
 
     public static void setSignInRequestRunningFlag(int signInRequestRunningFlag) {
         SignInController.signInRequestRunningFlag = signInRequestRunningFlag;
+    }
+
+    @FXML
+    private void goToRegistration(ActionEvent event) {
     }
 
 }

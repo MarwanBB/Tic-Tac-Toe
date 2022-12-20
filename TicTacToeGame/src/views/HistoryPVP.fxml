@@ -6,32 +6,45 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
-<Pane id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #90e0ef;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryPVPController">
+<Pane id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #a2cdd3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoryPVPController">
    <children>
-      <ImageView fx:id="imageStar" fitHeight="227.0" fitWidth="192.0" layoutX="23.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="600.0" fitWidth="726.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/Winner.png" />
+            <Image url="@../Images/tic-tac22.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="600.0" fitWidth="635.0" layoutX="631.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/tic-tac22.png" />
          </image>
       </ImageView>
       <ImageView fx:id="backImg" fitHeight="42.0" fitWidth="38.0" layoutX="49.0" layoutY="40.0" onMouseClicked="#goBackToGamePVP" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/Back.png" />
+            <Image url="@../Images/left-512.png" />
          </image>
       </ImageView>
-      <ScrollPane layoutX="261.0" layoutY="70.0" prefHeight="514.0" prefWidth="621.0" style="-fx-background-color: #E6E7D4;">
+      <ScrollPane layoutX="123.0" layoutY="79.0" prefHeight="508.0" prefWidth="705.0" style="-fx-background-color: #E6E7D4;">
          <content>
-            <TableView fx:id="tabelId" prefHeight="513.0" prefWidth="619.0" style="-fx-background-color: #ffffff;">
+            <TableView fx:id="tabelId" prefHeight="513.0" prefWidth="689.0" style="-fx-background-color: #ffffff;">
                <columns>
-                  <TableColumn fx:id="gameDate" maxWidth="500.0" minWidth="50.0" prefWidth="98.0" text="Game Date" />
-                  <TableColumn fx:id="player1" maxWidth="500.0" minWidth="50.0" prefWidth="114.0" text="Player1" />
-                  <TableColumn fx:id="score1" maxWidth="500.0" minWidth="50.0" prefWidth="78.0" text="Score" />
-                  <TableColumn fx:id="player2" maxWidth="500.0" minWidth="50.0" prefWidth="117.0" text="Player2" />
-                  <TableColumn fx:id="score2" maxWidth="500.0" minWidth="50.0" prefWidth="76.0" text="Score" />
-                  <TableColumn fx:id="winner" maxWidth="500.0" minWidth="50.0" prefWidth="116.0" text="Winner" />
+                  <TableColumn fx:id="gameDate" maxWidth="500.0" minWidth="50.0" prefWidth="169.0" text="Game Date" />
+                  <TableColumn fx:id="player1" maxWidth="500.0" minWidth="50.0" prefWidth="128.0" text="Player1" />
+                  <TableColumn fx:id="score1" maxWidth="500.0" minWidth="50.0" prefWidth="77.0" text="Score" />
+                  <TableColumn fx:id="player2" maxWidth="500.0" minWidth="50.0" prefWidth="120.0" text="Player2" />
+                  <TableColumn fx:id="score2" maxWidth="500.0" minWidth="50.0" prefWidth="72.0" text="Score" />
+                  <TableColumn fx:id="winner" maxWidth="500.0" minWidth="50.0" prefWidth="124.0" text="Winner" />
                </columns>
             </TableView>
          </content>
       </ScrollPane>
+      <Text layoutX="332.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="H" />
+      <Text layoutX="378.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="I" />
+      <Text layoutX="416.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="S" />
+      <Text layoutX="473.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="T" />
+      <Text layoutX="519.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="O" />
+      <Text layoutX="565.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="R" />
+      <Text layoutX="610.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-size: 40; -fx-font-family: 'Courier New'; -fx-font-weight: 800;" text="Y" />
    </children>
 </Pane>

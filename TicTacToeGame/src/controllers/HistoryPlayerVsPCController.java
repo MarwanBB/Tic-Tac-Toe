@@ -36,11 +36,7 @@ public class HistoryPlayerVsPCController implements Initializable {
     
     private Label label;
     @FXML
-    private ImageView imageStar;
-    @FXML
     private ImageView backImg;
-    @FXML
-    private StackPane stackpane;
     @FXML
     private TableView<GameDataPlayerVsPC> table;
     @FXML

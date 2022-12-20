@@ -29,14 +29,17 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="backImg" fitHeight="50.0" fitWidth="60.0" onMouseClicked="#goBackToMenu" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="backImg" fitHeight="41.0" fitWidth="42.0" onMouseClicked="#goBackToMenu" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Images/arr.png" />
+                        <Image url="@../Images/left-512.png" />
                      </image>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
                   </ImageView>
-                  <ImageView fitHeight="213.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <ImageView fitHeight="255.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../Images/Player.png" />
+                        <Image url="@../Images/tic-tac-toe.png" />
                      </image>
                   </ImageView>
                   <Label text="Welcome" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3">
@@ -66,9 +69,9 @@
                 <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <ImageView fitHeight="191.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <image>
-                        <Image url="@../Images/MultiPlayer.png" />
+                        <Image url="@../Images/tic-tac.png" />
                      </image>
                   </ImageView>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -80,7 +83,7 @@
                         </Label>
                         <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/Player1.png" />
+                              <Image url="@../Images/X.png" />
                            </image>
                         </ImageView>
                         <TextField fx:id="PlayerTxt" prefHeight="40.0" prefWidth="250.0" promptText="Player Name">

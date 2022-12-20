@@ -5,35 +5,29 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #90e0ef; -fx-background-image: ..\Images\tic-tac22.png;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #a2cdd3; -fx-background-image: ..\Images\tic-tac22.png;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="456.0" layoutX="27.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/tic-tac.png" />
          </image>
       </ImageView>
-      <Button layoutX="522.0" layoutY="145.0" mnemonicParsing="false" onAction="#goToGameSinglePlayer" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Single Player" />
-      <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="505.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="523.0" layoutY="227.0" mnemonicParsing="false" onAction="#goToGameSinglePlayer" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Single Player" />
+      <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="506.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Robot1.png" />
          </image>
       </ImageView>
-      <Button layoutX="522.0" layoutY="228.0" mnemonicParsing="false" onAction="#goToGamePVP" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Local MultiPlayer" />
-      <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="509.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="523.0" layoutY="296.0" mnemonicParsing="false" onAction="#goToGamePVP" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Local MultiPlayer" />
+      <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="513.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/Player.png" />
+            <Image url="@../Images/Online%20Players.png" />
          </image>
       </ImageView>
-      <Button layoutX="522.0" layoutY="308.0" mnemonicParsing="false" onAction="#goToGameOnline" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Online MultiPlayer" />
-      <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="505.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="523.0" layoutY="367.0" mnemonicParsing="false" onAction="#goToGameOnline" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Online MultiPlayer" />
+      <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="505.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/OnlineGame.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="extraGames" layoutX="523.0" layoutY="502.0" mnemonicParsing="false" onAction="#goToExtraGames" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Extra Games" />
-      <ImageView fitHeight="66.0" fitWidth="46.0" layoutX="487.0" layoutY="496.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/ExtraGames.png" />
          </image>
       </ImageView>
    </children>

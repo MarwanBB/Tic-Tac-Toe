@@ -5,60 +5,52 @@
  */
 package controllers;
 
-import java.net.URL;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import models.SceneNavigator;
 
-
 /**
+ * FXML Controller class
  *
- * @author Yomna
+ * @author Copy Center
  */
-public class WinnerController implements Initializable {
-    
+public class TiedController implements Initializable {
+
     @FXML
     private MediaView mediaView;
-    
-    private File file;
-    private Media media;
-    private MediaPlayer mediaPlayer;
     @FXML
     private ImageView imageBack;
-    @FXML
-    private Text winner;
-    
-   
-    
+     private File file;
+    private Media media;
+    private MediaPlayer mediaPlayer;
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        file = new File("src/Videos/Win.mp4");
+        file = new File("src/Videos/Tie.mp4");
         media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         mediaView.setMediaPlayer(mediaPlayer);
-    } 
-    public void DisplayNames(String win) {
-        winner.setText(win);
-    }
-    
+    }    
+
     @FXML
     private void goBack(MouseEvent event) {
         mediaPlayer.stop();
         SceneNavigator.navigate("/views/GamePVP.fxml");
-
+        
     }
+    
 }

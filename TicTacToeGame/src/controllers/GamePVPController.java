@@ -59,8 +59,6 @@ public class GamePVPController implements Initializable {
     private Label Player2Score;
     @FXML
     private Label TieScore;
-    @FXML
-    private Button playAgainButton;
 
     private int playerTurn = 0;
     private int p1score = 0;
@@ -75,10 +73,6 @@ public class GamePVPController implements Initializable {
     @FXML
     private ImageView backImg;
     @FXML
-    private ImageView saveImg;
-    @FXML
-    private ImageView loadImg;
-    @FXML
     private Label Player1Name;
     @FXML
     private Label Player2Name;
@@ -87,6 +81,12 @@ public class GamePVPController implements Initializable {
     private Parent root;
     private Scene scene;
     private Stage stage;
+    @FXML
+    private Button loadBtn1;
+    @FXML
+    private ImageView loadImg1;
+    @FXML
+    private Button saveBtn11;
 
     /**
      * Initializes the controller class.
@@ -113,7 +113,6 @@ public class GamePVPController implements Initializable {
         });
     }
 
-    @FXML
     void playAgain(ActionEvent event) {
         playerTurn = 0;
         squareCount = 0;
@@ -172,7 +171,24 @@ public class GamePVPController implements Initializable {
                     } catch (IOException ex) {
                         Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                } else if (flagWin == 3) {
+                    try {
+                        PVPDetails.setpName1(Player1Name.getText());
+                        PVPDetails.setpName2(Player2Name.getText());
+                        PVPDetails.setpScore1(Player1Score.getText());
+                        PVPDetails.setpScore2(Player2Score.getText());
+                        PVPDetails.setTie(TieScore.getText());
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Tied.fxml"));
+                        root = loader.load();
+                        stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+
             } catch (IOException ex) {
                 Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -212,6 +228,7 @@ public class GamePVPController implements Initializable {
         line = button3.getText() + button6.getText() + button9.getText();
         winLoseChecker(line);
         if (squareCount == 9 && flagWin == 0) {
+            flagWin = 3;
             getData("Tied");
             tiescore++;
             TieScore.setText(Integer.toString(tiescore));
@@ -285,75 +302,21 @@ public class GamePVPController implements Initializable {
         ldb.writeData(gm);
     }
 
-    @FXML
-    private void saveGame(MouseEvent event) {
-
-        // should create an alert here.
-        Stage stage = new Stage();
-        FileChooser fc = new FileChooser();
-
-        File file = fc.showSaveDialog(stage);
-        FileOutputStream fos;
-        try {
-            if (file != null) {
-                fos = new FileOutputStream(file);
-                b = bString.getBytes();
-                fos.write(b);
-                // 0X-1O-3X
-                fos.close();
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void loadGame(MouseEvent event) {
-        Stage stage = new Stage();
-        FileChooser fc = new FileChooser();
-        File file = fc.showOpenDialog(stage);
-        FileInputStream fis;
-
-        try {
-            if (file != null) {
-                fis = new FileInputStream(file);
-                while (fis.read() != -1) {
-                    int size = fis.available();
-                    b = new byte[size];
-                    fis.read(b);
-                    bString = new String(b);
-                    String[] arrString = bString.split("-");
-
-                    for (int i = 0; i < arrString.length; i++) {
-                        if ("X".equals(Character.toString(arrString[i].charAt(1))) | "O".equals(Character.toString(arrString[i].charAt(1)))) {
-                            buttons.get(Integer.parseInt(Character.toString(arrString[i].charAt(0))) - 1).setText(Character.toString(arrString[i].charAt(1)));
-                            buttons.get(Integer.parseInt(Character.toString(arrString[i].charAt(0))) - 1).setDisable(true);
-                        }
-
-                        if (arrString.length % 2 == 0) {
-                            playerTurn = 0;
-                        } else {
-                            playerTurn = 1;
-                        }
-
-                    }
-
-                    fis.close();
-                }
-            }
-        } catch (FileNotFoundException ex) {
-        } catch (IOException ex) {
-        }
-    }
-
     public void Data(String p1Name, String p2Name, int p1Score, int p2Score, int tScore) {
         Player1Name.setText(p1Name);
         Player2Name.setText(p2Name);
         Player1Score.setText(Integer.toString(p1Score));
         Player2Score.setText(Integer.toString(p2Score));
         TieScore.setText(Integer.toString(tScore));
+    }
+
+    @FXML
+    private void loadGame(ActionEvent event) {
+    }
+
+    @FXML
+    private void saveGame(ActionEvent event) {
+
     }
 
 }

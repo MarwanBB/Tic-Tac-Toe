@@ -29,14 +29,17 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="backImg" fitHeight="50.0" fitWidth="60.0" onMouseClicked="#goBackToMenu" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="backImg" fitHeight="47.0" fitWidth="44.0" onMouseClicked="#goBackToMenu" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Images/arr.png" />
+                        <Image url="@../Images/left-512.png" />
                      </image>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
                   </ImageView>
-                  <ImageView fitHeight="213.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <ImageView fitHeight="279.0" fitWidth="295.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../Images/Player.png" />
+                        <Image url="@../Images/tic-tac-toe.png" />
                      </image>
                   </ImageView>
                   <Label text="Welcome" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3">
@@ -68,22 +71,28 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <image>
-                        <Image url="@../Images/MultiPlayer.png" />
+                        <Image url="@../Images/tic-tac.png" />
                      </image>
                   </ImageView>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label prefHeight="50.0" prefWidth="146.0" text="Player X Name" textAlignment="CENTER" textFill="#239bd7">
+                        <Label prefHeight="50.0" prefWidth="177.0" text="Player One Name" textAlignment="CENTER" textFill="#239bd7">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
                         </Label>
-                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="43.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/Player2.png" />
+                              <Image url="@../Images/X.png" />
                            </image>
+                           <HBox.margin>
+                              <Insets right="2.0" />
+                           </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="PlayerXTxt" prefHeight="40.0" prefWidth="250.0" promptText="Player X Name">
+                        <TextField fx:id="PlayerXTxt" prefHeight="40.0" prefWidth="220.0" promptText="Player One Name">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>
@@ -92,17 +101,20 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
-                        <Label prefHeight="50.0" prefWidth="146.0" text="Player O Name" textAlignment="CENTER" textFill="#239bd7">
+                        <Label prefHeight="50.0" prefWidth="180.0" text="Player Two Name" textAlignment="CENTER" textFill="#239bd7">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
                         <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/Player1.png" />
+                              <Image url="@../Images/O.png" />
                            </image>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="PlayerOTxt" prefHeight="40.0" prefWidth="250.0" promptText="Player O Name">
+                        <TextField fx:id="PlayerOTxt" prefHeight="40.0" prefWidth="220.0" promptText="Player Two Name">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>

@@ -40,8 +40,6 @@ public class HistoryPVPController implements Initializable {
 
     private Label label;
     @FXML
-    private ImageView imageStar;
-    @FXML
     private ImageView backImg;
     //private TableView<GameDataPVP> table;
     @FXML

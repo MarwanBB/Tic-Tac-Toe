@@ -29,8 +29,6 @@ import models.SceneNavigator;
 public class MenuController implements Initializable {
     
     private Label label;
-    @FXML
-    private Button extraGames;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,7 +53,6 @@ public class MenuController implements Initializable {
         
     }
 
-    @FXML
     private void goToExtraGames(ActionEvent event) {
         SceneNavigator.navigate("/views/ExtraGames.fxml");
     }

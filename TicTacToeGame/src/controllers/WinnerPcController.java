@@ -25,8 +25,6 @@ public class WinnerPcController implements Initializable {
     @FXML
     private Text winner;
     @FXML
-    private Button backBtn;
-    @FXML
     private ImageView imageBack;
 
     private File file;

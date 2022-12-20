@@ -54,14 +54,9 @@ public class GameOnlineController implements Initializable {
     private Button button8;
     @FXML
     private Button button9;
-    @FXML
     private Label Player1Score;
-    @FXML
     private Label Player2Score;
-    @FXML
     private Label TieScore;
-    @FXML
-    private Button playAgainButton;
 
     private int playerTurn = 0;
     private int p1score = 0;
@@ -75,13 +70,7 @@ public class GameOnlineController implements Initializable {
     private String bString = "";   //added this at first cause printing reading the file didnt show first letter..
     @FXML
     private ImageView backImg;
-    @FXML
-    private ImageView saveImg;
-    @FXML
-    private ImageView loadImg;
-    @FXML
     private Label Player1Name;
-    @FXML
     private Label Player2Name;
     LocalDataBase ldb;
 
@@ -90,6 +79,14 @@ public class GameOnlineController implements Initializable {
     private Parent root;
     private Scene scene;
     private Stage stage;
+    @FXML
+    private RadioButton RecordBtn;
+    @FXML
+    private Label PlayerScore;
+    @FXML
+    private Label PCScore;
+    @FXML
+    private Label TiedScore;
 
     /**
      * Initializes the controller class.
@@ -154,7 +151,6 @@ public class GameOnlineController implements Initializable {
 
     }
 
-    @FXML
     void playAgain(ActionEvent event) {
         playerTurn = 0;
         squareCount = 0;
@@ -270,7 +266,6 @@ public class GameOnlineController implements Initializable {
         SceneNavigator.navigate("/views/Menu.fxml");
     }
 
-    @FXML
     private void goToHistoryPVP(ActionEvent event) {
         SceneNavigator.navigate("/views/HistoryPVP.fxml");
 
@@ -291,7 +286,6 @@ public class GameOnlineController implements Initializable {
         ldb.writeData(gm);
     }
 
-    @FXML
     private void saveGame(MouseEvent event) {
 
         // should create an alert here.
@@ -315,7 +309,6 @@ public class GameOnlineController implements Initializable {
 
     }
 
-    @FXML
     private void loadGame(MouseEvent event) {
         Stage stage = new Stage();
         FileChooser fc = new FileChooser();
@@ -360,6 +353,10 @@ public class GameOnlineController implements Initializable {
         Player1Score.setText(Integer.toString(p1Score));
         Player2Score.setText(Integer.toString(p2Score));
         TieScore.setText(Integer.toString(tScore));
+    }
+
+    @FXML
+    private void goToHistoryOnline(ActionEvent event) {
     }
 
 }
