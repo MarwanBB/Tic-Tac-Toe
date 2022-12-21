@@ -27,10 +27,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import models.AlertBoxOneButton;
 import models.PVPDetails;
 
 public class GamePVPController implements Initializable {
@@ -312,11 +316,92 @@ public class GamePVPController implements Initializable {
 
     @FXML
     private void loadGame(ActionEvent event) {
+        PVPDetails.setpName1(Player1Name.getText());
+        PVPDetails.setpName2(Player2Name.getText());
+        PVPDetails.setpScore1(Player1Score.getText());
+        PVPDetails.setpScore2(Player2Score.getText());
+        PVPDetails.setTie(TieScore.getText());
+        SceneNavigator.navigate("/views/RecordAndLoad.fxml");
     }
 
     @FXML
     private void saveGame(ActionEvent event) {
+        AlertBoxOneButton.createAlert("Recording", "You Game Has been Recorded", "OK");
+        String gameName = Player1Name.getText() + " Vs " + Player2Name.getText();
+        File file = new File("src/Records/PVP/" + gameName + ".txt");
+        FileOutputStream fos;
+        try {
+            if (file != null) {
+                fos = new FileOutputStream(file);
+                b = bString.getBytes();
+                fos.write(b);
+                // 0X-1O-3X
+                fos.close();
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    String[] record;
+
+    public void load(File file) {
+        String[] arrString = null;
+        try {
+            if (file != null) {
+                FileInputStream fis;
+                fis = new FileInputStream(file);
+
+                while (fis.read() != -1) {
+                    int size = fis.available();
+                    b = new byte[size];
+                    fis.read(b);
+                    bString = new String(b);
+                    arrString = bString.split("-");
+
+                }
+                record = arrString;
+
+            }
+            new Display().start();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
+
+    class Display extends Thread {
+
+        @Override
+        public void run() {
+            try {
+                for (String string : record) {
+                    Thread.sleep(1500);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if ("X".equals(Character.toString(string.charAt(1))) | "O".equals(Character.toString(string.charAt(1)))) {
+                                buttons.get(Integer.parseInt(Character.toString(string.charAt(0))) - 1).setText(Character.toString(string.charAt(1)));
+                                buttons.get(Integer.parseInt(Character.toString(string.charAt(0))) - 1).setDisable(true);
+                            }
+
+                            if (record.length % 2 == 0) {
+                                playerTurn = 0;
+                            } else {
+                                playerTurn = 1;
+                            }
+                        }
+                    });
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GamePlayerVsPCController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
 
 }

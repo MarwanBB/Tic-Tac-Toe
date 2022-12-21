@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -33,11 +34,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuScreen;
+import models.AlertBoxOneButton;
 import models.GameDataPVP;
 import models.GameDataPlayerVsPC;
 import models.PVEDetails;
 import models.SceneNavigator;
-
 
 public class GamePlayerVsPCController implements Initializable {
 
@@ -79,7 +80,7 @@ public class GamePlayerVsPCController implements Initializable {
     private boolean printO = true;
     private byte[] b;
     private String bString = "-";   //added this at first cause printing reading the file didnt show first letter..
-
+    String date = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss").format(Calendar.getInstance().getTime());
     Stage stage;
     private int xScore = 0;
     private int oScore = 0;
@@ -845,7 +846,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     public void getData(String winner) throws IOException {
-        String date = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss").format(Calendar.getInstance().getTime());
+        
         singleDB = new SingleDataBase();
 
         GameDataPlayerVsPC gm = new GameDataPlayerVsPC(
@@ -856,44 +857,21 @@ public class GamePlayerVsPCController implements Initializable {
 
     @FXML
     private void loadGame(ActionEvent event) {
-        Stage stage = new Stage();
-        FileChooser fc = new FileChooser();
-        File file = fc.showOpenDialog(stage);
-        FileInputStream fis;
-
-        try {
-            if (file != null) {
-                fis = new FileInputStream(file);
-                while (fis.read() != -1) {
-                    int size = fis.available();
-                    b = new byte[size];
-                    fis.read(b);
-                    bString = new String(b);
-                    String[] arrString = bString.split("-");
-
-                    for (int i = 0; i < arrString.length; i++) {
-                        if ("X".equals(Character.toString(arrString[i].charAt(1))) | "O".equals(Character.toString(arrString[i].charAt(1)))) {
-                            btnsArr[(Integer.parseInt(Character.toString(arrString[i].charAt(0))) - 1)].setText(Character.toString(arrString[i].charAt(1)));
-                            btnsArr[(Integer.parseInt(Character.toString(arrString[i].charAt(0))) - 1)].setDisable(true);
-                        }
-
-                    }
-
-                    fis.close();
-                }
-            }
-        } catch (FileNotFoundException ex) {
-        } catch (IOException ex) {
-        }
+        PVEDetails.setpName(PlayerName.getText());
+        PVEDetails.setpScore(PlayerScore.getText());
+        PVEDetails.setPcScore(PCScore.getText());
+        PVEDetails.setTie(TiedScore.getText());
+        SceneNavigator.navigate("/views/RecordAndLoadPc.fxml");
     }
 
     @FXML
     private void saveGame(ActionEvent event) {
         // should create an alert here.
-        Stage stage = new Stage();
-        FileChooser fc = new FileChooser();
-
-        File file = fc.showSaveDialog(stage);
+         AlertBoxOneButton.createAlert("Recording", "You Game Has been Recorded", "OK");
+        System.out.println("Clicked");
+        String gameName = PlayerName.getText() + " Vs " + Player2Name.getText();
+        System.out.println(gameName);
+        File file = new File("src/Records/PVE/" + gameName + ".txt");
         FileOutputStream fos;
         try {
             if (file != null) {
@@ -904,16 +882,66 @@ public class GamePlayerVsPCController implements Initializable {
                 fos.close();
             }
         } catch (FileNotFoundException ex) {
-
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    String[] record;
+
+    public void load(File file) {
+        String[] arrString = null;
+        try {
+            if (file != null) {
+                FileInputStream fis;
+                fis = new FileInputStream(file);
+
+                while (fis.read() != -1) {
+                    int size = fis.available();
+                    b = new byte[size];
+                    fis.read(b);
+                    bString = new String(b);
+                    arrString = bString.split("-");
+
+                }
+                record = arrString;
+
+            }
+            
+            //display(record);
+            new Display().start();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    @FXML
-    private void loadGame(MouseEvent event) {
-    }
+    class Display extends Thread{
 
+        @Override
+        public void run() {
+            try {
+                for(String string: record){
+                Thread.sleep(1500);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if ("X".equals(Character.toString(string.charAt(1))) | "O".equals(Character.toString(string.charAt(1)))) {
+                        btnsArr[(Integer.parseInt(Character.toString(string.charAt(0))) - 1)].setText(Character.toString(string.charAt(1)));
+                        btnsArr[(Integer.parseInt(Character.toString(string.charAt(0))) - 1)].setDisable(true);
+                    }
+                    }
+                });
+            }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GamePlayerVsPCController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    
+    }
     class Winning extends Thread {
 
         @Override
