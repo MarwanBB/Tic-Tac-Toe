@@ -30,11 +30,11 @@ public class Client implements Runnable {
     private Thread threadClient;
     private User user;
 
-    public static Client getInstance() {
+    public static Client getInstance(String ip, int port) {
         String s = "";
 
         if (instance == null) {
-            instance = new Client();
+            instance = new Client(ip, port);
         }
         return instance;
     }
@@ -63,19 +63,13 @@ public class Client implements Runnable {
         this.str = str;
     }
 
-    private Client() {
+    private Client(String ip, int port) {
         try {
 
-            TextInputDialog textInput = new TextInputDialog();
-            textInput.setTitle("Ip of the server");
-            textInput.getDialogPane().setContentText("Please enter the IP of the server");
-            Optional<String> result = textInput.showAndWait();
-            TextField input = textInput.getEditor();
 //            
 //            System.out.println("input text is" + input.getText());
-
-            //mySocket = new Socket("127.0.0.1", 5005);
-            mySocket = new Socket(input.getText(), 5005);
+            mySocket = new Socket(ip, port);
+            //mySocket = new Socket(input.getText(), 5005);
             //mySocket = new Socket("127.0.0.1", 5005);
             user = new User();
             threadClient = new Thread(this);
@@ -120,7 +114,7 @@ public class Client implements Runnable {
                             break;
 
                         case Constants.userNotFoundAfterSignInRequest:
-                            AlertBoxOneButton.createAlert("Sign In", "Sign In failed, Wrong username or password.", "Ok");
+                            AlertBoxOneButton.createAlert("Sign In", "Sign In failed, Wrong username or password or user already logged in.", "Ok");
                             break;
 
                         case Constants.emptyAvailablePlayersList:
@@ -156,21 +150,19 @@ public class Client implements Runnable {
                             // where bString is the string that loads the game board
                             refreshGameBoardResponse(str);
                             break;
-                            
-                            case "userFoundAfterSignInRequest":
+
+                        case "userFoundAfterSignInRequest":
                             OnlinePlayersController.playerUsername = user.getUsername();
                             setUser(user);
                             clientRefreshOnlineOnSignIn(user);
                             SceneNavigator.navigate("/views/OnlinePlayers.fxml");
-                            
-                            
-                            
+
                             break;
-                            
-                            case "showWinningVideo":
+
+                        case "showWinningVideo":
                             showWinningVideo();
                             break;
-                            
+
                         case "showLosingVideo":
                             showLosingVideo();
                             break;
@@ -372,8 +364,8 @@ public class Client implements Runnable {
         printstream.println(Constants.closeClient + "/" + user.getUsername());
 
     }
-    
-    void playerOneWon(){
+
+    void playerOneWon() {
         System.out.println("player one won called");
         try {
             printstream = new PrintStream(mySocket.getOutputStream());
@@ -382,8 +374,8 @@ public class Client implements Runnable {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    void playerTwoWon(){
+
+    void playerTwoWon() {
         System.out.println("player two won called");
         try {
             printstream = new PrintStream(mySocket.getOutputStream());
@@ -392,22 +384,22 @@ public class Client implements Runnable {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    void showWinningVideo(){
+
+    void showWinningVideo() {
         setStr("");
         Room.setBoardDataAsString("");
         System.out.println("show winning video called" + user.getUsername());
         SceneNavigator.navigate("/views/WinnerOnline.fxml");
     }
-    
-    void showLosingVideo(){
+
+    void showLosingVideo() {
         setStr("");
         Room.setBoardDataAsString("");
         System.out.println("show losing video called" + user.getUsername());
         SceneNavigator.navigate("/views/LoserOnline.fxml");
     }
-    
-    void appearOffline(String username){
+
+    void appearOffline(String username) {
         printstream.println("appearOffline" + "/" + username);
     }
 

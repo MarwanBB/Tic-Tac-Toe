@@ -58,10 +58,12 @@ public class DatabaseAccessLayer {
 
         try {
             con = startConnection();
-            PreparedStatement stmt = con.prepareStatement("Select * FROM USERS WHERE username=? and password=?");
+            PreparedStatement stmt = con.prepareStatement("Select * FROM USERS WHERE username=? and password=? and isonline=false");
             stmt.setString(1, username);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
+            
+            
             if (rs.next()) {
                 System.out.println("in rs.next()========================");
                 PreparedStatement stmt2 = con.prepareStatement("UPDATE  USERS SET isonline =? WHERE username=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -196,6 +198,24 @@ public class DatabaseAccessLayer {
             Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public static void logout(String username){
+        try {
+            con = startConnection();
+            PreparedStatement stmt = con.prepareStatement("UPDATE  USERS SET isonline =? WHERE username=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            
+            stmt.setBoolean(1, false);
+            stmt.setString(2, username);
+            
+            stmt.executeUpdate();
+            con.commit();
+            
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

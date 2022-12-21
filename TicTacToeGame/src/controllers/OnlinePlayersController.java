@@ -67,7 +67,7 @@ public class OnlinePlayersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Initialization
-        client = Client.getInstance();
+        client = Client.getInstance(Util.ip, Util.port);
 
         tableId.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override

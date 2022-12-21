@@ -8,6 +8,7 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import models.SceneNavigator;
 
@@ -49,7 +52,13 @@ public class MenuController implements Initializable {
 
     @FXML
     private void goToGameOnline(ActionEvent event)  {
-        SceneNavigator.navigate("/views/SignIn.fxml");
+        TextInputDialog textInput = new TextInputDialog();
+            textInput.setTitle("Ip of the server");
+            textInput.getDialogPane().setContentText("Please enter the IP of the server");
+            Optional<String> result = textInput.showAndWait();
+            TextField input = textInput.getEditor();
+            Util.ip=input.getText();
+            SceneNavigator.navigate("/views/SignIn.fxml");
         
     }
 

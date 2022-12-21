@@ -45,7 +45,6 @@ public class LoserOnlineController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        Loser.setText(PVEDetails.getpName());
         
         media = new Media(getClass().getResource("Loser.mp4").toExternalForm());
         mediaPlayer = new MediaPlayer(media);

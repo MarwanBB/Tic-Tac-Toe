@@ -379,7 +379,7 @@ public class GamePVPController implements Initializable {
         public void run() {
             try {
                 for (String string : record) {
-                    Thread.sleep(1500);
+                    Thread.sleep(500);
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {

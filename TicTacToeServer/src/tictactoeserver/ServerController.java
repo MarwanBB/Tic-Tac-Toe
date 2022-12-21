@@ -35,6 +35,8 @@ public class ServerController implements Initializable {
 
     @FXML
     private PieChart chart;
+    @FXML
+    private Button refreshButton;
 
     /**
      * Initializes the controller class.
@@ -43,12 +45,13 @@ public class ServerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         buttonTurnOffServer.setVisible(false);
+        refreshButton.setVisible(false);
 
         pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("online", DatabaseAccessLayer.getNumberOfOnlinePlayers()),
-                new PieChart.Data("offline", DatabaseAccessLayer.getNumberOfOFFlinePlayers())
+                new PieChart.Data("online: "+DatabaseAccessLayer.getNumberOfOnlinePlayers(), DatabaseAccessLayer.getNumberOfOnlinePlayers()),
+                new PieChart.Data("offline: "+DatabaseAccessLayer.getNumberOfOFFlinePlayers(), DatabaseAccessLayer.getNumberOfOFFlinePlayers())
         );
-
+        
         chart.setData(pieChartData);
 
         chart.setVisible(false);
@@ -63,6 +66,7 @@ public class ServerController implements Initializable {
             buttonTurnOnServer.setDisable(true);
             buttonTurnOffServer.setDisable(false);
             buttonTurnOffServer.setVisible(true);
+            refreshButton.setVisible(true);
             chart.setVisible(true);
             isNotOpenedYet = false;
         } else {
@@ -84,11 +88,22 @@ public class ServerController implements Initializable {
             Server.getInstance().stopAllClients();
             Server.getInstance().suspend();
             chart.setVisible(false);
+            refreshButton.setVisible(false);
 
         } catch (IOException ex) {
             Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @FXML
+    private void refreshButtonClicked(ActionEvent event) {
+         pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("online: "+DatabaseAccessLayer.getNumberOfOnlinePlayers(), DatabaseAccessLayer.getNumberOfOnlinePlayers()),
+                new PieChart.Data("offline: "+DatabaseAccessLayer.getNumberOfOFFlinePlayers(), DatabaseAccessLayer.getNumberOfOFFlinePlayers())
+        );
+         chart.setData(pieChartData);
+        
     }
 
 }

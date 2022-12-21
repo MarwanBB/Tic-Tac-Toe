@@ -14,7 +14,7 @@
             <children>
                 <ImageView fitHeight="100.0" fitWidth="114.0" layoutX="28.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="772.0" AnchorPane.topAnchor="34.0">
                     <image>
-                        <Image url="@../images/tic-tac.png" />
+                        <Image url="@../images/tic-tac-toe.png" />
                     </image>
                 </ImageView>
                 <Label layoutX="356.0" layoutY="28.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 40; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="TicTacToe">
@@ -34,6 +34,7 @@
                 <PieChart fx:id="chart" layoutX="355.0" layoutY="40.0" opacity="20.0" prefHeight="345.0" prefWidth="428.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="429.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="30.0" />
                 <Button fx:id="buttonTurnOnServer" layoutX="78.0" layoutY="98.0" mnemonicParsing="false" onAction="#turnOnServer" style="-fx-background-radius: 8; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="ON" />
                 <Button fx:id="buttonTurnOffServer" layoutX="78.0" layoutY="205.0" mnemonicParsing="false" onAction="#turnOffServer" style="-fx-background-radius: 8; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="OFF" />
+            <Button fx:id="refreshButton" layoutX="577.0" layoutY="375.0" mnemonicParsing="false" onAction="#refreshButtonClicked" prefHeight="55.0" prefWidth="132.0" style="-fx-background-radius: 25; -fx-background-color: #0077b6; -fx-text-fill: white; -fx-font-size: 25; -fx-font-weight: bold;" text="Refresh" />
             </children>
         </AnchorPane>
    

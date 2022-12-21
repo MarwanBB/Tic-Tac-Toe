@@ -57,7 +57,12 @@ public class Handler extends Thread {
 
             try {
                 String str = dataInputStream.readLine();
-                if(str==null){closeClient();}
+                if(str==null){
+                    closeClient();
+                    int x = handlerList.indexOf(this);
+                System.out.println("x::" + x);
+                Handler removed = handlerList.remove(x);
+                }
                 System.out.println("Inside Handler, in while loop in try dataInputStream.readLine() in run");
                 System.out.println("str recieved by handler: " + str);
 
@@ -74,6 +79,10 @@ public class Handler extends Thread {
                         //arrString[] = Constants.signInRequest ,  username ,  password
                         if (DatabaseAccessLayer.signIn(arrString[1], arrString[2])) {
                             signInResponse(Constants.userFoundAfterSignInRequest);
+                            this.user.setUsername(arrString[1]);
+                            this.user.setPassword(arrString[2]);
+                            this.isAvailable = 1;
+                            this.isPlaying = 0;
                         } else {
                             signInResponse(Constants.userNotFoundAfterSignInRequest);
                         }
@@ -81,10 +90,7 @@ public class Handler extends Thread {
 
                     case Constants.refreshOnlineOnSignIn:
                         //arrString[] = "refreshOnlineOnSignIn" ,  username ,  password
-                        this.user.setUsername(arrString[1]);
-                        this.user.setPassword(arrString[2]);
-                        this.isAvailable = 1;
-                        this.isPlaying = 0;
+                        
                         handlerRefreshAvailablePlayers();
                         break;
 
@@ -108,6 +114,7 @@ public class Handler extends Thread {
                     case Constants.closeClient:
                         //arrString[] = closeClient , username
                         System.out.println(str);
+                        DatabaseAccessLayer.logout(arrString[1]);
                         handleCloseClientRequest(str);
 
                         break;
@@ -134,13 +141,26 @@ public class Handler extends Thread {
 
             } catch (NullPointerException e) {
                 closed = true;
+                this.isAvailable=0;
                 
                 closeClient();
+                DatabaseAccessLayer.logout(user.getUsername());
+                int x = handlerList.indexOf(this);
+                System.out.println("x::" + x);
+                Handler removed = handlerList.remove(x);
 
             } catch (IOException ex) {
                 
+                DatabaseAccessLayer.logout(user.getUsername());
                 closed = true;
+                this.isAvailable=0;
                 closeClient();
+                int x = handlerList.indexOf(this);
+                System.out.println("x::" + x);
+                if(!handlerList.isEmpty()){
+                    Handler removed = handlerList.remove(x);
+                }
+                
 
                 
             }
@@ -328,7 +348,7 @@ public class Handler extends Thread {
         try {
             closed = true;
             System.out.println(closed);
-
+            DatabaseAccessLayer.logout(this.getName());
             this.dataInputStream.close();
             this.printStream.close();
             this.socket.close();

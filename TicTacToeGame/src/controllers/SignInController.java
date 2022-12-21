@@ -89,10 +89,10 @@ public class SignInController extends Thread implements Initializable {
                     User user = new User(userTxt.getText(), passwordTxt.getText());
                     System.out.println(user.getUsername());
 
-                    client = Client.getInstance();
+                    client = Client.getInstance(Util.ip, Util.port);
                     client.setUser(user);
                     client.clientSignInRequest(user);
-                    
+
 //                    if (client.getStr().equals("userFoundAfterSignInRequest")) {
 //                            OnlinePlayersController.playerUsername = user.getUsername();
 //                            client.clientRefreshOnlineOnSignIn(user);
@@ -101,7 +101,6 @@ public class SignInController extends Thread implements Initializable {
 //                            SceneNavigator.navigate("/views/OnlinePlayers.fxml");
 //
 //                        }
-
                     // threadSignIn = new Thread() {
                     //   @Override
                     //  public void run() {

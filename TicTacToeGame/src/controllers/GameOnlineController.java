@@ -86,7 +86,7 @@ public class GameOnlineController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("bstring at initialization ============================= " + bString);
 
-        client = Client.getInstance();
+        client = Client.getInstance(Util.ip, Util.port);
 
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
 

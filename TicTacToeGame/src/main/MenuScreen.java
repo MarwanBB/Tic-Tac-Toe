@@ -6,11 +6,13 @@
 package main;
 
 import controllers.Client;
+import controllers.Util;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +27,7 @@ import javafx.stage.WindowEvent;
  */
 public class MenuScreen extends Application {
 
-    Socket mySocket;
+ //   Socket mySocket;
     private static Stage stage;
 
     public static Stage getStage() {
@@ -50,8 +52,8 @@ public class MenuScreen extends Application {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                    Client.getInstance().CloseRequest();
-                    Client.getInstance().closeClient();
+                    //Client.getInstance(Util.ip,Util.port).CloseRequest();
+                    //Client.getInstance(Util.ip, Util.port).closeClient();
                     
                     System.out.println("close");
                     Platform.exit();
