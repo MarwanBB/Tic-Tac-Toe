@@ -374,7 +374,8 @@ public class GameOnlineController implements Initializable {
     private void goBack(MouseEvent event) {
 
         Room.setBoardDataAsString("");
-        SceneNavigator.navigate("/views/Menu.fxml");
+        SceneNavigator.navigate("/views/OnlinePlayers.fxml");
+        client.resetIsPlaying();
     }
 
 }

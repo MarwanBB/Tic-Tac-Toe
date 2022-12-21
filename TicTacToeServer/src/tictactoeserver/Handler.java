@@ -17,7 +17,7 @@ public class Handler extends Thread {
     public Socket socket;
     private User user;
     private int isAvailable;
-    private int isPlaying;
+    private int isPlaying = 0;
 
     public static Vector<Handler> handlerList = new Vector<Handler>();
 
@@ -137,6 +137,10 @@ public class Handler extends Thread {
                             System.out.println("appear offline in handler !!");
                             DatabaseAccessLayer.appearOffline(arrString[1]);
                             break;
+                            
+                        case "resetIsPlaying":
+                            isPlaying = 0;
+                            break;
                 }
 
             } catch (NullPointerException e) {
@@ -206,14 +210,31 @@ public class Handler extends Thread {
         String[] arrString = str.split("/");
         for (Handler handler : handlerList) {
             if (handler.user.getUsername().equals(arrString[2])) {
-                try {
+                if (handler.isPlaying == 0){
+                    try {
                     printStream = new PrintStream(socket.getOutputStream());
                     handler.printStream.println(Constants.showAlertForInvitedPlayer + "/" + arrString[1] + "/" + arrString[2]);
                 } catch (IOException ex) {
                     Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                }
+                else{
+                    for (Handler handlerSending : handlerList) {
+            if (handlerSending.user.getUsername().equals(arrString[1])) {
+                handlerSending.printStream.println("showAlertIsBusy");
+            }
+                    }
+                    
+                }
+                
+                
 
             }
+//            if (handler.user.getUsername().equals(arrString[1])) {
+//                handler.printStream.println("showAlertIsBusy");
+//                
+//
+//            }
         }
     }
 
@@ -227,6 +248,7 @@ public class Handler extends Thread {
             for (Handler handler : handlerList) {
                 if (handler.user.getUsername().equals(arrString[1])) {
                     try {
+                        handler.isPlaying = 1;
                         printStream = new PrintStream(socket.getOutputStream());
                         //added "1" at the end of the first player to indicate that this is the first player to play.
                         handler.printStream.println(Constants.takeTheTwoPlayersToTheGameViewSincePlayerTwoAcceptedInvitation + "/" + arrString[1] + "/" + arrString[2] + "/" + "1");
@@ -237,6 +259,7 @@ public class Handler extends Thread {
                 }
                 if (handler.user.getUsername().equals(arrString[2])) {
                     try {
+                        handler.isPlaying = 1;
                         printStream = new PrintStream(socket.getOutputStream());
                         //added "0" at the end of the first player to indicate that this is the second player to play.
                         handler.printStream.println(Constants.takeTheTwoPlayersToTheGameViewSincePlayerTwoAcceptedInvitation + "/" + arrString[1] + "/" + arrString[2] + "/" + "0");

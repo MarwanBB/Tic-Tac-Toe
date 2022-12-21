@@ -217,5 +217,26 @@ public class DatabaseAccessLayer {
             Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static void setAllToOffline(){
+        
+        try {
+            con = startConnection();
+            PreparedStatement stmt = con.prepareStatement("update users set isonline=false ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            
+            
+            stmt.executeUpdate();
+            con.commit();
+            
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+    }
 
 }

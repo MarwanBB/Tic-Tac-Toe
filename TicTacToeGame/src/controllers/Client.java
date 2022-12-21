@@ -166,6 +166,10 @@ public class Client implements Runnable {
                         case "showLosingVideo":
                             showLosingVideo();
                             break;
+                            
+                        case "showAlertIsBusy":
+                            showAlertIsBusy();
+                            break;
 
                     }
                 }
@@ -294,6 +298,8 @@ public class Client implements Runnable {
     void clientGoToGameView(String str) {
         //arrString[] = takeTheTwoPlayersToTheGameView , username p1 , username p2 , (1 or 0)
         // "1" for p1 and "0" for p2
+        
+        
 
         String[] arrString = str.split("/");
 
@@ -401,6 +407,14 @@ public class Client implements Runnable {
 
     void appearOffline(String username) {
         printstream.println("appearOffline" + "/" + username);
+    }
+    
+    void resetIsPlaying(){
+        printstream.println("resetIsPlaying");
+    }
+    
+    void showAlertIsBusy(){
+        AlertBoxOneButton.createAlert("Player is busy", "The invited player is busy right now.", "Ok");
     }
 
 }

@@ -43,6 +43,9 @@ public class ServerController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        DatabaseAccessLayer.setAllToOffline();
+        
         // TODO
         buttonTurnOffServer.setVisible(false);
         refreshButton.setVisible(false);
