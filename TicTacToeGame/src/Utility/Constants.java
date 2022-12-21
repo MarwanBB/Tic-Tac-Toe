@@ -1,9 +1,7 @@
-
 package Utility;
 
-
 public class Constants {
-    
+
     public static final String signUpRequest = "signUpRequest";
     public static final String signInRequest = "signInRequest";
     public static final String refreshOnlineOnSignIn = "refreshOnlineOnSignIn";
@@ -24,13 +22,5 @@ public class Constants {
     public static final String refreshGameBoardResponse = "refreshGameBoardResponse";
     public static final String closeClient = "closeClient";
 
-    
-//    public static final String  = "";
-//    public static final String  = "";
-//    public static final String  = "";
-//    public static final String  = "";
-//    public static final String  = "";
-//    public static final String  = "";
-//    public static final String  = "";
-    
+
 }

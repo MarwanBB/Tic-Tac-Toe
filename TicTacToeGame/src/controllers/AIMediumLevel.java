@@ -1,22 +1,18 @@
 package controllers;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- *
- * @author Mahmoud
- */
+
 public class AIMediumLevel {
 
     List<List> winningLists;
     List<List> possibleWinLists;
     List possibleTopRow1;
-    List possibleTopRow2; 
-    List possibleMidRow1; 
-    List possibleMidRow2 ;
+    List possibleTopRow2;
+    List possibleMidRow1;
+    List possibleMidRow2;
     List possibleBottomRow1;
     List possibleBottomRow2;
     List possibleLeftcol1;
@@ -35,6 +31,7 @@ public class AIMediumLevel {
     List diagonalOne;
     List diagonalTwo;
     List possibleRightcol2;
+
     AIMediumLevel() {
         winningLists = new ArrayList<>();
         possibleWinLists = new ArrayList<>();
@@ -42,17 +39,17 @@ public class AIMediumLevel {
         possibleTopRow2 = Arrays.asList(1, 3);
         possibleMidRow1 = Arrays.asList(4, 6);
         possibleMidRow2 = Arrays.asList(4, 5);
-        possibleBottomRow1 = Arrays.asList(8,9);
-        possibleBottomRow2 = Arrays.asList(7,8);
-        possibleLeftcol1 = Arrays.asList(1,7);
-        possibleMidcol1 = Arrays.asList(5,8);
-        possibleRightcol1 = Arrays.asList(3,9);
-        possibleRightcol2 = Arrays.asList(3,6);
-        possiblediagonalOne1 = Arrays.asList( 5, 9);
-        possibleDiagonalTwo1 = Arrays.asList(3,5);
-        possibleDiagonalOne2 = Arrays.asList( 1, 5);
+        possibleBottomRow1 = Arrays.asList(8, 9);
+        possibleBottomRow2 = Arrays.asList(7, 8);
+        possibleLeftcol1 = Arrays.asList(1, 7);
+        possibleMidcol1 = Arrays.asList(5, 8);
+        possibleRightcol1 = Arrays.asList(3, 9);
+        possibleRightcol2 = Arrays.asList(3, 6);
+        possiblediagonalOne1 = Arrays.asList(5, 9);
+        possibleDiagonalTwo1 = Arrays.asList(3, 5);
+        possibleDiagonalOne2 = Arrays.asList(1, 5);
         possibleDiagonalTwo2 = Arrays.asList(5, 7);
-        
+
         possibleWinLists.add(possibleTopRow1);
         possibleWinLists.add(possibleTopRow2);
         possibleWinLists.add(possibleMidRow1);
@@ -84,65 +81,53 @@ public class AIMediumLevel {
         winningLists.add(diagonalOne);
         winningLists.add(diagonalTwo);
     }
-    public int setTheNextPlay(ArrayList<Integer> playerXSteps, ArrayList<Integer> moves){
-       // System.out.println("setTheNextPlay");
+
+    public int setTheNextPlay(ArrayList<Integer> playerXSteps, ArrayList<Integer> moves) {
+        // System.out.println("setTheNextPlay");
         int move = -1;
         for (List l : possibleWinLists) {
             if (playerXSteps.containsAll(l)) {
-                if(l.equals(possibleTopRow1) && !moves.contains(3))// topRow1 = Arrays.asList(1, 2);
+                if (l.equals(possibleTopRow1) && !moves.contains(3))// topRow1 = Arrays.asList(1, 2);
                 {
-                   
+
                     return 3;
-                }
-                else if(l.equals(possibleTopRow2) && !moves.contains(2))//topRow2 = Arrays.asList(1, 3);
+                } else if (l.equals(possibleTopRow2) && !moves.contains(2))//topRow2 = Arrays.asList(1, 3);
                 {
-                   
+
                     return 2;
-                }
-                else if(l.equals(possibleMidRow1) && !moves.contains(5))//midRow1 = Arrays.asList(4, 6);
+                } else if (l.equals(possibleMidRow1) && !moves.contains(5))//midRow1 = Arrays.asList(4, 6);
                 {
                     return 5;
-                }
-                else if(l.equals(possibleMidRow2) && !moves.contains(6))//midRow2 = Arrays.asList(4, 5);
+                } else if (l.equals(possibleMidRow2) && !moves.contains(6))//midRow2 = Arrays.asList(4, 5);
                 {
                     return 6;
-                }
-                else if(l.equals(possibleBottomRow1) && !moves.contains(7)){//bottomRow1 = Arrays.asList(8, 9);
+                } else if (l.equals(possibleBottomRow1) && !moves.contains(7)) {//bottomRow1 = Arrays.asList(8, 9);
                     return 7;
-                }
-                else if(l.equals(possibleBottomRow2) && !moves.contains(9)){//bottomRow2 = Arrays.asList(7,8);
+                } else if (l.equals(possibleBottomRow2) && !moves.contains(9)) {//bottomRow2 = Arrays.asList(7,8);
                     return 9;
-                }
-                else if(l.equals(possibleLeftcol1) && !moves.contains(4)){//leftcol1 = Arrays.asList(1, 7);
+                } else if (l.equals(possibleLeftcol1) && !moves.contains(4)) {//leftcol1 = Arrays.asList(1, 7);
                     return 4;
-                }
-                else if(l.equals(possibleMidcol1) && !moves.contains(2)){//midcol1 = Arrays.asList(5, 8);
+                } else if (l.equals(possibleMidcol1) && !moves.contains(2)) {//midcol1 = Arrays.asList(5, 8);
                     return 2;
-                }
-                else if(l.equals(possibleRightcol2) && !moves.contains(9)){ // rightco2 = Arrays.asList(3,6);
+                } else if (l.equals(possibleRightcol2) && !moves.contains(9)) { // rightco2 = Arrays.asList(3,6);
                     return 9;
-                }
-                else if(l.equals(possibleRightcol1) && !moves.contains(6)){//rightco1 = Arrays.asList(3,9);
+                } else if (l.equals(possibleRightcol1) && !moves.contains(6)) {//rightco1 = Arrays.asList(3,9);
                     return 6;
-                }
-                else if(l.equals(possiblediagonalOne1) && !moves.contains(1)){//diagonalOne1 = Arrays.asList( 5, 9);
+                } else if (l.equals(possiblediagonalOne1) && !moves.contains(1)) {//diagonalOne1 = Arrays.asList( 5, 9);
                     return 1;
-                }
-                else if(l.equals(possibleDiagonalTwo1) && !moves.contains(7)){//diagonalTwo1 = Arrays.asList(3, 5);
+                } else if (l.equals(possibleDiagonalTwo1) && !moves.contains(7)) {//diagonalTwo1 = Arrays.asList(3, 5);
                     return 7;
-                }
-                else if(l.equals(possibleDiagonalOne2) && !moves.contains(9)){//diagonalOne2 = Arrays.asList( 1, 5);
+                } else if (l.equals(possibleDiagonalOne2) && !moves.contains(9)) {//diagonalOne2 = Arrays.asList( 1, 5);
                     return 9;
-                }
-                else if(l.equals(possibleDiagonalTwo2) && !moves.contains(3)){ // diagonalTwo2 = Arrays.asList(5, 7);
+                } else if (l.equals(possibleDiagonalTwo2) && !moves.contains(3)) { // diagonalTwo2 = Arrays.asList(5, 7);
                     return 3;
                 }
-                
-                
-            } 
+
+            }
         }
         return move;
     }
+
     public int isGameOver(ArrayList<Integer> playerXSteps, ArrayList<Integer> playerOSteps) {
         if (playerXSteps.size() + playerOSteps.size() >= 5) {
             for (List l : winningLists) {
@@ -156,7 +141,7 @@ public class AIMediumLevel {
                 return 0;
             }
         }
-        
+
         return -1;
     }
 }

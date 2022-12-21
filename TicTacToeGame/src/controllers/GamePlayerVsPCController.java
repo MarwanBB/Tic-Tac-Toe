@@ -1,6 +1,5 @@
 package controllers;
 
-import database.LocalDataBase;
 import database.SingleDataBase;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Vector;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -28,14 +26,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.MenuScreen;
 import models.AlertBoxOneButton;
-import models.GameDataPVP;
 import models.GameDataPlayerVsPC;
 import models.PVEDetails;
 import models.SceneNavigator;
@@ -491,8 +486,6 @@ public class GamePlayerVsPCController implements Initializable {
                 PVEDetails.setPcScore(PCScore.getText());
                 PVEDetails.setTie(TiedScore.getText());
                 new Winning().start();
-//                xResult = 0;
-//                oResult = 0;
 
             } else if (xResult < oResult) {
                 getData("PC");
@@ -501,8 +494,6 @@ public class GamePlayerVsPCController implements Initializable {
                 PVEDetails.setPcScore(PCScore.getText());
                 PVEDetails.setTie(TiedScore.getText());
                 new Losing().start();
-//                xResult = 0;
-//                oResult = 0;
 
             } else {
                 PVEDetails.setpName(PlayerName.getText());
@@ -511,8 +502,6 @@ public class GamePlayerVsPCController implements Initializable {
                 PVEDetails.setTie(TiedScore.getText());
                 new Drowing().start();
                 getData("Tied");
-//                xResult = 0;
-//                oResult = 0;
 
             }
         } catch (IOException ex) {
@@ -648,11 +637,6 @@ public class GamePlayerVsPCController implements Initializable {
                 System.out.println("" + draws);
 
                 break;
-//            case 0:
-//                xScore = 0;
-//                oScore = 0;
-//                draws = 0;
-//                break;
         }
 
         disableAllXOButton();
@@ -660,8 +644,6 @@ public class GamePlayerVsPCController implements Initializable {
         PCScore.setText("" + oScore);
         if (xResult > oResult) {
             getData(PlayerName.getText());
-//            xResult = 0;
-//            oResult = 0;
             PVEDetails.setpName(PlayerName.getText());
             PVEDetails.setpScore(PlayerScore.getText());
             PVEDetails.setPcScore(PCScore.getText());
@@ -675,8 +657,6 @@ public class GamePlayerVsPCController implements Initializable {
             PVEDetails.setPcScore(PCScore.getText());
             PVEDetails.setTie(TiedScore.getText());
             new Losing().start();
-//            xResult = 0;
-//            oResult = 0;
 
         } else {
             getData("Tied");
@@ -685,8 +665,6 @@ public class GamePlayerVsPCController implements Initializable {
             PVEDetails.setPcScore(PCScore.getText());
             PVEDetails.setTie(TiedScore.getText());
             new Drowing().start();
-//            xResult = 0;
-//            oResult = 0;
         }
 
     }
@@ -846,7 +824,7 @@ public class GamePlayerVsPCController implements Initializable {
     }
 
     public void getData(String winner) throws IOException {
-        
+
         singleDB = new SingleDataBase();
 
         GameDataPlayerVsPC gm = new GameDataPlayerVsPC(
@@ -867,7 +845,7 @@ public class GamePlayerVsPCController implements Initializable {
     @FXML
     private void saveGame(ActionEvent event) {
         // should create an alert here.
-         AlertBoxOneButton.createAlert("Recording", "You Game Has been Recorded", "OK");
+        AlertBoxOneButton.createAlert("Recording", "You Game Has been Recorded", "OK");
         System.out.println("Clicked");
         String gameName = PlayerName.getText() + " Vs " + Player2Name.getText();
         System.out.println(gameName);
@@ -878,7 +856,6 @@ public class GamePlayerVsPCController implements Initializable {
                 fos = new FileOutputStream(file);
                 b = bString.getBytes();
                 fos.write(b);
-                // 0X-1O-3X
                 fos.close();
             }
         } catch (FileNotFoundException ex) {
@@ -908,8 +885,7 @@ public class GamePlayerVsPCController implements Initializable {
                 record = arrString;
 
             }
-            
-            //display(record);
+
             new Display().start();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
@@ -919,29 +895,30 @@ public class GamePlayerVsPCController implements Initializable {
 
     }
 
-    class Display extends Thread{
+    class Display extends Thread {
 
         @Override
         public void run() {
             try {
-                for(String string: record){
-                Thread.sleep(1500);
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if ("X".equals(Character.toString(string.charAt(1))) | "O".equals(Character.toString(string.charAt(1)))) {
-                        btnsArr[(Integer.parseInt(Character.toString(string.charAt(0))) - 1)].setText(Character.toString(string.charAt(1)));
-                        btnsArr[(Integer.parseInt(Character.toString(string.charAt(0))) - 1)].setDisable(true);
-                    }
-                    }
-                });
-            }
+                for (String string : record) {
+                    Thread.sleep(1500);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if ("X".equals(Character.toString(string.charAt(1))) | "O".equals(Character.toString(string.charAt(1)))) {
+                                btnsArr[(Integer.parseInt(Character.toString(string.charAt(0))) - 1)].setText(Character.toString(string.charAt(1)));
+                                btnsArr[(Integer.parseInt(Character.toString(string.charAt(0))) - 1)].setDisable(true);
+                            }
+                        }
+                    });
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(GamePlayerVsPCController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    
+
     }
+
     class Winning extends Thread {
 
         @Override

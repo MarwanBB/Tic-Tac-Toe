@@ -12,8 +12,6 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.stage.Window;
 import models.AlertBoxOneButton;
 import models.Room;
@@ -65,12 +63,7 @@ public class Client implements Runnable {
 
     private Client(String ip, int port) {
         try {
-
-//            
-//            System.out.println("input text is" + input.getText());
             mySocket = new Socket(ip, port);
-            //mySocket = new Socket(input.getText(), 5005);
-            //mySocket = new Socket("127.0.0.1", 5005);
             user = new User();
             threadClient = new Thread(this);
             threadClient.start();
@@ -78,7 +71,6 @@ public class Client implements Runnable {
         } catch (IOException ex) {
 
             if (ex instanceof ConnectException) {
-                // SignInController.getThreadSignIn().stop();
                 AlertBoxOneButton.createAlert("connection Exeption", "server is Off", "ok");
                 this.closeClient();
 
@@ -95,10 +87,7 @@ public class Client implements Runnable {
 
                 dataInputStream = new DataInputStream(mySocket.getInputStream());
                 str = dataInputStream.readLine();
-
-                /*if (SignInController.getSignInRequestRunningFlag() == 1) { //if a sign in request is running
-                    SignInController.getThreadSignIn().resume();
-                }*/
+                
                 if (str != null) {
                     String[] arrString = str.split("/");
 
@@ -166,7 +155,7 @@ public class Client implements Runnable {
                         case "showLosingVideo":
                             showLosingVideo();
                             break;
-                            
+
                         case "showAlertIsBusy":
                             showAlertIsBusy();
                             break;
@@ -210,15 +199,7 @@ public class Client implements Runnable {
         }
 
     }
-
-//    public void clientSendMessage(String st) {
-//        try {
-//            printstream = new PrintStream(mySocket.getOutputStream());
-//            printstream.println(st);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    
     public void clientRefreshOnlineOnSignIn(User user) {
         try {
             printstream = new PrintStream(mySocket.getOutputStream());
@@ -298,22 +279,18 @@ public class Client implements Runnable {
     void clientGoToGameView(String str) {
         //arrString[] = takeTheTwoPlayersToTheGameView , username p1 , username p2 , (1 or 0)
         // "1" for p1 and "0" for p2
-        
-        
 
         String[] arrString = str.split("/");
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-//                try {
+
 
                 Room.setPlayerOneUserName(arrString[1]);
                 Room.setPlayerTwoUserName(arrString[2]);
                 Room.setTurn(arrString[3]);
-                //Room.setPlayerStartTurn(arrString[3]);
 
-                System.out.println("before trying to go to game");
 
                 SceneNavigator.navigate("/views/GameOnline.fxml");
 
@@ -366,13 +343,11 @@ public class Client implements Runnable {
 
     public void CloseRequest() {
 
-        // printstream = new PrintStream(mySocket.getOutputStream());
         printstream.println(Constants.closeClient + "/" + user.getUsername());
 
     }
 
     void playerOneWon() {
-        System.out.println("player one won called");
         try {
             printstream = new PrintStream(mySocket.getOutputStream());
             printstream.println("playerOneWon" + "/" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName());
@@ -382,7 +357,6 @@ public class Client implements Runnable {
     }
 
     void playerTwoWon() {
-        System.out.println("player two won called");
         try {
             printstream = new PrintStream(mySocket.getOutputStream());
             printstream.println("playerTwoWon" + "/" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName());
@@ -408,12 +382,12 @@ public class Client implements Runnable {
     void appearOffline(String username) {
         printstream.println("appearOffline" + "/" + username);
     }
-    
-    void resetIsPlaying(){
+
+    void resetIsPlaying() {
         printstream.println("resetIsPlaying");
     }
-    
-    void showAlertIsBusy(){
+
+    void showAlertIsBusy() {
         AlertBoxOneButton.createAlert("Player is busy", "The invited player is busy right now.", "Ok");
     }
 

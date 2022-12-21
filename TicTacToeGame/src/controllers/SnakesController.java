@@ -1,7 +1,5 @@
 package controllers;
 
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,14 +12,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -35,7 +31,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.MenuScreen;
 import models.SceneNavigator;
-
 
 public class SnakesController implements Initializable {
 
@@ -52,7 +47,6 @@ public class SnakesController implements Initializable {
     @FXML
     private ImageView backButton;
 
-    //private Image background;
     @FXML
     private void exitAction(ActionEvent event) {
         System.exit(0);
@@ -109,7 +103,7 @@ public class SnakesController implements Initializable {
                 } else {
                     gc.setFill(Color.web("AED6F1"));
                 }
-                gc.fillRect(i * 400/20, j * 400/20, 400/20, 400/20);
+                gc.fillRect(i * 400 / 20, j * 400 / 20, 400 / 20, 400 / 20);
             }
 
         }
@@ -117,7 +111,6 @@ public class SnakesController implements Initializable {
 
     public void repaint() {
 
-        // background = new Image("/images/background.jpg");
         Duration duration = Duration.millis(250);
         timeline = new Timeline(new KeyFrame(duration, (ActionEvent event) -> {
             text.setText(String.valueOf(game.getScore()));
@@ -125,10 +118,6 @@ public class SnakesController implements Initializable {
             GraphicsContext context = canvas.getGraphicsContext2D();
             drawBackground(context);
             if (!game.isGameOver()) {
-
-                //context.setFill(Color.web("#91A988"));
-                // context.drawImage(background, 400, 400);
-                //context.fillRect(0, 0, 400, 00);
 
                 game.snake.getSnake().stream().forEach((part) -> {
                     context.setFill(SnakePart.getColor());

@@ -1,40 +1,9 @@
 package controllers;
 
 
-
-/*
-      title: TicTacToe AI-ENGINE 
-     author: Kris Cieslak
-       date: 03.09.2012
-    license: http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US
-   language: java
-   
-   description: 
-      Complete game-tree search/decision algorithm.
-      NegaMax function without recursion depth checking. 
-
- 
- Methods:
-    private void put(int pos)
-    private void clear(int pos)
-    private boolean Check(int P)
-    private int GameOver()
-    private int NegaMax(int p)
-    private int PosToBit(int pos)
-    private int BitToPos(int bitNum)
-    
-    public boolean Move(int pos, int player)
-    public int GenerateMove(int Player)
-    public int getX()
-    public int getO()
-    public int getBoard()
-    public void NewGame()
-    public int isGameOver() 
- */
-
 public class AiHardLevel {
-	
-/*
+
+    /*
    BOARD (int) :
    001|002|004
    ---+---+---
@@ -47,10 +16,10 @@ public class AiHardLevel {
    
    X | O = Board
   
-*/
-	private int X = 0, O = 0;
+     */
+    private int X = 0, O = 0;
 
-/*  -==-=-=-=- put method -==-=-=-=-=-=-=-=-=-=-=-
+    /*  -==-=-=-=- put method -==-=-=-=-=-=-=-=-=-=-=-
   
     Turns on (set 1) specified bit.
     
@@ -60,24 +29,24 @@ public class AiHardLevel {
     "pos" > 0 - X move
     "pos" < 0 - O move
     
- */
-	private void put(int pos) {
-		X = X | pos & -((pos >> 31) + 1) & ~O;
-		O = O | -pos & (pos >> 31) & ~X;
-	}
+     */
+    private void put(int pos) {
+        X = X | pos & -((pos >> 31) + 1) & ~O;
+        O = O | -pos & (pos >> 31) & ~X;
+    }
 
-/* -==-=-=-=- clear method -==-=-=-=-=-=-=-=-=-=-=-
+    /* -==-=-=-=- clear method -==-=-=-=-=-=-=-=-=-=-=-
     
     Turns off (set 0) specified bit.
     sign doesn't matter.   
 
-*/
-	private void clear(int pos) {
-		X = X & ~pos;
-		O = O & ~pos;
-	}
+     */
+    private void clear(int pos) {
+        X = X & ~pos;
+        O = O & ~pos;
+    }
 
-/* -==-=-=-=- check method -==-=-=-=-=-=-=-=-=-=-=-	
+    /* -==-=-=-=- check method -==-=-=-=-=-=-=-=-=-=-=-	
 
    P - X or Y (not 1/-1) (look at the GameOver method)
  
@@ -91,33 +60,31 @@ public class AiHardLevel {
     Diagonal 1 - 100010001 = 0x111
     Diagonal 2 - 001010100 = 0x054 
 	
-*/
-	private boolean Check(int P) {
-		return  (P & 0x007) == 7 || 
-				(P & 0x038) == 0x038 || 
-				(P & 0x1C0) == 0x1C0 || 
-				(P & 0x049) == 0x49 || 
-				(P & 0x092) == 0x92 || 
-				(P & 0x124) == 0x124 || 
-				(P & 0x111) == 0x111 ||
-				(P & 0x054) == 0x54;
-	}
+     */
+    private boolean Check(int P) {
+        return (P & 0x007) == 7
+                || (P & 0x038) == 0x038
+                || (P & 0x1C0) == 0x1C0
+                || (P & 0x049) == 0x49
+                || (P & 0x092) == 0x92
+                || (P & 0x124) == 0x124
+                || (P & 0x111) == 0x111
+                || (P & 0x054) == 0x54;
+    }
 
-/* -==-=-=-=- check method -==-=-=-=-=-=-=-=-=-=-=-
+    /* -==-=-=-=- check method -==-=-=-=-=-=-=-=-=-=-=-
     returns
         2048 - X won
         512  - O won
         1024 - drawn
            0 - game still goes on
 	
-*/	
-	private int GameOver() {
-		return Check(X) ? 2048 : Check(O) ? 512 : ((X | O) & 511) == 511 ? 1024 : 0;
-	}
+     */
+    private int GameOver() {
+        return Check(X) ? 2048 : Check(O) ? 512 : ((X | O) & 511) == 511 ? 1024 : 0;
+    }
 
-	
-
-/* -==-=-=-=- NegaMax method -==-=-=-=-=-=-=-=-=-=-=-
+    /* -==-=-=-=- NegaMax method -==-=-=-=-=-=-=-=-=-=-=-
     
     best_value (binary)
 
@@ -133,99 +100,101 @@ public class AiHardLevel {
     Worst "best_value" for X - 512 (O wins)
     Worst "best_value" for O - 2048 (X wins)
 
-*/	
-	private int NegaMax(int p) {
-		int End = GameOver();
-		if (End != 0)
-			return End;
+     */
+    private int NegaMax(int p) {
+        int End = GameOver();
+        if (End != 0) {
+            return End;
+        }
 
-		int best_value = (p == 1) ? 512 : 2048;
-		for (int b = 1; b <= 256; b = b << 1) {
-			int move = (~(X | O) & b);
-			if (move != 0) {
-				put(p * move);
-				int s = NegaMax(-p);
-				best_value = p * (s & 0xfffffe00) > p
-						* (best_value & 0xfffffe00) ? ((s & 0xfffffe00) | move)
-						: best_value;
-				clear(move);
-			}
+        int best_value = (p == 1) ? 512 : 2048;
+        for (int b = 1; b <= 256; b = b << 1) {
+            int move = (~(X | O) & b);
+            if (move != 0) {
+                put(p * move);
+                int s = NegaMax(-p);
+                best_value = p * (s & 0xfffffe00) > p
+                        * (best_value & 0xfffffe00) ? ((s & 0xfffffe00) | move)
+                                : best_value;
+                clear(move);
+            }
 
-		}
-		return best_value;
-	}
+        }
+        return best_value;
+    }
 
-/* -==-=-=-=- PosToBit/BitToPos method -==-=-=-=-=-=-=-=-=-=-=-
+    /* -==-=-=-=- PosToBit/BitToPos method -==-=-=-=-=-=-=-=-=-=-=-
    
     Standard field numeration (1,2,3,4,5,6,7,8,9)  
     bit position (1,2,4,8,16,32,64,128,256)
 	
-*/	
-	private int PosToBit(int pos) {
-		return pos>=1 && pos<=9 ? 1<<(pos-1) : 0;
-	}
+     */
+    private int PosToBit(int pos) {
+        return pos >= 1 && pos <= 9 ? 1 << (pos - 1) : 0;
+    }
 
-	private int BitToPos(int bitNum) {
-		int result = 1;
-		while ( (bitNum=bitNum>>1) > 0 ) result++;   
+    private int BitToPos(int bitNum) {
+        int result = 1;
+        while ((bitNum = bitNum >> 1) > 0) {
+            result++;
+        }
         return result;
-	}
-	
-/*
-  -=-= PUBLIC =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=-=-=-=-=-
- */
+    }
 
-/* -==-=-=-=- Move method -==-=-=-=-=-=-=-=-=-=-=-
+    /*
+  -=-= PUBLIC =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=-=-=-=-=-
+     */
+
+ /* -==-=-=-=- Move method -==-=-=-=-=-=-=-=-=-=-=-
     
     player -  1 or -1
     pos in [1,2,3,4,5,6,7,8,9]
 
-*/
-	public boolean Move(int pos, int player) {
-		int p = PosToBit(pos);
-		if ( p!=0  && ( player==1 || player==-1 ) && ((X | O) & p)==0) {
-		  put(p*player);
-		  return true;
-		} else
-		  return false; 
-	}
- 
-	
- /* -==-=-=-=- GenerateMoveNegaMax method -==-=-=-=-=-=-=-=-=-=-=-
-      Opponent = 1, -1
- */
-	public int GenerateMove(int Player) {
-		return BitToPos((NegaMax(Player) & 511));
-	}
+     */
+    public boolean Move(int pos, int player) {
+        int p = PosToBit(pos);
+        if (p != 0 && (player == 1 || player == -1) && ((X | O) & p) == 0) {
+            put(p * player);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	
+    /* -==-=-=-=- GenerateMoveNegaMax method -==-=-=-=-=-=-=-=-=-=-=-
+      Opponent = 1, -1
+     */
+    public int GenerateMove(int Player) {
+        return BitToPos((NegaMax(Player) & 511));
+    }
+
 // -==-=-=-=- getX -==-=-=-=-=-=-=-=-=-=-=- 	
-	public int getX() {
-		return X;
-	}
+    public int getX() {
+        return X;
+    }
 
 // -==-=-=-=- getO -==-=-=-=-=-=-=-=-=-=-=-	
-	public int getO() {
-		return O;
-	}
-	
+    public int getO() {
+        return O;
+    }
+
 // -==-=-=-=- getBoard -==-=-=-=-=-=-=-=-=-=-=-
-	public int getBoard() {
-		return (X|O);
-	}
-	
+    public int getBoard() {
+        return (X | O);
+    }
+
 // -==-=-=-=- ClearBoard -==-=-=-=-=-=-=-=-=-=-=-	
-	public void NewGame() {
-		X=O=0;
-	}
-	
-	/* 1 - X player won
+    public void NewGame() {
+        X = O = 0;
+    }
+
+    /* 1 - X player won
 	  -1 - O player won
 	   2 - drawn
 	   0 - game still goes on
-	*/
+     */
 // -==-=-=-=-= isGameOver =-=-=-=-=-=-=-=-=-=-=-=-=-
-	public int isGameOver() {
-		return Check(X) ? 1 : Check(O) ? -1 : ((X | O) & 511) == 511 ? 2 : 0;
-	}
+    public int isGameOver() {
+        return Check(X) ? 1 : Check(O) ? -1 : ((X | O) & 511) == 511 ? 2 : 0;
+    }
 }

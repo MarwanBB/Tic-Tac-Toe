@@ -1,8 +1,6 @@
 package controllers;
 
-
 import javafx.scene.paint.Color;
-
 
 public class SnakePart {
 

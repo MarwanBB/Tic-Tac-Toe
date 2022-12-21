@@ -1,24 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package models;
 
-/**
- *
- * @author Copy Center
- */
+
 public class PVPDetails {
+
     private static String pName1;
     private static String pName2;
     private static String pScore1;
     private static String pScore2;
     private static String tie;
 
-
-    
-    
     public static String getpName1() {
         return pName1;
     }
@@ -59,7 +50,4 @@ public class PVPDetails {
         PVPDetails.tie = tie;
     }
 
-
-    
-    
 }

@@ -6,7 +6,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,20 +14,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import models.GameDataPVP;
 import models.SceneNavigator;
 import java.util.Calendar;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.Timer;
-import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -328,14 +323,23 @@ public class GamePVPController implements Initializable {
     private void saveGame(ActionEvent event) {
         AlertBoxOneButton.createAlert("Recording", "You Game Has been Recorded", "OK");
         String gameName = Player1Name.getText() + " Vs " + Player2Name.getText();
-        File file = new File("src/Records/PVP/" + gameName + ".txt");
+        
+        File folder = new File(System.getProperty("user.home")+"/tic_tac_toe_files");
+        if(!folder.exists()){
+            folder.mkdir();
+        }
+        
+        
+        //File file = new File("src/Records/PVP/" + gameName + ".txt");
+        File file = new File(System.getProperty("user.home")+"/tic_tac_toe_files", gameName+".txt");
+        
+        
         FileOutputStream fos;
         try {
             if (file != null) {
                 fos = new FileOutputStream(file);
                 b = bString.getBytes();
                 fos.write(b);
-                // 0X-1O-3X
                 fos.close();
             }
         } catch (FileNotFoundException ex) {
@@ -402,6 +406,5 @@ public class GamePVPController implements Initializable {
         }
 
     }
-
 
 }

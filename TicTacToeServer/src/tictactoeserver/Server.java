@@ -3,8 +3,6 @@ package tictactoeserver;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Server extends Thread {
 
@@ -12,8 +10,6 @@ public class Server extends Thread {
     Socket socket;
     private static Server instance;
     private int indexHandlerMax = -1;
-  
-
 
     public static Server getInstance() {
         if (instance == null) {
@@ -37,7 +33,7 @@ public class Server extends Thread {
 
     @Override
     public void run() {
-        
+
         while (true) {
             try {
                 socket = serverSocket.accept();
@@ -46,13 +42,12 @@ public class Server extends Thread {
                 new Handler(socket, indexHandlerMax);
 
             } catch (IOException ex) {
-                
+
                 ex.printStackTrace();
             }
         }
 
     }
-    
 
     public int getIndexHandlerMax() {
         return indexHandlerMax;
@@ -68,8 +63,7 @@ public class Server extends Thread {
             client.closeClient();
         }
         Handler.handlerList.clear();
-        
+
     }
-    
 
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
 import java.net.URL;
@@ -16,11 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javax.swing.JFrame;
 import models.SceneNavigator;
 
-/**
- * FXML Controller class
- *
- * @author marwan
- */
+
 public class ExtraGamesController implements Initializable {
 
     @FXML
@@ -30,13 +22,11 @@ public class ExtraGamesController implements Initializable {
     @FXML
     private ImageView backImg;
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        
+    }
 
     @FXML
     private void gotoSnakesAndLaddersGame(ActionEvent event) {
@@ -60,5 +50,5 @@ public class ExtraGamesController implements Initializable {
     private void goBackToMenu(MouseEvent event) {
         SceneNavigator.navigate("/views/Menu.fxml");
     }
-    
+
 }

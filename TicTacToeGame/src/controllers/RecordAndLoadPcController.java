@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
 import java.io.File;
@@ -25,11 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.SceneNavigator;
 
-/**
- * FXML Controller class
- *
- * @author Copy Center
- */
+
 public class RecordAndLoadPcController implements Initializable {
 
     @FXML
@@ -39,9 +31,7 @@ public class RecordAndLoadPcController implements Initializable {
     private Scene scene;
     private Stage stage;
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         File file = new File("src/Records/PVE/");

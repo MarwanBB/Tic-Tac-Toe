@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package models;
 
-/**
- *
- * @author Copy Center
- */
+
 public class OnlineDetails {
+
     private static String pName1;
     private static String pName2;
     private static int pScore1 = 0;
@@ -56,9 +50,4 @@ public class OnlineDetails {
         OnlineDetails.tie = tie;
     }
 
-
-
-
-    
-    
 }

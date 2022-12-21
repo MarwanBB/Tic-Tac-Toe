@@ -1,18 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,11 +22,7 @@ import javafx.scene.input.MouseEvent;
 import models.OnlinePlayers;
 import models.SceneNavigator;
 
-/**
- * FXML Controller class
- *
- * @author marwan
- */
+
 public class OnlinePlayersController implements Initializable {
 
     @FXML

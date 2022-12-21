@@ -28,7 +28,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import models.OnlineDetails;
 
 import models.Room;
 
@@ -79,9 +78,7 @@ public class GameOnlineController implements Initializable {
     private Scene scene;
     private Stage stage;
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("bstring at initialization ============================= " + bString);
@@ -123,9 +120,6 @@ public class GameOnlineController implements Initializable {
             try {
                 String[] arrStringShapes = bString.split("-");
                 squareCount = arrStringShapes.length;
-                System.out.println(bString);
-                System.out.println(arrStringShapes[0]);
-                System.out.println(arrStringShapes.length);
 
                 for (int i = 0; i < arrStringShapes.length; i++) {
 
@@ -138,8 +132,6 @@ public class GameOnlineController implements Initializable {
 
                 String check = checkIfGameIsOver();
                 if (winLoseChecker(check) == true) {
-                    System.out.println("someone won");
-                    //SceneNavigator.navigate("/views/Winner.fxml");
 
                 }
 
@@ -170,13 +162,7 @@ public class GameOnlineController implements Initializable {
 
             setPlayerSymbol(button);
 
-//                String check = checkIfGameIsOver();
-//                if (winLoseChecker(check)==true) {
-//                    System.out.println("someone won");
-//                    SceneNavigator.navigate("/views/Winner.fxml");
-//                    
-//                    
-//                }
+
             client.clientRefreshGameBoardRequest(Constants.refreshGameBoardAfterEveryTurn + "/" + Room.getPlayerOneUserName() + "/" + Room.getPlayerTwoUserName() + "/" + bString);
 
         });
@@ -217,14 +203,8 @@ public class GameOnlineController implements Initializable {
         winLoseChecker(line);
         if (squareCount == 9 && flagWin == 0) {
             flagWin = 1;
-            //OnlineDetails.setTie( (OnlineDetails.getTie())+1 );
-            //TieScore.setText(String.valueOf(OnlineDetails.getTie()));
-            //Room.setTurn(Room.getPlayerStartTurn());
-            //getData("Tied");
             tiescore++;
-            System.out.println("Tie score isssssss " + tiescore);
             SceneNavigator.navigate("/views/TiedOnline.fxml");
-            //TieScore.setText(Integer.toString(tiescore));
         }
         d = line;
         return d;
@@ -242,15 +222,8 @@ public class GameOnlineController implements Initializable {
                     Room.setPlayerOneWonFlag(0);
                 }
 
-                //OnlineDetails.setpScore1((OnlineDetails.getpScore1())+1 );
-                // Room.setTurn(Room.getPlayerStartTurn());
-//                Player1Score.setText(Integer.toString(p1score));
                  {
-//                    try {
-//                        getData(Player1Name.getText());
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(GamePVPController.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
+
                 }
                 buttons.forEach(button -> {
                     button.setDisable(true);
@@ -266,11 +239,6 @@ public class GameOnlineController implements Initializable {
                     Room.setPlayerTwoWonFlag(0);
                 }
 
-                //p2score++;
-                //OnlineDetails.setpScore2((OnlineDetails.getpScore2())+1 );
-                //Room.setTurn(Room.getPlayerStartTurn());
-                //Player2Score.setText(Integer.toString(p2score));
-                //getData(Player2Name.getText());
                 buttons.forEach(button -> {
                     button.setDisable(true);
                 });

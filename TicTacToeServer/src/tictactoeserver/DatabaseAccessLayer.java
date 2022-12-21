@@ -14,8 +14,6 @@ public class DatabaseAccessLayer {
     public static Connection con;
 
     private static Connection startConnection() {
-        //driver
-        //connect DB
         try {
             DriverManager.registerDriver(new ClientDriver());
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/RegisteredUsers", "root", "root");
@@ -41,7 +39,6 @@ public class DatabaseAccessLayer {
                 stmt.close();
                 con.close();
                 return true;
-                // do we need to commit?
 
             } catch (SQLException ex) {
                 Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,10 +59,8 @@ public class DatabaseAccessLayer {
             stmt.setString(1, username);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
-            
-            
+
             if (rs.next()) {
-                System.out.println("in rs.next()========================");
                 PreparedStatement stmt2 = con.prepareStatement("UPDATE  USERS SET isonline =? WHERE username=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
                 stmt2.setBoolean(1, true);
@@ -85,7 +80,6 @@ public class DatabaseAccessLayer {
                 con.close();
                 return false;
             }
-            // do we need to commit?
         } catch (SQLException ex) {
             System.out.println("catch of sign in in database");
             Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
@@ -193,50 +187,45 @@ public class DatabaseAccessLayer {
                 con.close();
 
             }
-            // do we need to commit?
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
-    public static void logout(String username){
+
+    public static void logout(String username) {
         try {
             con = startConnection();
             PreparedStatement stmt = con.prepareStatement("UPDATE  USERS SET isonline =? WHERE username=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            
+
             stmt.setBoolean(1, false);
             stmt.setString(2, username);
-            
+
             stmt.executeUpdate();
             con.commit();
-            
+
             stmt.close();
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static void setAllToOffline(){
-        
+
+    public static void setAllToOffline() {
+
         try {
             con = startConnection();
             PreparedStatement stmt = con.prepareStatement("update users set isonline=false ", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            
-            
+
             stmt.executeUpdate();
             con.commit();
-            
+
             stmt.close();
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseAccessLayer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
+
     }
 
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
 import java.io.IOException;
@@ -20,19 +16,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.MenuScreen;
 
-/**
- * FXML Controller class
- *
- * @author Copy Center
- */
+
 public class SplachController implements Initializable {
 
     @FXML
     private AnchorPane parent;
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         new SplashScreen().start();

@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -19,12 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import models.SceneNavigator;
 
-/**
- *
- * @author Yomna
- */
+
 public class HistoryOnlineController implements Initializable {
-    
+
     private Label label;
     @FXML
     private ImageView imageStar;
@@ -46,20 +38,20 @@ public class HistoryOnlineController implements Initializable {
     private TableColumn<?, ?> score2;
     @FXML
     private TableColumn<?, ?> winner;
-    
+
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void goBackToGameOnline(MouseEvent event) {
-    SceneNavigator.navigate("/views/GameOnline.fxml");
+        SceneNavigator.navigate("/views/GameOnline.fxml");
     }
-    
+
 }

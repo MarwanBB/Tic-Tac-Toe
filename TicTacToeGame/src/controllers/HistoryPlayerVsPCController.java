@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
-import database.LocalDataBase;
 import database.SingleDataBase;
 import java.io.IOException;
 import java.net.URL;
@@ -14,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -23,15 +17,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import models.GameDataPVP;
 import models.GameDataPlayerVsPC;
 import models.SceneNavigator;
 
-/**
- *
- * @author Yomna
- */
 public class HistoryPlayerVsPCController implements Initializable {
     
     private Label label;

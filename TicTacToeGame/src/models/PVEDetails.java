@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package models;
 
-/**
- *
- * @author Yomna
- */
+
 public class PVEDetails {
-    
+
     private static String pName;
     private static String pScore;
     private static String pcScore;

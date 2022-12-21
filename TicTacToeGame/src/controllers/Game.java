@@ -2,7 +2,6 @@ package controllers;
 
 import javafx.geometry.Dimension2D;
 
-
 public class Game {
 
     public Food food;

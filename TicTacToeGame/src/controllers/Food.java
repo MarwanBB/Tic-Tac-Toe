@@ -1,14 +1,12 @@
-
 package controllers;
 
 import java.util.Random;
 import javafx.scene.paint.Color;
 
-
 public class Food extends SnakePart {
 
     private boolean eated;
-    private static Color color=new Color(0, 1, 0 ,1);
+    private static Color color = new Color(0, 1, 0, 1);
 
     public Food() {
         super();
@@ -16,10 +14,10 @@ public class Food extends SnakePart {
         Random rand = new Random();
         int x = rand.nextInt(380) / 20;
         int y = rand.nextInt(380) / 20;
-        this.setX(x*SnakePart.getWidth());
-        this.setY(y*SnakePart.getHeight());
+        this.setX(x * SnakePart.getWidth());
+        this.setY(y * SnakePart.getHeight());
     }
-    
+
     public static Color getColor() {
         return color;
     }

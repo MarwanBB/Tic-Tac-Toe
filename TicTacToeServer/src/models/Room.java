@@ -1,9 +1,7 @@
-
 package models;
 
-
 public class Room {
-    
+
     private static String playerOneUserName;
     private static String playerTwoUserName;
 
@@ -23,6 +21,4 @@ public class Room {
         Room.playerTwoUserName = playerTwoUserName;
     }
 
-    
-    
 }

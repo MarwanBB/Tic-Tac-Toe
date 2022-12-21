@@ -1,4 +1,3 @@
-
 package controllers;
 
 import java.util.ArrayList;
@@ -84,18 +83,18 @@ public class Snake {
                     case 3:
                         snake.get(0).setY(snake.get(0).getY() + 20);
                         break;
-                        
+
                 }
-                
-                if (isConflicted(x, y))
+
+                if (isConflicted(x, y)) {
                     return false;
-                
+                }
+
                 if (snake.get(i).getX() == food.getX()
                         && snake.get(i).getY() == food.getY()) {
                     food.setEated(true);
-                    SnakePart newSnakePart = new SnakePart
-                    (snake.get(snake.size() - 1).getX(),
-                     snake.get(snake.size() - 1).getY());
+                    SnakePart newSnakePart = new SnakePart(snake.get(snake.size() - 1).getX(),
+                            snake.get(snake.size() - 1).getY());
                     snake.add(newSnakePart);
                 }
             } else {

@@ -57,11 +57,11 @@ public class Handler extends Thread {
 
             try {
                 String str = dataInputStream.readLine();
-                if(str==null){
+                if (str == null) {
                     closeClient();
                     int x = handlerList.indexOf(this);
-                System.out.println("x::" + x);
-                Handler removed = handlerList.remove(x);
+                    System.out.println("x::" + x);
+                    Handler removed = handlerList.remove(x);
                 }
                 System.out.println("Inside Handler, in while loop in try dataInputStream.readLine() in run");
                 System.out.println("str recieved by handler: " + str);
@@ -90,7 +90,7 @@ public class Handler extends Thread {
 
                     case Constants.refreshOnlineOnSignIn:
                         //arrString[] = "refreshOnlineOnSignIn" ,  username ,  password
-                        
+
                         handlerRefreshAvailablePlayers();
                         break;
 
@@ -124,29 +124,29 @@ public class Handler extends Thread {
                         //so arrString[] = "refreshGameBoardAfterEveryTurn" + username1 + username2 + String that loads the game board after every game button clicked.
                         handlerChangeBoard(str);
                         break;
-                        
-                        case "playerOneWon":
-                            goToVideoView(str);
-                            break;
-                            
-                        case "playerTwoWon":
-                            goToVideoView(str);
-                            break;
-                            
-                        case "appearOffline":
-                            System.out.println("appear offline in handler !!");
-                            DatabaseAccessLayer.appearOffline(arrString[1]);
-                            break;
-                            
-                        case "resetIsPlaying":
-                            isPlaying = 0;
-                            break;
+
+                    case "playerOneWon":
+                        goToVideoView(str);
+                        break;
+
+                    case "playerTwoWon":
+                        goToVideoView(str);
+                        break;
+
+                    case "appearOffline":
+                        System.out.println("appear offline in handler !!");
+                        DatabaseAccessLayer.appearOffline(arrString[1]);
+                        break;
+
+                    case "resetIsPlaying":
+                        isPlaying = 0;
+                        break;
                 }
 
             } catch (NullPointerException e) {
                 closed = true;
-                this.isAvailable=0;
-                
+                this.isAvailable = 0;
+
                 closeClient();
                 DatabaseAccessLayer.logout(user.getUsername());
                 int x = handlerList.indexOf(this);
@@ -154,19 +154,17 @@ public class Handler extends Thread {
                 Handler removed = handlerList.remove(x);
 
             } catch (IOException ex) {
-                
+
                 DatabaseAccessLayer.logout(user.getUsername());
                 closed = true;
-                this.isAvailable=0;
+                this.isAvailable = 0;
                 closeClient();
                 int x = handlerList.indexOf(this);
                 System.out.println("x::" + x);
-                if(!handlerList.isEmpty()){
+                if (!handlerList.isEmpty()) {
                     Handler removed = handlerList.remove(x);
                 }
-                
 
-                
             }
         }
     }
@@ -210,31 +208,24 @@ public class Handler extends Thread {
         String[] arrString = str.split("/");
         for (Handler handler : handlerList) {
             if (handler.user.getUsername().equals(arrString[2])) {
-                if (handler.isPlaying == 0){
+                if (handler.isPlaying == 0) {
                     try {
-                    printStream = new PrintStream(socket.getOutputStream());
-                    handler.printStream.println(Constants.showAlertForInvitedPlayer + "/" + arrString[1] + "/" + arrString[2]);
-                } catch (IOException ex) {
-                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                }
-                else{
-                    for (Handler handlerSending : handlerList) {
-            if (handlerSending.user.getUsername().equals(arrString[1])) {
-                handlerSending.printStream.println("showAlertIsBusy");
-            }
+                        printStream = new PrintStream(socket.getOutputStream());
+                        handler.printStream.println(Constants.showAlertForInvitedPlayer + "/" + arrString[1] + "/" + arrString[2]);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+                } else {
+                    for (Handler handlerSending : handlerList) {
+                        if (handlerSending.user.getUsername().equals(arrString[1])) {
+                            handlerSending.printStream.println("showAlertIsBusy");
+                        }
+                    }
+
                 }
-                
-                
 
             }
-//            if (handler.user.getUsername().equals(arrString[1])) {
-//                handler.printStream.println("showAlertIsBusy");
-//                
-//
-//            }
+
         }
     }
 
@@ -316,14 +307,13 @@ public class Handler extends Thread {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    void goToVideoView(String str){
+
+    void goToVideoView(String str) {
         System.out.println(str);
         String[] arrString = str.split("/");
         for (Handler handler : handlerList) {
             System.out.println(handler.user.getUsername());
             if (handler.user.getUsername().equals(arrString[1]) && "playerOneWon".equals(arrString[0])) {
-                System.out.println("11111111111111111111 " + handler.user.getUsername());
                 try {
                     printStream = new PrintStream(socket.getOutputStream());
                     handler.printStream.println("showWinningVideo");
@@ -331,9 +321,23 @@ public class Handler extends Thread {
                     Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-            }
-            else if (handler.user.getUsername().equals(arrString[1]) && "playerTwoWon".equals(arrString[0])) {
-                System.out.println("22222222222222222 " + handler.user.getUsername());
+            } else if (handler.user.getUsername().equals(arrString[1]) && "playerTwoWon".equals(arrString[0])) {
+                try {
+                    printStream = new PrintStream(socket.getOutputStream());
+                    handler.printStream.println("showLosingVideo");
+                } catch (IOException ex) {
+                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else if (handler.user.getUsername().equals(arrString[2]) && "playerTwoWon".equals(arrString[0])) {
+                try {
+                    printStream = new PrintStream(socket.getOutputStream());
+                    handler.printStream.println("showWinningVideo");
+                } catch (IOException ex) {
+                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else if (handler.user.getUsername().equals(arrString[2]) && "playerOneWon".equals(arrString[0])) {
                 try {
                     printStream = new PrintStream(socket.getOutputStream());
                     handler.printStream.println("showLosingVideo");
@@ -342,29 +346,9 @@ public class Handler extends Thread {
                 }
 
             }
-            else if (handler.user.getUsername().equals(arrString[2]) && "playerTwoWon".equals(arrString[0])) {
-                System.out.println("3333333333333333 " + handler.user.getUsername());
-                try {
-                    printStream = new PrintStream(socket.getOutputStream());
-                    handler.printStream.println("showWinningVideo");
-                } catch (IOException ex) {
-                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-                }
 
-            }
-            else if (handler.user.getUsername().equals(arrString[2]) && "playerOneWon".equals(arrString[0])) {
-                System.out.println("444444444444444 " + handler.user.getUsername());
-                try {
-                    printStream = new PrintStream(socket.getOutputStream());
-                    handler.printStream.println("showLosingVideo");
-                } catch (IOException ex) {
-                    Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        }
 
-            }
-        
-    }
-        
     }
 
     void closeClient() {

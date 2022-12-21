@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/marwa/Desktop/clone%20after%20all%20fixes/Tic-Tac-Toe/TicTacToeGame/src/main/MenuScreen.java</file>
-            <file>file:/C:/Users/marwa/Desktop/clone%20after%20all%20fixes/Tic-Tac-Toe/TicTacToeGame/src/controllers/GameOnlineController.java</file>
-            <file>file:/C:/Users/marwa/Desktop/clone%20after%20all%20fixes/Tic-Tac-Toe/TicTacToeGame/src/controllers/Client.java</file>
+            <file>file:/C:/Users/marwa/Desktop/cloning%20refactoring/Tic-Tac-Toe/TicTacToeGame/src/controllers/Client.java</file>
+            <file>file:/C:/Users/marwa/Desktop/cloning%20refactoring/Tic-Tac-Toe/TicTacToeGame/src/main/MenuScreen.java</file>
+            <file>file:/C:/Users/marwa/Desktop/cloning%20refactoring/Tic-Tac-Toe/TicTacToeGame/src/controllers/RecordAndLoadController.java</file>
+            <file>file:/C:/Users/marwa/Desktop/cloning%20refactoring/Tic-Tac-Toe/TicTacToeGame/src/controllers/GamePVPController.java</file>
+            <file>file:/C:/Users/marwa/Desktop/cloning%20refactoring/Tic-Tac-Toe/TicTacToeGame/src/controllers/MenuController.java</file>
         </group>
     </open-files>
 </project-private>

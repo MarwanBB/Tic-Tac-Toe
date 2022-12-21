@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -33,7 +32,7 @@ public class SignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        client = Client.getInstance(Util.ip , Util.port);
+        client = Client.getInstance(Util.ip, Util.port);
     }
 
     @FXML

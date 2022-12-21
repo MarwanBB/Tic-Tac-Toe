@@ -1,9 +1,7 @@
-
 package models;
 
-
 public class Room {
-    
+
     private static String playerOneUserName;
     private static String playerTwoUserName;
     private static String turn;
@@ -29,8 +27,6 @@ public class Room {
         Room.playerTwoWonFlag = playerTwoWonFlag;
     }
 
-    
-    
     public static String getClearOnPlayAgain() {
         return clearOnPlayAgain;
     }
@@ -39,8 +35,6 @@ public class Room {
         Room.clearOnPlayAgain = clearOnPlayAgain;
     }
 
-    
-    
     public static String getPlayerOneUserName() {
         return playerOneUserName;
     }
@@ -81,6 +75,4 @@ public class Room {
         Room.playerStartTurn = playerStartTurn;
     }
 
-    
-    
 }

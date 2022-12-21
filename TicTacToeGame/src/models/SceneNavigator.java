@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import main.MenuScreen;
 
 public class SceneNavigator {
-    
+
     public static void navigate(String destination) {
         Platform.runLater(new Runnable() {
             @Override
@@ -78,7 +78,5 @@ public class SceneNavigator {
         });
 
     }
-
-    
 
 }
