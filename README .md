@@ -34,9 +34,9 @@ Run the Program using [TicTacToe.java](https://github.com/MarwanElbahnasawy/Tic-
 
 
 Yomna Kerir [linkedin](https://www.linkedin.com/in/yomna-kerir-2117381ba/)\
-Marwan [linkedin](https://www.linkedin.com/in/marwan-elbahnasawy/)\
-Mahmoud [linkedin](https://www.linkedin.com/in/mahmoud-awad-67388b140/)\
-Asalha [linkedin](https://www.linkedin.com/in/asalah-sayed-b330a9243/)
+Marwan Elbahnasawy [linkedin](https://www.linkedin.com/in/marwan-elbahnasawy/)\
+Mahmoud Sayed [linkedin](https://www.linkedin.com/in/mahmoud-awad-67388b140/)\
+Asalah Sayed [linkedin](https://www.linkedin.com/in/asalah-sayed-b330a9243/)
 
 ## Screenshots
 
