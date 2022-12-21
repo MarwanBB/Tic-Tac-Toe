@@ -81,9 +81,9 @@
             <Image url="@../Images/tic-tac.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="416.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="147.0" fitWidth="122.0" layoutX="389.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/X.png" />
+            <Image url="@../Images/Minion%20%20on%20We%20Heart%20It.gif" />
          </image>
       </ImageView>
       <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="618.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">

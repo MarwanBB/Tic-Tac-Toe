@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import models.AlertBoxOneButton;
 import models.SceneNavigator;
 
 /**
@@ -55,7 +56,7 @@ public class PlayerVsPCNameController implements Initializable {
 
     @FXML
     private void goToGameSinglePlayer(ActionEvent event) throws IOException {
-       if(!PlayerTxt.getText().isEmpty()){
+       if(!PlayerTxt.getText().isEmpty() && ! PlayerTxt.getText().contains(",")){
             
            String p1Name = PlayerTxt.getText();
            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/GamePlayerVsPC.fxml"));
@@ -67,6 +68,9 @@ public class PlayerVsPCNameController implements Initializable {
            stage.setScene(scene);
            stage.show();
         }
+       else {
+           AlertBoxOneButton.createAlert( "Player Name", "The Name Shouldn't Contain (,) or be null", "OK");
+       }
     }
     
 }

@@ -37,9 +37,9 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <ImageView fitHeight="255.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <ImageView fitHeight="313.0" fitWidth="271.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../Images/tic-tac-toe.png" />
+                        <Image url="@../Images/Minions_%20Cute%20Animated%20Stickers%20_%20Line%20Sticker.gif" />
                      </image>
                   </ImageView>
                   <Label text="Welcome" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3">
@@ -71,7 +71,7 @@
                <children>
                   <ImageView fitHeight="191.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <image>
-                        <Image url="@../Images/tic-tac.png" />
+                        <Image url="@../Images/pngwing.com%20(5).png" />
                      </image>
                   </ImageView>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -83,7 +83,7 @@
                         </Label>
                         <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/X.png" />
+                              <Image url="@../Images/pngwing.com%20(2).png" />
                            </image>
                         </ImageView>
                         <TextField fx:id="PlayerTxt" prefHeight="40.0" prefWidth="250.0" promptText="Player Name">

@@ -37,9 +37,9 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <ImageView fitHeight="279.0" fitWidth="295.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <ImageView fitHeight="381.0" fitWidth="288.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../Images/tic-tac-toe.png" />
+                        <Image url="@../Images/pngwing.com%20(1).png" />
                      </image>
                   </ImageView>
                   <Label text="Welcome" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3">
@@ -56,7 +56,7 @@
       </VBox>
       <VBox prefHeight="600.0" prefWidth="450.0">
          <children>
-            <GridPane alignment="CENTER" prefHeight="600.0" prefWidth="450.0">
+            <GridPane alignment="CENTER" prefHeight="600.0" prefWidth="450.0" style="-fx-background-color: white;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -69,9 +69,9 @@
                 <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <ImageView fitHeight="151.0" fitWidth="393.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <image>
-                        <Image url="@../Images/tic-tac.png" />
+                        <Image url="@../Images/pngwing.com%20(4).png" />
                      </image>
                   </ImageView>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -86,7 +86,7 @@
                         </Label>
                         <ImageView fitHeight="43.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/X.png" />
+                              <Image url="@../Images/pngwing.com%20(5).png" />
                            </image>
                            <HBox.margin>
                               <Insets right="2.0" />
@@ -108,7 +108,7 @@
                         </Label>
                         <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/O.png" />
+                              <Image url="@../Images/pngwing.com%20(5).png" />
                            </image>
                            <HBox.margin>
                               <Insets right="5.0" />

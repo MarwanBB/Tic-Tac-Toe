@@ -22,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.SceneNavigator;
 import database.LocalDataBase;
+import models.AlertBoxOneButton;
 
 /**
  * FXML Controller class
@@ -57,7 +58,7 @@ public class PVPNamesController implements Initializable {
 
     @FXML
     private void goToGamePVP(ActionEvent event) throws IOException {
-        if(!PlayerXTxt.getText().isEmpty()&& !PlayerOTxt.getText().isEmpty()){
+        if(!PlayerXTxt.getText().isEmpty()&& !PlayerOTxt.getText().isEmpty()&&!PlayerXTxt.getText().contains(",")&& !PlayerOTxt.getText().contains(",")){
             
            String p1Name = PlayerXTxt.getText();
            String p2Name = PlayerOTxt.getText();
@@ -71,6 +72,9 @@ public class PVPNamesController implements Initializable {
            stage.show();
            
         }  
+         else {
+           AlertBoxOneButton.createAlert( "Player Name", "The Name Shouldn't Contain (,) or be null", "OK");
+       }
     }
     
 }

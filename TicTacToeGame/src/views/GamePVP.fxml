@@ -67,17 +67,17 @@
             <Image url="@../Images/tic-tac.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="563.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="122.0" fitWidth="126.0" layoutX="520.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/X.png" />
+            <Image url="@../Images/Minion%20%20on%20We%20Heart%20It%20(1).gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="783.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="146.0" fitWidth="137.0" layoutX="753.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/O.png" />
+            <Image url="@../Images/Minion%20%20on%20We%20Heart%20It.gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="88.0" layoutX="667.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="60.0" fitWidth="88.0" layoutX="653.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Tied.png" />
          </image>
