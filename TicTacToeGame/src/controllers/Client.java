@@ -74,8 +74,8 @@ public class Client implements Runnable {
 //            
 //            System.out.println("input text is" + input.getText());
 
-            mySocket = new Socket("127.0.0.1", 5005);
-            //mySocket = new Socket(input.getText(), 5005);
+            //mySocket = new Socket("127.0.0.1", 5005);
+            mySocket = new Socket(input.getText(), 5005);
             //mySocket = new Socket("127.0.0.1", 5005);
             user = new User();
             threadClient = new Thread(this);

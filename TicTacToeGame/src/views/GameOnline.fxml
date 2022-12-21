@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #90e0ef;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameOnlineController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #a2cdd3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameOnlineController">
    <children>
       <FlowPane hgap="10.0" layoutX="120.0" layoutY="122.0" prefHeight="300.0" prefWidth="331.0" vgap="10.0">
          <children>
@@ -69,7 +69,7 @@
       </ImageView>
       <ImageView fx:id="backImg" fitHeight="42.0" fitWidth="38.0" layoutX="29.0" layoutY="20.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/Back.png" />
+            <Image url="@../Images/left-512.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="81.0" fitWidth="92.0" layoutX="810.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
@@ -78,5 +78,10 @@
          </image>
       </ImageView>
       <Label fx:id="Player2Name" alignment="CENTER" contentDisplay="CENTER" layoutX="752.0" layoutY="287.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 20; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" textAlignment="CENTER" />
+      <ImageView fitHeight="296.0" fitWidth="375.0" layoutX="466.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Minions%20%20on%20We%20Heart%20It.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

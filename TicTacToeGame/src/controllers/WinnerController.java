@@ -45,11 +45,11 @@ public class WinnerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        file = new File("src/Videos/Win.mp4");
-        media = new Media(file.toURI().toString());
+        media = new Media(getClass().getResource("Win.mp4").toExternalForm());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         mediaView.setMediaPlayer(mediaPlayer);
+        
     } 
     public void DisplayNames(String win) {
         winner.setText(win);
@@ -57,7 +57,7 @@ public class WinnerController implements Initializable {
     
     @FXML
     private void goBack(MouseEvent event) {
-        mediaPlayer.stop();
+        mediaPlayer.pause();
         SceneNavigator.navigate("/views/GamePVP.fxml");
 
     }

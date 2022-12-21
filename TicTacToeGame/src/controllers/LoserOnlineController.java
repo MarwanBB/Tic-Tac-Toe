@@ -31,7 +31,6 @@ public class LoserOnlineController implements Initializable {
 
     @FXML
     private MediaView mediaView;
-    @FXML
     private Text Loser;
     @FXML
     private ImageView imageBack;
@@ -45,9 +44,10 @@ public class LoserOnlineController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         Loser.setText(PVEDetails.getpName());
-        file = new File("src/Videos/Loser.mp4");
-        media = new Media(file.toURI().toString());
+        
+        media = new Media(getClass().getResource("Loser.mp4").toExternalForm());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         mediaView.setMediaPlayer(mediaPlayer);
@@ -55,7 +55,7 @@ public class LoserOnlineController implements Initializable {
     
     @FXML
     private void goBack(MouseEvent event) {
-        mediaPlayer.stop();
+        mediaPlayer.pause();
         SceneNavigator.navigate("/views/OnlinePlayers.fxml");
 
     }

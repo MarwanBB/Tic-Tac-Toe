@@ -117,17 +117,5 @@
       </ImageView>
       <Label fx:id="PlayerName" alignment="CENTER" contentDisplay="CENTER" layoutX="418.0" layoutY="408.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 20; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" textAlignment="CENTER" />
       <Label fx:id="Player2Name" alignment="CENTER" contentDisplay="CENTER" layoutX="617.0" layoutY="408.0" minHeight="40.0" prefHeight="60.0" prefWidth="100.0" style="-fx-font-style: Bogart-Alt-Black-trial.ttf; -fx-font-size: 20; -fx-font-weight: bold; -fx-border-width: 20; -fx-text-fill: #0077b6;" text="PC" textAlignment="CENTER" />
-      <Button fx:id="EasyBtn1" layoutX="232.0" layoutY="496.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="54.0" prefWidth="163.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="Load" />
-      <ImageView fx:id="loadImg" fitHeight="54.0" fitWidth="52.0" layoutX="214.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/l.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="EasyBtn11" layoutX="42.0" layoutY="496.0" mnemonicParsing="false" onAction="#saveGame" prefHeight="54.0" prefWidth="163.0" style="-fx-background-color: #0077b6; -fx-background-radius: 25; -fx-font-weight: bold; -fx-font-size: 25; -fx-font-family: Bogart-Alt-Black-trial; -fx-text-fill: white;" text="Record" />
-      <ImageView fx:id="loadImg1" fitHeight="54.0" fitWidth="52.0" layoutX="24.0" layoutY="497.0" onMouseClicked="#loadGame" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/rec.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
