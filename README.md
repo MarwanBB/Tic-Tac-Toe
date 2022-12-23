@@ -25,7 +25,7 @@ Run the Program using [TicTacToe.java](https://github.com/MarwanElbahnasawy/Tic-
 | ------------- | ------------- |
 | Single player ` vs`  Computer       | List online players `Connected to the network`       | 
 | Multiple Players         | List offline players `Disconnected`     | 
-| Show recorded games        | Show Server IP to provide access to players who want to join the network | 
+| Show recorded games        | You can choose one of recorded games and resume it | 
 | Play online    | Display a report `Pi Chart` on number of online according to the offline ones in the network       | 
 | Login/Register   | Activate or disable the server        | 
 
@@ -103,6 +103,7 @@ BounceBall
 ![ball](https://user-images.githubusercontent.com/76075022/209374336-b300a58c-51e3-410c-a36f-4e059b01860e.PNG)
 
 Snake Game
+
 ![snake](https://user-images.githubusercontent.com/76075022/209374341-ee0e0379-25c6-49fa-9cda-14bdfdda8193.PNG)
 
 Here you should turn the server on to play online with your friends.
