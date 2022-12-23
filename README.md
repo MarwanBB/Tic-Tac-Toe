@@ -44,68 +44,77 @@ Asalah Sayed [linkedin](https://www.linkedin.com/in/asalah-sayed-b330a9243/)
 
 Start Screen 
 
-![1](https://user-images.githubusercontent.com/76075022/208742738-3189df77-eb33-420d-9b83-96c3621d1965.PNG)
+![splach](https://user-images.githubusercontent.com/76075022/209373268-01a821a8-68a3-4347-aa42-3c42eb6ea7d4.PNG)
 
 Home Page\
 It is the main features through which you can start your journey in our application
 
-![2](https://user-images.githubusercontent.com/76075022/208742742-a6c714a7-1043-4f16-962c-350659bc8c6e.PNG)
+![menu](https://user-images.githubusercontent.com/76075022/209373416-26a3ae94-d060-4db8-b164-b50f781d3b6d.PNG)
 
 Single Player\
 Here you can play with pc , just enter your name in this field and click next.
 
-![3](https://user-images.githubusercontent.com/76075022/208742750-1191b628-160f-4127-acb6-8bb3383c08df.PNG)
+![singleplayer](https://user-images.githubusercontent.com/76075022/209373427-4a7fa805-a775-4fcb-a6e5-0bf6b41456fd.PNG)
 
 
 You can select the level you want and then play.\
-To record the game all you must do is click the botttom (Record) at the bottom left of the window.\
-To resume the game also just clicked the (load) at the bottom left of the window.\
 To Show your history just click the bottom (history) at the right left of the window.
 
-![4](https://user-images.githubusercontent.com/76075022/208742751-d9e9c344-ea3d-43cd-bc9f-6c819b1f0ca4.PNG)
+![singlePlayerBoard](https://user-images.githubusercontent.com/76075022/209373556-135d7765-3e57-4dfe-a265-377b67f0c67c.PNG)
 
 
-![5](https://user-images.githubusercontent.com/76075022/208742754-17ea8c87-85c7-4b29-94d5-22b198d62fea.PNG)
+![singleGame](https://user-images.githubusercontent.com/76075022/209373564-f1fa12fe-7261-4343-a722-70a36e33ebf2.PNG)
 
 
-![6](https://user-images.githubusercontent.com/76075022/208742757-637ed55e-6c6c-4406-a8f6-999bd5f0fabb.PNG)
 
-![record](https://user-images.githubusercontent.com/76075022/208892669-b84ecfee-1449-47da-a01f-8317c479671d.jpeg)
+![History](https://user-images.githubusercontent.com/76075022/209373715-7dc63cc7-235d-429d-b6a2-00715e6071bc.PNG)
+
 
 
 Local Player\
 Here you can play on one device with your friend\
-Just enter your names and click next
+Just enter your names and click next.\
+To record the game all you must do is click the botttom (Record) at the bottom left of the window.\
+To resume the game also just clicked the (load) at the bottom left of the window.
 
-![7](https://user-images.githubusercontent.com/76075022/208742768-d25ee5b0-c717-4c2f-8778-b75b4b8cfb4c.PNG)
-
-![8](https://user-images.githubusercontent.com/76075022/208742771-19bc06b2-21aa-466a-bb19-a14b010544dc.PNG)
+![Local](https://user-images.githubusercontent.com/76075022/209373919-38159d3c-e4ff-424b-a897-2e6d983b79d5.PNG)
 
 
-![9](https://user-images.githubusercontent.com/76075022/208742775-1695653b-4b88-4e61-a4b9-7cb942aa7373.PNG)
+![LocalBoard](https://user-images.githubusercontent.com/76075022/209373944-55a268fa-c837-43bf-9612-8a249350bcb4.PNG)
+
+
+![historylocal](https://user-images.githubusercontent.com/76075022/209373950-d1001fc7-7ab6-4e2b-a111-767f8fa73d64.PNG)
+
+
+![Load](https://user-images.githubusercontent.com/76075022/209373957-7902b24e-6d0b-4836-91fb-815551d053fa.PNG)
+
+
+![win](https://user-images.githubusercontent.com/76075022/209374057-139e8420-539d-40ce-b8b1-62be7ebfa85a.PNG)
 
 
 Extra Games\
 Here you can choose other games like Snake and BounceBall.
 
-![10](https://user-images.githubusercontent.com/76075022/208742714-3ace9d4a-a60c-4c47-a78b-2b519dd42c75.PNG)
+![extra](https://user-images.githubusercontent.com/76075022/209374064-3f1a92a2-114d-4dc0-afd5-be3582d30825.PNG)
 
 
 BounceBall
 
-![11](https://user-images.githubusercontent.com/76075022/208742725-4519884f-82e3-4914-95d0-e3d60abb57c0.PNG)
+![ball](https://user-images.githubusercontent.com/76075022/209374336-b300a58c-51e3-410c-a36f-4e059b01860e.PNG)
 
 Snake Game
-![16](https://user-images.githubusercontent.com/76075022/208750570-2687fcd4-cf88-4700-b265-ad79b78fabf8.PNG)
+![snake](https://user-images.githubusercontent.com/76075022/209374341-ee0e0379-25c6-49fa-9cda-14bdfdda8193.PNG)
 
 Here you should turn the server on to play online with your friends.
 
-![12](https://user-images.githubusercontent.com/76075022/208742727-6b3d964a-9ec8-4211-9c62-7b26e6854f2b.PNG)
-![13](https://user-images.githubusercontent.com/76075022/208742730-258f4a6b-eb9e-4f41-835b-7e8fd19c07aa.PNG)
+![server](https://user-images.githubusercontent.com/76075022/209374540-6223d85b-5698-452f-9964-834e9d369065.jpg)
 
-![14](https://user-images.githubusercontent.com/76075022/208742735-05dcadd0-f4b4-45b9-8e6d-1572b44f0d5d.PNG)
 
-![15](https://user-images.githubusercontent.com/76075022/208749286-ea7a5913-5cc6-43cc-b6ae-944164c88d18.jpeg)
+![online](https://user-images.githubusercontent.com/76075022/209374550-b7e63bf7-2265-46c4-90b7-543c955cb1bb.jpg)
+
+
+![multiPlayers](https://user-images.githubusercontent.com/76075022/209374556-88da650a-a92e-459e-88bf-9a5122f4a413.jpg)
+
 
 
 
